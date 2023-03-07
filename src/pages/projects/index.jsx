@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import ProjectCard from "@/components/ProjectCard";
 
 const Projects = () => {
     return (
@@ -25,6 +26,7 @@ const Projects = () => {
                         <th>Target End Date</th>
                         <th>Actual End Date</th>
                     </tr>
+                    <ProjectCard/>
                 </table>
             </section>
         </div>
