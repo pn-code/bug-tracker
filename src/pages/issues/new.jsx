@@ -83,11 +83,11 @@ const NewIssue = () => {
                     <section className="flex flex-col gap-2">
                         <label htmlFor="status">Status:</label>
                         <select className="px-2 py-1 rounded-md" id="status">
-                            <option value={0}>New</option>
+                            <option value={0}>Open</option>
                             <option value={1}>In Progress</option>
                             <option value={2}>Needs Review</option>
                             <option value={3}>Under Review</option>
-                            <option value={4}>Completed</option>
+                            <option value={4}>Closed</option>
                         </select>
                     </section>
 
