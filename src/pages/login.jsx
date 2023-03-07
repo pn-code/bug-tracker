@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 const Login = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
     return (
         <div className="w-full h-[100vh] bg-[#1cba9b] flex items-center justify-center">
             <form className="bg-gray-100 p-10 rounded-md flex flex-col gap-4">
@@ -14,6 +17,8 @@ const Login = () => {
                     <section className="flex flex-col gap-1">
                         <label htmlFor="username">Username:</label>
                         <input
+                            onChange={(e) => setUsername(e.target.value)}
+                            value={username}
                             id="username"
                             className="p-2 rounded-md"
                             type="text"
@@ -24,6 +29,8 @@ const Login = () => {
                     <section className="flex flex-col">
                         <label htmlFor="username">Password:</label>
                         <input
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
                             id="password"
                             className="p-2 rounded-md"
                             type="text"
@@ -31,12 +38,14 @@ const Login = () => {
                         />
                     </section>
                 </fieldset>
-                <button className="py-4 bg-blue-400 text-gray-50 rounded-md">
+                <button className="py-4 bg-blue-400 text-gray-50 rounded-md hover:bg-blue-500">
                     Login
                 </button>
                 <span>
                     Don't have an account?{" "}
-                    <Link className="underline" href="/register">Register here.</Link>
+                    <Link className="underline" href="/register">
+                        Register here.
+                    </Link>
                 </span>
             </form>
         </div>
