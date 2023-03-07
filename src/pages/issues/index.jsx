@@ -13,7 +13,19 @@ const Issues = () => {
                     </div>
                 </header>
 
+                {/* Sorting Row */}
+                <section className="my-4 font-semibold bg-gray-300 px-4 py-2 text-sm rounded-md">
+                    <ul className="flex justify-between">
+                        <li>Summary</li>
+                        <li>Project</li>
+                        <li>Priority</li>
+                        <li>Status</li>
+                        <li>Assigned to</li>
+                        <li>Identified Date</li>
+                    </ul>
+                </section>
 
+                
             </section>
         </div>
     );
