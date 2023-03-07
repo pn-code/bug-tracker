@@ -13,50 +13,56 @@ const NewIssue = () => {
                     </div>
                 </header>
 
-                <fieldset>
-                    <section>
+                <fieldset className="flex flex-col gap-4">
+                    <section className="flex flex-col gap-2">
                         <label htmlFor="project">Project: </label>
-                        <input id="project" type="text" placeholder="project" />
+                        <input className="px-2 py-1" id="project" type="text" placeholder="project" />
                     </section>
-                    <section>
+
+                    <section className="flex flex-col gap-2">
                         <label htmlFor="summary">Summary: </label>
-                        <input id="summary" type="text" placeholder="summary" />
+                        <input className="px-2 py-1" id="summary" type="text" placeholder="summary" />
                     </section>
-                    <section>
+
+                    <section className="flex flex-col gap-2">
                         <label htmlFor="">Description: </label>
                         <input
-                            id="description"
+                            className="px-2 py-1" id="description"
                             type="text"
                             placeholder="description"
                         />
                     </section>
-                    <section>
+
+                    <section className="flex flex-col gap-2">
                         <label htmlFor="identifiedDate">
                             Identified Date:{" "}
                         </label>
                         <input
-                            id="identifiedDate"
+                            className="px-2 py-1" id="identifiedDate"
                             type="text"
                             placeholder="identified date"
                         />
                     </section>
-                    <section>
+
+                    <section className="flex flex-col gap-2">
                         <label htmlFor="targetResolutionDate">
                             Target Resolution Date:{" "}
                         </label>
                         <input
-                            id="targetResolutionDate"
+                            className="px-2 py-1" id="targetResolutionDate"
                             type="text"
                             placeholder="target resolution date"
                         />
                     </section>
-                    <section>
+
+                    <section className="flex flex-col gap-2">
                         <label htmlFor="assignedUser">Assigned User: </label>
-                        <input id="assignedUser" type="text" placeholder="assigned user" />
+                        <input className="px-2 py-1" id="assignedUser" type="text" placeholder="assigned user" />
                     </section>
-                    <section>
+
+                    <section className="flex flex-col gap-2">
                         <label htmlFor="status">Status:</label>
-                        <select id="status">
+                        <select className="px-2 py-1" id="status">
                             <option value={0}>New</option>
                             <option value={1}>In Progress</option>
                             <option value={2}>Needs Review</option>
@@ -64,9 +70,10 @@ const NewIssue = () => {
                             <option value={4}>Completed</option>
                         </select>
                     </section>
-                    <section>
+
+                    <section className="flex flex-col gap-2">
                         <label htmlFor="priority">Priority: </label>
-                        <select id="priority">
+                        <select className="px-2 py-1" id="priority">
                             <option value={0}>Low</option>
                             <option value={1}>Medium</option>
                             <option value={2}>High</option>
