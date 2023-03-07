@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 const Login = () => {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     return (
@@ -15,14 +15,15 @@ const Login = () => {
 
                 <fieldset className="flex flex-col gap-4">
                     <section className="flex flex-col gap-1">
-                        <label htmlFor="username">Username:</label>
+                        <label htmlFor="email">Email:</label>
                         <input
-                            onChange={(e) => setUsername(e.target.value)}
-                            value={username}
-                            id="username"
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
+                            id="email"
                             className="p-2 rounded-md"
-                            type="text"
-                            placeholder="username"
+                            type="email"
+                            placeholder="email"
+                            required
                         />
                     </section>
 
@@ -33,8 +34,9 @@ const Login = () => {
                             value={password}
                             id="password"
                             className="p-2 rounded-md"
-                            type="text"
+                            type="password"
                             placeholder="password"
+                            required
                         />
                     </section>
                 </fieldset>
