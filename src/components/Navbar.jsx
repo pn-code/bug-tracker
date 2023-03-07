@@ -7,7 +7,7 @@ const Navbar = () => {
             <h1 className="text-xl">Bug Tracker</h1>
             <ul className="flex gap-12 text-sm">
                 <Link href="/">Dashboard</Link>
-                <Link href="/user-roles">User Roles</Link>
+                <Link href="/roles">User Roles</Link>
                 <Link href="/issues">Issues</Link>
                 <Link href="/projects">Projects</Link>
                 <Link href="/profile">Profile</Link>
