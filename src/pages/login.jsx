@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const Login = () => {
     return (
@@ -33,6 +34,10 @@ const Login = () => {
                 <button className="py-4 bg-blue-400 text-gray-50 rounded-md">
                     Login
                 </button>
+                <span>
+                    Don't have an account?{" "}
+                    <Link className="underline" href="/register">Register here.</Link>
+                </span>
             </form>
         </div>
     );
