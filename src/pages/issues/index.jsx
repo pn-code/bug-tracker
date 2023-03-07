@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import IssueCard from "@/components/IssueCard";
 
 const Issues = () => {
@@ -8,21 +9,21 @@ const Issues = () => {
                 <header className="flex justify-between items-center">
                     <h1 className="text-xl font-bold">Issues</h1>
                     <div className="text-[16px] font-semibold">
-                        <button className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md">
+                        <Link href="/issues/new" className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md">
                             Add Issue
-                        </button>
+                        </Link>
                     </div>
                 </header>
 
                 {/* Sorting Row */}
                 <table className="w-full">
-                    <tr className="text-left bg-gray-300 h-10">
+                    <tr className="text-left bg-gray-300 h-10 text-sm sm:text-[16px]">
                         <th>Summary</th>
                         <th>Project</th>
                         <th>Priority</th>
                         <th>Status</th>
                         <th>Assigned User</th>
-                        <th>Date of Origin</th>
+                        <th>Identified Date</th>
                     </tr>
                     <IssueCard/>
                 </table>

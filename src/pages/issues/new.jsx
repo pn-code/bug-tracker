@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const NewIssue = () => {
     return (
@@ -7,9 +8,9 @@ const NewIssue = () => {
                 <header className="flex justify-between items-center">
                     <h1 className="text-xl font-bold">New Issue Form</h1>
                     <div className="text-[16px] font-semibold">
-                        <button className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md">
+                        <Link href="/issues" className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md">
                             Return to Issues
-                        </button>
+                        </Link>
                     </div>
                 </header>
 
