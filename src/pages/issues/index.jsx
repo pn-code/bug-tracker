@@ -18,7 +18,7 @@ const Issues = () => {
                 {/* Sorting Row */}
                 <table className="w-full">
                     <tr className="bg-gray-300 h-10 text-sm sm:text-[16px]">
-                        <th>Summary</th>
+                        <th>Title</th>
                         <th>Project</th>
                         <th>Priority</th>
                         <th>Status</th>
