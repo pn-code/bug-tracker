@@ -16,21 +16,33 @@ const NewIssue = () => {
                 <fieldset className="flex flex-col gap-4">
                     <section className="flex flex-col gap-2">
                         <label htmlFor="project">Project: </label>
-                        <input className="px-2 py-1" id="project" type="text" placeholder="project" />
+                        <input
+                            className="px-2 py-1 rounded-md"
+                            id="project"
+                            type="text"
+                            placeholder="project"
+                        />
                     </section>
 
                     <section className="flex flex-col gap-2">
                         <label htmlFor="summary">Summary: </label>
-                        <input className="px-2 py-1" id="summary" type="text" placeholder="summary" />
+                        <input
+                            className="px-2 py-1 resize-none rounded-md"
+                            id="summary"
+                            type="text"
+                            placeholder="summary"
+                        />
                     </section>
 
                     <section className="flex flex-col gap-2">
                         <label htmlFor="">Description: </label>
-                        <input
-                            className="px-2 py-1" id="description"
+                        <textarea
+                            className="px-2 py-1 resize-none rounded-md"
+                            id="summary"
                             type="text"
                             placeholder="description"
-                        />
+                            rows={10}
+                        ></textarea>
                     </section>
 
                     <section className="flex flex-col gap-2">
@@ -38,8 +50,9 @@ const NewIssue = () => {
                             Identified Date:{" "}
                         </label>
                         <input
-                            className="px-2 py-1" id="identifiedDate"
-                            type="text"
+                            className="px-2 py-1 rounded-md"
+                            id="identifiedDate"
+                            type="date"
                             placeholder="identified date"
                         />
                     </section>
@@ -49,20 +62,26 @@ const NewIssue = () => {
                             Target Resolution Date:{" "}
                         </label>
                         <input
-                            className="px-2 py-1" id="targetResolutionDate"
-                            type="text"
+                            className="px-2 py-1 rounded-md"
+                            id="targetResolutionDate"
+                            type="date"
                             placeholder="target resolution date"
                         />
                     </section>
 
                     <section className="flex flex-col gap-2">
                         <label htmlFor="assignedUser">Assigned User: </label>
-                        <input className="px-2 py-1" id="assignedUser" type="text" placeholder="assigned user" />
+                        <input
+                            className="px-2 py-1 rounded-md"
+                            id="assignedUser"
+                            type="text"
+                            placeholder="assigned user"
+                        />
                     </section>
 
                     <section className="flex flex-col gap-2">
                         <label htmlFor="status">Status:</label>
-                        <select className="px-2 py-1" id="status">
+                        <select className="px-2 py-1 rounded-md" id="status">
                             <option value={0}>New</option>
                             <option value={1}>In Progress</option>
                             <option value={2}>Needs Review</option>
@@ -73,7 +92,7 @@ const NewIssue = () => {
 
                     <section className="flex flex-col gap-2">
                         <label htmlFor="priority">Priority: </label>
-                        <select className="px-2 py-1" id="priority">
+                        <select className="px-2 py-1 rounded-md" id="priority">
                             <option value={0}>Low</option>
                             <option value={1}>Medium</option>
                             <option value={2}>High</option>
