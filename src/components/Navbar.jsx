@@ -16,9 +16,9 @@ const Navbar = () => {
       {/* Mobile NavMenu */}
       {openNavMenu && (
         <div className="fixed bg-[#1cba9b] h-[100vh] w-full top-0 left-0 flex items-center justify-center">
-          <div className="w-[290px] flex flex-col mx-3 gap-8">
+          <div className="w-[290px] flex flex-col mx-3 gap-12">
             <section className="flex justify-between w-full">
-              <h1 className="text-2xl font-bold">Bug Tracker</h1>
+              <h1 className="text-3xl font-bold">Bug Tracker</h1>
               <button
                 onClick={() => setOpenNavMenu(false)}
                 className="text-xl font-bold hover:bg-gray-50 hover:text-[#1cba9b] rounded-full px-3 py-1"
@@ -26,29 +26,49 @@ const Navbar = () => {
                 X
               </button>
             </section>
-            <ul className="flex flex-col gap-4 text-xl">
-              <li className="hover:bg-[#29947e] px-2 py-2 rounded-md cursor-pointer">
-                <Link onClick={() => setOpenNavMenu(false)} href="/">
+            <ul className="flex flex-col gap-8 text-2xl">
+              <li className="w-full">
+                <Link
+                  className="hover:bg-[#29947e] px-2 py-2 rounded-md"
+                  onClick={() => setOpenNavMenu(false)}
+                  href="/"
+                >
                   Dashboard
                 </Link>
               </li>
-              <li className="hover:bg-[#29947e] px-2 py-2 rounded-md cursor-pointer">
-                <Link onClick={() => setOpenNavMenu(false)} href="/roles">
-                  User Roles
+              <li className="w-full">
+                <Link
+                  className="hover:bg-[#29947e] px-2 py-2 rounded-md"
+                  onClick={() => setOpenNavMenu(false)}
+                  href="/roles"
+                >
+                  Roles
                 </Link>
               </li>
-              <li className="hover:bg-[#29947e] px-2 py-2 rounded-md cursor-pointer">
-                <Link onClick={() => setOpenNavMenu(false)} href="/issues">
+              <li className="w-full">
+                <Link
+                  className="hover:bg-[#29947e] px-2 py-2 rounded-md"
+                  onClick={() => setOpenNavMenu(false)}
+                  href="/issues"
+                >
                   Issues
                 </Link>
               </li>
-              <li className="hover:bg-[#29947e] px-2 py-2 rounded-md cursor-pointer">
-                <Link onClick={() => setOpenNavMenu(false)} href="/projects">
+              <li className="w-full">
+                <Link
+                  className="hover:bg-[#29947e] px-2 py-2 rounded-md"
+                  onClick={() => setOpenNavMenu(false)}
+                  href="/projects"
+                >
                   Projects
                 </Link>
               </li>
-              <li className="hover:bg-[#29947e] px-2 py-2 rounded-md cursor-pointer">
-                <Link onClick={() => setOpenNavMenu(false)} href="/profile">
+              <li className="w-full">
+                <Link
+                  className="hover:bg-[#29947e] px-2 py-2 rounded-md"
+                  onClick={() => setOpenNavMenu(false)}
+                  href="/profile"
+                >
                   Profile
                 </Link>
               </li>
