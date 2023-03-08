@@ -1,15 +1,61 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = () => {
+  const [openNavMenu, setOpenNavMenu] = useState(false);
+
   return (
     <nav className="flex justify-between px-4 py-6 bg-[#1cba9b] text-white font-semibold items-center">
       <h1 className="text-xl">Bug Tracker</h1>
 
-      <button className="sm:hidden">
-        <GiHamburgerMenu size={28}/>
+      <button onClick={() => setOpenNavMenu(true)} className="sm:hidden">
+        <GiHamburgerMenu size={28} />
       </button>
+
+      {/* Mobile NavMenu */}
+      {openNavMenu && (
+        <div className="fixed bg-[#1cba9b] h-[100vh] w-full top-0 left-0  pt-[20%] items-center">
+          <div className="w-[300px] flex flex-col mx-3 gap-8">
+            <section className="flex justify-between items-center gap-2">
+              <h1 className="text-2xl font-bold">Bug Tracker</h1>
+              <button
+                onClick={() => setOpenNavMenu(false)}
+                className="text-xl font-bold hover:bg-gray-50 hover:text-[#1cba9b] rounded-full px-3 py-1"
+              >
+                X
+              </button>
+            </section>
+            <ul className="flex flex-col gap-4 text-xl">
+              <li className="hover:bg-[#29947e] px-2 py-2 rounded-md cursor-pointer">
+                <Link onClick={() => setOpenNavMenu(false)} href="/">
+                  Dashboard
+                </Link>
+              </li>
+              <li className="hover:bg-[#29947e] px-2 py-2 rounded-md cursor-pointer">
+                <Link onClick={() => setOpenNavMenu(false)} href="/roles">
+                  User Roles
+                </Link>
+              </li>
+              <li className="hover:bg-[#29947e] px-2 py-2 rounded-md cursor-pointer">
+                <Link onClick={() => setOpenNavMenu(false)} href="/issues">
+                  Issues
+                </Link>
+              </li>
+              <li className="hover:bg-[#29947e] px-2 py-2 rounded-md cursor-pointer">
+                <Link onClick={() => setOpenNavMenu(false)} href="/projects">
+                  Projects
+                </Link>
+              </li>
+              <li className="hover:bg-[#29947e] px-2 py-2 rounded-md cursor-pointer">
+                <Link onClick={() => setOpenNavMenu(false)} href="/profile">
+                  Profile
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
 
       <ul className="gap-12 text-sm hidden sm:flex">
         <Link href="/">Dashboard</Link>
