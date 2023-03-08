@@ -15,9 +15,9 @@ const Navbar = () => {
 
       {/* Mobile NavMenu */}
       {openNavMenu && (
-        <div className="fixed bg-[#1cba9b] h-[100vh] w-full top-0 left-0  pt-[20%] items-center">
-          <div className="w-[300px] flex flex-col mx-3 gap-8">
-            <section className="flex justify-between items-center gap-2">
+        <div className="fixed bg-[#1cba9b] h-[100vh] w-full top-0 left-0 flex items-center justify-center">
+          <div className="w-[290px] flex flex-col mx-3 gap-8">
+            <section className="flex justify-between w-full">
               <h1 className="text-2xl font-bold">Bug Tracker</h1>
               <button
                 onClick={() => setOpenNavMenu(false)}
