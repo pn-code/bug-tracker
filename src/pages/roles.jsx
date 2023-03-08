@@ -3,8 +3,8 @@ import UserRoleCard from "../components/UserRoleCard";
 
 const Role = () => {
   return (
-    <div className="bg-gray-100 h-[90vh] w-full flex px-4 pt-5 justify-between gap-20">
-      <form className="w-[50%] flex flex-col gap-4">
+    <div className="bg-gray-100 h-[90vh] w-full flex px-4 pt-5 gap-10 lg:justify-between lg:gap-20 flex-col lg:flex-row">
+      <form className="lg:w-[50%] flex flex-col gap-4">
         <h1 className="text-xl font-bold">Manage User Roles</h1>
         <label htmlFor="">User: </label>
         <select name="" id="">
