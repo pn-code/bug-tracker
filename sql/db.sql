@@ -9,7 +9,7 @@ CREATE TABLE users (
 );
 
 -- Manually inserting data into our table
-INSERT INTO users (id, full_name, email, role, assigned_project, created_on) VALUES (123, 'Admin', 'admin@gmail.com', 'admin', 0, NOW());
+INSERT INTO users (full_name, email, role, assigned_project, created_on) VALUES ('Admin', 'admin@gmail.com', 'admin', 0, NOW());
 
 -- To select all data entries from a specific table
 SELECT * from users;
