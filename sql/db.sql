@@ -8,3 +8,5 @@ CREATE TABLE users (
     created_on timestamp
 );
 
+-- Manually inserting data into our table
+INSERT INTO users (id, full_name, email, role, assigned_project, created_on) VALUES (123, 'Admin', 'admin@gmail.com', 'admin', 0, NOW());
