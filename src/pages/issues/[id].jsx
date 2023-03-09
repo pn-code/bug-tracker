@@ -47,14 +47,26 @@ const IssueDetails = () => {
                                 <p>Priority</p>
                             </article>
                             <article className="flex gap-2">
-                                <h2 className="font-semibold">Assigned User</h2>
-                                <p>Assigned User</p>
+                                <h2 className="font-semibold">Identifier (user):</h2>
+                                <p>User who identified issue</p>
                             </article>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">
                                     Identified Date:
                                 </h2>
                                 <p>Identified Date</p>
+                            </article>
+                            <article className="flex gap-2">
+                                <h2 className="font-semibold">Assigned User:</h2>
+                                <p>Assigned User</p>
+                            </article>
+                            <article className="flex gap-2">
+                                <h2 className="font-semibold">Target Resolution Date:</h2>
+                                <p>Target Resolution Date</p>
+                            </article>
+                            <article className="flex gap-2">
+                                <h2 className="font-semibold">Actual Resolution Date:</h2>
+                                <p>Actual Resolution Date</p>
                             </article>
                         </section>
 
