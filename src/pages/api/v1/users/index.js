@@ -12,7 +12,10 @@ export default async function handler(req, res) {
                 },
             });
         } catch (error) {
-            res.sendStatus(500);
+            res.status(500).json({
+                status: "Unsuccessful",
+                error,
+            });
         }
     }
 }
