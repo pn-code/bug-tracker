@@ -23,6 +23,14 @@ CREATE TABLE issues (
     actual_resolution_date DATE
 );
 
+-- Creating Projects Table
+CREATE TABLE projects (
+    id BIGSERIAL PRIMARY KEY NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    created_on TIMESTAMP NOT NULL,
+    created_by VARCHAR(50) NOT NULL,
+);
+
 -- Additional Constraints
 
 -- For Number Constraints, include:
