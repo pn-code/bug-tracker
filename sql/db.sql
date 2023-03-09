@@ -1,11 +1,26 @@
--- Creating User Table
+-- Creating Users Table
 CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY NOT NULL,
     full_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
     role VARCHAR(30) NOT NULL,
     assigned_project INT NOT NULL,
-    created_on timestamp NOT NULL
+    created_on TIMESTAMP NOT NULL
+);
+
+-- Creating Issues Table
+CREATE TABLE issues (
+    id BIGSERIAL PRIMARY KEY NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    description VARCHAR(1000) NOT NULL,
+    related_project INT NOT NULL,
+    assigned_to INT NOT NULL,
+    created_on TIMESTAMP NOT NULL,
+    created_by VARCHAR(50),
+    status VARCHAR(30),
+    priority VARCHAR(30),
+    target_resolution_date DATE,
+    actual_resolution_date DATE
 );
 
 -- Additional Constraints
