@@ -1,7 +1,8 @@
 import Head from "next/head";
 import DashboardCard from "../components/DashboardCard";
+import serverAPI from "@/api/axios";
 
-export default function Home() {
+export default function Home({ projects, issues }) {
     return (
         <>
             <Head>
@@ -20,16 +21,29 @@ export default function Home() {
                 <section className="w-full flex gap-2">
                     <DashboardCard
                         title="Projects"
-                        quantity={5}
+                        quantity={projects.length}
                         hrefLink="/projects"
                     />
                     <DashboardCard
                         title="Issues"
-                        quantity={21}
+                        quantity={issues.length}
                         hrefLink="/issues"
                     />
                 </section>
             </main>
         </>
     );
+}
+
+export async function getServerSideProps() {
+    const projectsRes = await serverAPI.get("/api/v1/projects");
+    const issuesRes = await serverAPI.get("/api/v1/issues");
+
+    // Pass data to the page via props
+    return {
+        props: {
+            projects: projectsRes.data.data.projects,
+            issues: issuesRes.data.data.issues,
+        },
+    };
 }
