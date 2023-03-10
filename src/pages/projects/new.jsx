@@ -9,10 +9,10 @@ const NewProject = () => {
                     <h1 className="text-xl font-bold">New Project Form</h1>
                     <div className="text-[16px] font-semibold">
                         <Link
-                            href="/issues"
+                            href="/projects"
                             className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md"
                         >
-                            Return to Issues
+                            Return to Projects
                         </Link>
                     </div>
                 </header>
