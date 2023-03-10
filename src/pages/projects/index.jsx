@@ -1,8 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import ProjectCard from "@/components/ProjectCard";
+import serverAPI from "@/api/axios";
 
-const Projects = () => {
+const Projects = ({ projects }) => {
     return (
         <div className="bg-gray-100 h-[100vh] w-full">
             <section className="mx-4 pt-5 flex flex-col gap-4">
@@ -20,13 +21,17 @@ const Projects = () => {
 
                 {/* Sorting Row */}
                 <table className="w-full">
-                    <tr className="bg-gray-300 h-10 text-sm sm:text-[16px]">
-                        <th>Title</th>
-                        <th>Start Date</th>
-                        <th>Target End Date</th>
-                        <th>Actual End Date</th>
-                    </tr>
-                    <ProjectCard />
+                    <tbody>
+                        <tr className="bg-gray-300 h-10 text-sm sm:text-[16px]">
+                            <th>Project Name</th>
+                            <th>Created By</th>
+                            <th>Created On</th>
+                        </tr>
+                        {projects &&
+                            projects.map((project) => (
+                                <ProjectCard project={project} />
+                            ))}
+                    </tbody>
                 </table>
             </section>
         </div>
@@ -34,3 +39,14 @@ const Projects = () => {
 };
 
 export default Projects;
+
+export async function getServerSideProps() {
+    const res = await serverAPI.get("/api/v1/projects");
+
+    // Pass data to the page via props
+    return {
+        props: {
+            projects: res.data.data.projects,
+        },
+    };
+}
