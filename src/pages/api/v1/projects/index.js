@@ -3,8 +3,7 @@ import db from "../../../../../db";
 export default async function handler(req, res) {
     if (req.method === "GET") {
         const results = await db.query(
-            "select * from projects where id = $1",
-            [req.query.id]
+            "select * from projects",
         );
         try {
             res.status(201).json({
