@@ -1,12 +1,36 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import serverAPI from "@/api/axios";
+import { useRouter } from "next/router";
 
 const NewProject = () => {
+    const [loading, setLoading] = useState(false);
     const [projectName, setProjectName] = useState("");
+
+    const router = useRouter()
+
+    const submitProject = async (e) => {
+        e.preventDefault();
+        if (!loading && projectName != "") {
+            setLoading(true);
+
+            await serverAPI.post("/api/v1/projects", {
+                name: projectName,
+                // Change to reflect current user shown through user authorization later...
+                createdBy: "admin",
+            });
+
+            setLoading(false);
+            router.push("/projects")
+        }
+    };
 
     return (
         <div className="bg-gray-100 h-[100vh] w-full">
-            <form className="px-4 pt-5 flex flex-col gap-4">
+            <form
+                onSubmit={(e) => submitProject(e)}
+                className="px-4 pt-5 flex flex-col gap-4"
+            >
                 <header className="flex justify-between items-center">
                     <h1 className="text-xl font-bold">New Project Form</h1>
                     <div className="text-[16px] font-semibold">
