@@ -2,14 +2,15 @@ import React from "react";
 import Link from "next/link";
 import IssueHistoryCard from "@/components/IssueHistoryCard";
 import IssueCommentCard from "@/components/IssueCommentCard";
+import serverAPI from "@/api/axios";
 
-const IssueDetails = () => {
+const IssueDetails = ({ issue }) => {
     return (
         <div>
             <div className="bg-gray-100 h-[100vh] w-full">
                 <section className="mx-4 pt-5 flex flex-col gap-4">
                     <header className="flex justify-between items-center">
-                        <h1 className="text-xl font-bold">Issue Title</h1>
+                        <h1 className="text-xl font-bold">{issue.title}</h1>
                         <div className="text-[16px] font-semibold flex gap-2">
                             <Link
                                 href="/issues"
@@ -27,46 +28,54 @@ const IssueDetails = () => {
                                 Issue Information
                             </h1>
                             <article className="flex gap-2">
-                                <h2 className="font-semibold">Issue Title:</h2>
-                                <p>Issue Title</p>
+                                <h2 className="font-semibold">Title:</h2>
+                                <p>{issue.title}</p>
                             </article>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">
-                                    Issue Summary:
+                                    Description:
                                 </h2>
-                                <p>Issue Summary</p>
+                                <p>{issue.description}</p>
                             </article>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">
-                                    Project Title:
+                                    Related Project
                                 </h2>
-                                <p>Project Title</p>
+                                <p>{issue.related_project}</p>
                             </article>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">Priority:</h2>
-                                <p>Priority</p>
+                                <p>{issue.priority}</p>
                             </article>
                             <article className="flex gap-2">
-                                <h2 className="font-semibold">Identifier (user):</h2>
-                                <p>User who identified issue</p>
+                                <h2 className="font-semibold">
+                                    Identifier (user):
+                                </h2>
+                                <p>{issue.created_by}</p>
                             </article>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">
                                     Identified Date:
                                 </h2>
-                                <p>Identified Date</p>
+                                <p>{issue.created_on.substring(0,10)}</p>
                             </article>
                             <article className="flex gap-2">
-                                <h2 className="font-semibold">Assigned User:</h2>
-                                <p>Assigned User</p>
+                                <h2 className="font-semibold">
+                                    Assigned User:
+                                </h2>
+                                <p>{issue.assigned_to}</p>
                             </article>
                             <article className="flex gap-2">
-                                <h2 className="font-semibold">Target Resolution Date:</h2>
-                                <p>Target Resolution Date</p>
+                                <h2 className="font-semibold">
+                                    Target Resolution Date:
+                                </h2>
+                                <p>{issue.target_resolution_date.substring(0,10)}</p>
                             </article>
                             <article className="flex gap-2">
-                                <h2 className="font-semibold">Actual Resolution Date:</h2>
-                                <p>Actual Resolution Date</p>
+                                <h2 className="font-semibold">
+                                    Actual Resolution Date:
+                                </h2>
+                                <p>{issue.actual_resolution_date.substring(0,10)}</p>
                             </article>
                         </section>
 
@@ -76,13 +85,15 @@ const IssueDetails = () => {
                                 Issue History
                             </h1>
                             <table className="text-left">
-                                <tr>
-                                    <th>Property</th>
-                                    <th>Old Value</th>
-                                    <th>New Value</th>
-                                    <th>Date Modified</th>
-                                </tr>
-                                <IssueHistoryCard />
+                                <tbody>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>Old Value</th>
+                                        <th>New Value</th>
+                                        <th>Date Modified</th>
+                                    </tr>
+                                    <IssueHistoryCard />
+                                </tbody>
                             </table>
                         </section>
 
@@ -92,12 +103,14 @@ const IssueDetails = () => {
                                 Issue Comments
                             </h1>
                             <table className="text-left">
-                                <tr>
-                                    <th>User</th>
-                                    <th>Message</th>
-                                    <th>Date</th>
-                                </tr>
-                                <IssueCommentCard />
+                                <tbody>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Message</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    <IssueCommentCard />
+                                </tbody>
                             </table>
                             <form className="flex flex-col gap-2">
                                 <label htmlFor="comment">Comment: </label>
@@ -120,3 +133,15 @@ const IssueDetails = () => {
 };
 
 export default IssueDetails;
+
+export async function getServerSideProps({ params }) {
+    const issueId = params.id;
+    const res = await serverAPI.get(`/api/v1/issues/${issueId}`);
+
+    // Pass data to the page via props
+    return {
+        props: {
+            issue: res.data.data.issues,
+        },
+    };
+}
