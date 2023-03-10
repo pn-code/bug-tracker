@@ -28,7 +28,7 @@ CREATE TABLE projects (
     id BIGSERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(100) NOT NULL,
     created_on TIMESTAMP NOT NULL,
-    created_by VARCHAR(50) NOT NULL,
+    created_by VARCHAR(50) NOT NULL
 );
 
 -- Additional Constraints
