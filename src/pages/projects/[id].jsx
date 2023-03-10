@@ -1,13 +1,14 @@
 import React from "react";
 import Link from "next/link";
+import serverAPI from "@/api/axios";
 
-const ProjectDetails = () => {
+const ProjectDetails = ({ project }) => {
     return (
         <div>
             <div className="bg-gray-100 h-[100vh] w-full">
                 <section className="mx-4 pt-5 flex flex-col gap-4">
                     <header className="flex justify-between items-center">
-                        <h1 className="text-xl font-bold">Project Title</h1>
+                        <h1 className="text-xl font-bold">{project.name}</h1>
                         <div className="text-[16px] font-semibold flex gap-2">
                             <Link
                                 href="/projects"
@@ -28,27 +29,15 @@ const ProjectDetails = () => {
                                 <h2 className="font-semibold">
                                     Project Title:
                                 </h2>
-                                <p>Project Title</p>
+                                <p>{project.name}</p>
                             </article>
                             <article className="flex gap-2">
-                                <h2 className="font-semibold">Start Date:</h2>
-                                <p>Start Date:</p>
-                            </article>
-                            <article className="flex gap-2">
-                                <h2 className="font-semibold">
-                                    Target End Date:
-                                </h2>
-                                <p>Target End Date</p>
-                            </article>
-                            <article className="flex gap-2">
-                                <h2 className="font-semibold">
-                                    Actual End Date:
-                                </h2>
-                                <p>Actual End Date</p>
+                                <h2 className="font-semibold">Created by:</h2>
+                                <p>{project.created_by}</p>
                             </article>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">Created on:</h2>
-                                <p>Created on</p>
+                                <p>{project.created_on.substring(0, 10)}</p>
                             </article>
                         </section>
 
@@ -58,10 +47,6 @@ const ProjectDetails = () => {
                                 Users Assigned
                             </h1>
                             <section className="overflow-scroll-y">
-                                <article>User</article> 
-                                <article>User</article>
-                                <article>User</article> 
-                                <article>User</article>
                                 <article>User</article>
                                 <article>User</article>
                                 <article>User</article>
@@ -76,3 +61,15 @@ const ProjectDetails = () => {
 };
 
 export default ProjectDetails;
+
+export async function getServerSideProps({ params }) {
+    const projectId = params.id;
+    const res = await serverAPI.get(`/api/v1/projects/${projectId}`);
+
+    // Pass data to the page via props
+    return {
+        props: {
+            project: res.data.data.projects,
+        },
+    };
+}
