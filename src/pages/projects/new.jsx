@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 const NewProject = () => {
+    const [projectName, setProjectName] = useState("");
+
     return (
         <div className="bg-gray-100 h-[100vh] w-full">
             <form className="px-4 pt-5 flex flex-col gap-4">
@@ -21,35 +23,17 @@ const NewProject = () => {
                     <section className="flex flex-col gap-2">
                         <label htmlFor="project">Project Name: </label>
                         <input
+                            onChange={(e) => setProjectName(e.target.value)}
+                            value={projectName}
                             className="px-2 py-1 rounded-md"
                             id="project"
                             type="text"
                             placeholder="project name"
                         />
                     </section>
-
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="date">Start Date: </label>
-                        <input
-                            className="px-2 py-1 resize-none rounded-md"
-                            id="date"
-                            type="date"
-                            placeholder="start date"
-                        />
-                    </section>
-
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="date">Target End Date: </label>
-                        <input
-                            className="px-2 py-1 resize-none rounded-md"
-                            id="date"
-                            type="date"
-                            placeholder="target end date"
-                        />
-                    </section>
                 </fieldset>
                 <button className="bg-blue-400 text-white rounded-md py-2">
-                    Submit Issue
+                    Submit Project
                 </button>
             </form>
         </div>
