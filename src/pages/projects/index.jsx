@@ -29,7 +29,10 @@ const Projects = ({ projects }) => {
                         </tr>
                         {projects &&
                             projects.map((project) => (
-                                <ProjectCard project={project} />
+                                <ProjectCard
+                                    project={project}
+                                    key={project.id}
+                                />
                             ))}
                     </tbody>
                 </table>
