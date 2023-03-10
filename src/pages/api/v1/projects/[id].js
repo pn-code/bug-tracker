@@ -32,8 +32,18 @@ export default async function handler(req, res) {
     }
 
     if (req.method === "DELETE") {
-        res.status(204).json({
-            status: "Success",
-        });
+        try {
+            const results = await db.query("DELETE FROM projects WHERE id = $1",
+            [req.query.id])
+            res.status(204).json({
+                status: "Success",
+                results
+            });
+        } catch (error) {
+            res.status(500).json({
+                status: "Unsuccessful",
+                error,
+            });
+        }
     }
 }
