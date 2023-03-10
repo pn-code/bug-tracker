@@ -3,6 +3,10 @@ import Link from "next/link";
 import serverAPI from "@/api/axios";
 
 const ProjectDetails = ({ project }) => {
+    const deleteProject = async () => {
+        const res = await serverAPI.delete(`/api/v1/projects/${project.id}`)
+    }
+
     return (
         <div>
             <div className="bg-gray-100 h-[100vh] w-full">
@@ -20,14 +24,14 @@ const ProjectDetails = ({ project }) => {
                     </header>
 
                     {/* Project Information */}
-                    <div className="flex w-full gap-2 justify-between">
+                    <div className="flex w-full gap-2 justify-between flex-col lg:flex-row">
                         <section className="flex flex-col bg-gray-200 gap-4 px-4 py-4 rounded-md w-full flex-[2]">
                             <h1 className="font-semibold text-xl">
                                 Project Information
                             </h1>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">
-                                    Project Title:
+                                    Title:
                                 </h2>
                                 <p>{project.name}</p>
                             </article>
@@ -39,6 +43,11 @@ const ProjectDetails = ({ project }) => {
                                 <h2 className="font-semibold">Created on:</h2>
                                 <p>{project.created_on.substring(0, 10)}</p>
                             </article>
+
+                            <section className="flex gap-4">
+                                <button type="button" className="bg-green-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-600">Update</button>
+                                <button onClick={deleteProject} type="button" className="bg-red-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-600">Delete</button>
+                            </section>
                         </section>
 
                         {/* Users Assigned to Project */}
