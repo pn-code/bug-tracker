@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+// import { useRouter } from "next/router";
+// import serverAPI from "@/api/axios";
+// const submitIssue = async () => {
+//     const res = await serverAPI.post("/api/v1/issues",)
+// }
 
 const NewIssue = () => {
+    const [issue, setIssue] = useState({
+        relatedProject: "",
+        title: "",
+        description: "",
+        identifiedDate: "",
+        targetResolutionDate: "",
+        actualResolutionDate: "",
+        assignedTo: "",
+        status: "",
+        priority: "",
+    });
+
+    const handleInputChange = (e) => {
+        setIssue((prevIssue) => ({
+            ...prevIssue,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
+    console.log(issue);
     return (
         <div className="bg-gray-100 h-[100vh] w-full">
             <form className="px-4 pt-5 flex flex-col gap-4">
@@ -21,6 +46,9 @@ const NewIssue = () => {
                     <section className="flex flex-col gap-2">
                         <label htmlFor="project">Related Project: </label>
                         <input
+                            onChange={(e) => handleInputChange(e)}
+                            name="relatedProject"
+                            value={issue.relatedProject}
                             className="px-2 py-1 rounded-md"
                             id="project"
                             type="text"
@@ -29,8 +57,11 @@ const NewIssue = () => {
                     </section>
 
                     <section className="flex flex-col gap-2">
-                        <label htmlFor="summary">Title: </label>
+                        <label htmlFor="title">Title: </label>
                         <input
+                            onChange={(e) => handleInputChange(e)}
+                            name="title"
+                            value={issue.title}
                             className="px-2 py-1 resize-none rounded-md"
                             id="title"
                             type="text"
@@ -41,6 +72,9 @@ const NewIssue = () => {
                     <section className="flex flex-col gap-2">
                         <label htmlFor="description">Description: </label>
                         <textarea
+                            onChange={(e) => handleInputChange(e)}
+                            name="description"
+                            value={issue.description}
                             className="px-2 py-1 resize-none rounded-md"
                             id="description"
                             type="text"
@@ -54,6 +88,9 @@ const NewIssue = () => {
                             Identified Date:{" "}
                         </label>
                         <input
+                            onChange={(e) => handleInputChange(e)}
+                            name="identifiedDate"
+                            value={issue.identifiedDate}
                             className="px-2 py-1 rounded-md"
                             id="identifiedDate"
                             type="date"
@@ -66,6 +103,9 @@ const NewIssue = () => {
                             Target Resolution Date:{" "}
                         </label>
                         <input
+                            onChange={(e) => handleInputChange(e)}
+                            name="targetResolutionDate"
+                            value={issue.targetResolutionDate}
                             className="px-2 py-1 rounded-md"
                             id="targetResolutionDate"
                             type="date"
@@ -78,6 +118,9 @@ const NewIssue = () => {
                             Actual Resolution Date:{" "}
                         </label>
                         <input
+                            onChange={(e) => handleInputChange(e)}
+                            name="actualResolutionDate"
+                            value={issue.actualResolutionDate}
                             className="px-2 py-1 rounded-md"
                             id="actualResolutionDate"
                             type="date"
@@ -86,18 +129,27 @@ const NewIssue = () => {
                     </section>
 
                     <section className="flex flex-col gap-2">
-                        <label htmlFor="assignedUser">Assigned User: </label>
+                        <label htmlFor="assignedTo">Assigned to: </label>
                         <input
+                            onChange={(e) => handleInputChange(e)}
+                            name="assignedTo"
+                            value={issue.assignedTo}
                             className="px-2 py-1 rounded-md"
-                            id="assignedUser"
+                            id="assignedTo"
                             type="text"
-                            placeholder="assigned user"
+                            placeholder="assigned to"
                         />
                     </section>
 
                     <section className="flex flex-col gap-2">
                         <label htmlFor="status">Status:</label>
-                        <select className="px-2 py-1 rounded-md" id="status">
+                        <select
+                            onChange={(e) => handleInputChange(e)}
+                            name="status"
+                            value={issue.status}
+                            className="px-2 py-1 rounded-md"
+                            id="status"
+                        >
                             <option value={null}>SELECT STATUS</option>
                             <option value={0}>Open</option>
                             <option value={1}>In Progress</option>
@@ -109,7 +161,13 @@ const NewIssue = () => {
 
                     <section className="flex flex-col gap-2">
                         <label htmlFor="priority">Priority: </label>
-                        <select className="px-2 py-1 rounded-md" id="priority">
+                        <select
+                            onChange={(e) => handleInputChange(e)}
+                            name="priority"
+                            value={issue.priority}
+                            className="px-2 py-1 rounded-md"
+                            id="priority"
+                        >
                             <option value={null}>SELECT PRIORITY</option>
                             <option value={0}>Low</option>
                             <option value={1}>Medium</option>

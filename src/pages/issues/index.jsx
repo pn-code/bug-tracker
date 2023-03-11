@@ -4,7 +4,6 @@ import IssueCard from "@/components/IssueCard";
 import serverAPI from "@/api/axios";
 
 const Issues = ({ issues }) => {
-    console.log(issues);
     return (
         <div className="bg-gray-100 h-[100vh] w-[100%]">
             <section className="mx-4 pt-5 flex flex-col gap-4">
