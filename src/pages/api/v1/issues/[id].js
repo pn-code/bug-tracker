@@ -1,11 +1,12 @@
 import db from "../../../../../db";
 
 export default async function handler(req, res) {
+    const issueId = req.query.id;
+
     if (req.method === "GET") {
-        const results = await db.query(
-            "select * from issues where id = $1",
-            [req.query.id]
-        );
+        const results = await db.query("select * from issues where id = $1", [
+            issueId,
+        ]);
         try {
             res.status(200).json({
                 status: "Success",
@@ -32,8 +33,18 @@ export default async function handler(req, res) {
     }
 
     if (req.method === "DELETE") {
-        res.status(204).json({
-            status: "Success",
-        });
+        try {
+            await db.query(
+                `DELETE FROM issues WHERE id = ${issueId}`
+            );
+            res.status(204).json({
+                status: "Success",
+            });
+        } catch (error) {
+            res.status(500).json({
+                status: "Unsuccessful",
+                error,
+            });
+        }
     }
 }
