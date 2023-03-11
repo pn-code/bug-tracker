@@ -22,13 +22,15 @@ const NewIssue = () => {
         e.preventDefault();
         if (!loading) {
             try {
-                const res = await serverAPI.post("/api/v1/issues", {
+                setLoading(true);
+                await serverAPI.post("/api/v1/issues", {
                     ...issue,
                     createdBy: 1,
                     relatedProject: Number(issue.relatedProject),
                     assignedTo: Number(issue.assignedTo),
                 });
                 router.push("/issues");
+                setLoading(false);
             } catch (error) {
                 console.error(error);
             }
