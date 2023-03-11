@@ -3,8 +3,20 @@ import Link from "next/link";
 import IssueHistoryCard from "@/components/IssueHistoryCard";
 import IssueCommentCard from "@/components/IssueCommentCard";
 import serverAPI from "@/api/axios";
+import { useRouter } from "next/router";
 
 const IssueDetails = ({ issue }) => {
+
+    const router = useRouter();
+    const deleteIssue = async () => {
+        try {
+            await serverAPI.delete(`/api/v1/issues/${issue.id}`)
+            router.push("/issues")
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
     return (
         <div>
             <div className="bg-gray-100 h-[100vh] w-full">
@@ -77,6 +89,11 @@ const IssueDetails = ({ issue }) => {
                                 </h2>
                                 <p>{issue.actual_resolution_date.substring(0,10)}</p>
                             </article>
+
+                            <section className="flex gap-4">
+                                <button type="button" className="bg-green-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-600">Update</button>
+                                <button onClick={deleteIssue} type="button" className="bg-red-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-600">Delete</button>
+                            </section>
                         </section>
 
                         {/* Issue History */}
