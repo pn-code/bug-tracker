@@ -1,23 +1,39 @@
 import React, { useState } from "react";
 import Link from "next/link";
-// import { useRouter } from "next/router";
-// import serverAPI from "@/api/axios";
-// const submitIssue = async () => {
-//     const res = await serverAPI.post("/api/v1/issues",)
-// }
+import { useRouter } from "next/router";
+import serverAPI from "@/api/axios";
 
 const NewIssue = () => {
+    const [loading, setLoading] = useState(false);
     const [issue, setIssue] = useState({
         relatedProject: "",
         title: "",
         description: "",
-        identifiedDate: "",
         targetResolutionDate: "",
         actualResolutionDate: "",
         assignedTo: "",
         status: "",
         priority: "",
     });
+
+    const router = useRouter();
+
+    const submitIssue = async (e) => {
+        e.preventDefault();
+        if (!loading) {
+            try {
+                const res = await serverAPI.post("/api/v1/issues", {
+                    ...issue,
+                    createdBy: 1,
+                    relatedProject: Number(issue.relatedProject),
+                    assignedTo: Number(issue.assignedTo),
+                });
+                router.push("/issues");
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    };
 
     const handleInputChange = (e) => {
         setIssue((prevIssue) => ({
@@ -26,10 +42,12 @@ const NewIssue = () => {
         }));
     };
 
-    console.log(issue);
     return (
         <div className="bg-gray-100 h-[100vh] w-full">
-            <form className="px-4 pt-5 flex flex-col gap-4">
+            <form
+                onSubmit={(e) => submitIssue(e)}
+                className="px-4 pt-5 flex flex-col gap-4"
+            >
                 <header className="flex justify-between items-center">
                     <h1 className="text-xl font-bold">New Issue Form</h1>
                     <div className="text-[16px] font-semibold">
@@ -81,21 +99,6 @@ const NewIssue = () => {
                             placeholder="description"
                             rows={10}
                         ></textarea>
-                    </section>
-
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="identifiedDate">
-                            Identified Date:{" "}
-                        </label>
-                        <input
-                            onChange={(e) => handleInputChange(e)}
-                            name="identifiedDate"
-                            value={issue.identifiedDate}
-                            className="px-2 py-1 rounded-md"
-                            id="identifiedDate"
-                            type="date"
-                            placeholder="identified date"
-                        />
                     </section>
 
                     <section className="flex flex-col gap-2">
