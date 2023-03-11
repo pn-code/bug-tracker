@@ -154,11 +154,11 @@ const NewIssue = () => {
                             id="status"
                         >
                             <option value={null}>SELECT STATUS</option>
-                            <option value={0}>Open</option>
-                            <option value={1}>In Progress</option>
-                            <option value={2}>Needs Review</option>
-                            <option value={3}>Under Review</option>
-                            <option value={4}>Closed</option>
+                            <option value="open">Open</option>
+                            <option value="in progress">In Progress</option>
+                            <option value="needs review">Needs Review</option>
+                            <option value="under review">Under Review</option>
+                            <option value="closed">Closed</option>
                         </select>
                     </section>
 
@@ -172,9 +172,9 @@ const NewIssue = () => {
                             id="priority"
                         >
                             <option value={null}>SELECT PRIORITY</option>
-                            <option value={0}>Low</option>
-                            <option value={1}>Medium</option>
-                            <option value={2}>High</option>
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
                         </select>
                     </section>
                 </fieldset>
