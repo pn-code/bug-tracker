@@ -17,6 +17,10 @@ const IssueDetails = ({ issue }) => {
         }
     }
 
+    const navigateToUpdateIssue = () => {
+        router.push(`/issues/update/${issue.id}`)
+    }
+
     return (
         <div>
             <div className="bg-gray-100 h-[100vh] w-full">
@@ -91,7 +95,7 @@ const IssueDetails = ({ issue }) => {
                             </article>
 
                             <section className="flex gap-4">
-                                <button type="button" className="bg-green-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-600">Update</button>
+                                <button onClick={navigateToUpdateIssue} type="button" className="bg-green-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-600">Update</button>
                                 <button onClick={deleteIssue} type="button" className="bg-red-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-600">Delete</button>
                             </section>
                         </section>
