@@ -8,7 +8,10 @@ const NewIssue = () => {
                 <header className="flex justify-between items-center">
                     <h1 className="text-xl font-bold">New Issue Form</h1>
                     <div className="text-[16px] font-semibold">
-                        <Link href="/issues" className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md">
+                        <Link
+                            href="/issues"
+                            className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md"
+                        >
                             Return to Issues
                         </Link>
                     </div>
@@ -16,30 +19,30 @@ const NewIssue = () => {
 
                 <fieldset className="flex flex-col gap-4">
                     <section className="flex flex-col gap-2">
-                        <label htmlFor="project">Project: </label>
+                        <label htmlFor="project">Related Project: </label>
                         <input
                             className="px-2 py-1 rounded-md"
                             id="project"
                             type="text"
-                            placeholder="project"
+                            placeholder="related project"
                         />
                     </section>
 
                     <section className="flex flex-col gap-2">
-                        <label htmlFor="summary">Summary: </label>
+                        <label htmlFor="summary">Title: </label>
                         <input
                             className="px-2 py-1 resize-none rounded-md"
-                            id="summary"
+                            id="title"
                             type="text"
-                            placeholder="summary"
+                            placeholder="title"
                         />
                     </section>
 
                     <section className="flex flex-col gap-2">
-                        <label htmlFor="">Description: </label>
+                        <label htmlFor="description">Description: </label>
                         <textarea
                             className="px-2 py-1 resize-none rounded-md"
-                            id="summary"
+                            id="description"
                             type="text"
                             placeholder="description"
                             rows={10}
@@ -71,6 +74,18 @@ const NewIssue = () => {
                     </section>
 
                     <section className="flex flex-col gap-2">
+                        <label htmlFor="actualResolutionDate">
+                            Actual Resolution Date:{" "}
+                        </label>
+                        <input
+                            className="px-2 py-1 rounded-md"
+                            id="actualResolutionDate"
+                            type="date"
+                            placeholder="actual resolution date"
+                        />
+                    </section>
+
+                    <section className="flex flex-col gap-2">
                         <label htmlFor="assignedUser">Assigned User: </label>
                         <input
                             className="px-2 py-1 rounded-md"
@@ -83,6 +98,7 @@ const NewIssue = () => {
                     <section className="flex flex-col gap-2">
                         <label htmlFor="status">Status:</label>
                         <select className="px-2 py-1 rounded-md" id="status">
+                            <option value={null}>SELECT STATUS</option>
                             <option value={0}>Open</option>
                             <option value={1}>In Progress</option>
                             <option value={2}>Needs Review</option>
@@ -94,13 +110,14 @@ const NewIssue = () => {
                     <section className="flex flex-col gap-2">
                         <label htmlFor="priority">Priority: </label>
                         <select className="px-2 py-1 rounded-md" id="priority">
+                            <option value={null}>SELECT PRIORITY</option>
                             <option value={0}>Low</option>
                             <option value={1}>Medium</option>
                             <option value={2}>High</option>
                         </select>
                     </section>
                 </fieldset>
-                <button className="bg-blue-400 text-white rounded-md py-2">
+                <button className="bg-blue-400 text-white rounded-md py-2 my-4">
                     Submit Issue
                 </button>
             </form>
