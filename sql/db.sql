@@ -1,8 +1,9 @@
 -- Creating Users Table
 CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY NOT NULL,
-    full_name VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
     role VARCHAR(30) NOT NULL,
     assigned_project INT NOT NULL,
     created_on TIMESTAMP NOT NULL
