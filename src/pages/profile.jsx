@@ -1,17 +1,6 @@
-import React, { useEffect } from "react";
-import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import React from "react";
 
 const Profile = () => {
-    const { data: session } = useSession();
-    const router = useRouter();
-
-    useEffect(() => {
-        if (!session?.user) {
-            router.push("/login");
-        }
-    }, []);
-
     return (
         <div className="bg-gray-100 h-[90vh] w-full flex flex-col px-4 pt-5 items-center lg:justify-center lg:items-start gap-12 lg:flex-row">
             <section className="flex flex-col gap-4">

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { signIn, useSession } from "next-auth/react";
 
 const Navbar = () => {
     const [openNavMenu, setOpenNavMenu] = useState(false);
-    const session = useSession();
 
     return (
         <nav className="flex justify-between px-4 py-6 bg-[#1cba9b] text-white font-semibold items-center">
-            <h1 className="text-xl">Bug Tracker</h1>
+            <Link href="/">
+                <h1 className="text-xl">Bug Tracker</h1>
+            </Link>
 
             <button onClick={() => setOpenNavMenu(true)} className="sm:hidden">
                 <GiHamburgerMenu size={28} />
@@ -79,19 +79,13 @@ const Navbar = () => {
                 </div>
             )}
 
-            {!session?.data?.user && (
-                <button onClick={() => signIn()}>Sign In</button>
-            )}
-
-            {session?.data?.user && (
-                <ul className="gap-12 text-sm hidden sm:flex">
-                    <Link href="/">Dashboard</Link>
-                    <Link href="/roles">User Roles</Link>
-                    <Link href="/issues">Issues</Link>
-                    <Link href="/projects">Projects</Link>
-                    <Link href="/profile">Profile</Link>
-                </ul>
-            )}
+            <ul className="gap-12 text-sm hidden sm:flex">
+                <Link href="/">Dashboard</Link>
+                <Link href="/roles">User Roles</Link>
+                <Link href="/issues">Issues</Link>
+                <Link href="/projects">Projects</Link>
+                <Link href="/profile">Profile</Link>
+            </ul>
         </nav>
     );
 };
