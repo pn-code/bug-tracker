@@ -1,5 +1,6 @@
 import db from "../../../../db";
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 export default async function loginHandler(req, res) {
     if (req.method === "POST") {
@@ -19,6 +20,7 @@ export default async function loginHandler(req, res) {
                 email: user.email,
                 role: user.role,
                 assigned_project: user.assigned_project,
+                token: generateToken(user.id),
             });
         } else {
             res.status(400).json({
@@ -28,3 +30,9 @@ export default async function loginHandler(req, res) {
         }
     }
 }
+
+// Generate JWT
+const generateToken = (id) =>
+    jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: "30m",
+    });
