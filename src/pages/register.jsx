@@ -7,6 +7,7 @@ const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const router = useRouter();
 
@@ -77,6 +78,10 @@ const Register = () => {
                         />
                     </section>
 
+                    <section className="flex gap-2">
+                        <input type="checkbox" />
+                        <label htmlFor="showPassword">Show Password</label>
+                    </section>
                 </fieldset>
                 <button className="py-4 bg-blue-400 text-gray-50 rounded-md hover:bg-blue-500">
                     Register
