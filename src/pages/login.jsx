@@ -6,7 +6,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
 
     return (
-        <div className="w-full h-[100vh] bg-[#1cba9b] flex items-center justify-center">
+        <div className="w-full h-[92vh] bg-[#1cba9b] flex items-center justify-center">
             <form className="bg-gray-100 p-10 rounded-md flex flex-col gap-4">
                 <section>
                     <h1 className="text-3xl font-bold">Bug Tracker</h1>

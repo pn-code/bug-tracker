@@ -53,7 +53,7 @@ const Register = () => {
     const checkName = (str) => (str.length > 2 ? true : false);
 
     return (
-        <div className="w-full h-[94vh] bg-[#1cba9b] flex items-center justify-center">
+        <div className="w-full h-[92vh] bg-[#1cba9b] flex items-center justify-center">
             <form
                 onSubmit={(e) => handleRegisterUser(e)}
                 className="bg-gray-100 p-10 rounded-md flex flex-col gap-4 w-[320px]"
