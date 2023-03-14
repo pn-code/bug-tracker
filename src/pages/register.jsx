@@ -8,30 +8,55 @@ const Register = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [inputError, setInputError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const router = useRouter();
 
     const handleRegisterUser = async (e) => {
         e.preventDefault();
-        try {
-            const res = await serverAPI.post("/api/auth/register", {
-                name,
-                email,
-                password,
-            });
-            if (res.status === 201) {
-                router.push("/login");
+
+        if (loading) return;
+        setLoading(true);
+        if (!checkName(name)) {
+            setInputError("Full name must be at least 3 characters.");
+        } else if (!checkPassword(password)) {
+            setInputError(
+                "Password should be 8-30 characters, with at least 1 symbol, uppercase, lowercase, and a number."
+            );
+        } else {
+            try {
+                const res = await serverAPI.post("/api/auth/register", {
+                    name,
+                    email,
+                    password,
+                });
+                if (res.status === 201) {
+                    router.push("/login");
+                }
+            } catch (error) {
+                console.error(error);
             }
-        } catch (error) {
-            console.error(error);
         }
+        setLoading(false);
     };
 
+    console.log(inputError);
+
+    const checkPassword = (str) => {
+        // Regex for password: 8-30 characters, w/ at least 1 symbol, uppercase, lowercase, and a number.
+        const regEx =
+            /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,100}$/;
+        return regEx.test(str);
+    };
+
+    const checkName = (str) => (str.length > 2 ? true : false);
+
     return (
-        <div className="w-full h-[100vh] bg-[#1cba9b] flex items-center justify-center">
+        <div className="w-full h-[94vh] bg-[#1cba9b] flex items-center justify-center">
             <form
                 onSubmit={(e) => handleRegisterUser(e)}
-                className="bg-gray-100 p-10 rounded-md flex flex-col gap-4"
+                className="bg-gray-100 p-10 rounded-md flex flex-col gap-4 w-[320px]"
             >
                 <section>
                     <h1 className="text-3xl font-bold">Bug Tracker</h1>
@@ -39,6 +64,12 @@ const Register = () => {
                         User Registration
                     </h2>
                 </section>
+
+                {inputError && (
+                    <section className="text-red-500 font-semibold text-sm">
+                        <span>*{inputError}</span>
+                    </section>
+                )}
 
                 <fieldset className="flex flex-col gap-4">
                     <section className="flex flex-col gap-1">
@@ -72,14 +103,18 @@ const Register = () => {
                             value={password}
                             id="password"
                             className="p-2 rounded-md"
-                            type="password"
+                            type={showPassword ? "text" : "password"}
                             placeholder="password"
                             required
                         />
                     </section>
 
                     <section className="flex gap-2">
-                        <input type="checkbox" />
+                        <input
+                            onChange={() => setShowPassword((show) => !show)}
+                            id="showPassword"
+                            type="checkbox"
+                        />
                         <label htmlFor="showPassword">Show Password</label>
                     </section>
                 </fieldset>
