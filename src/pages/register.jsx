@@ -7,7 +7,6 @@ const Register = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
 
     const router = useRouter();
 
@@ -78,20 +77,6 @@ const Register = () => {
                         />
                     </section>
 
-                    <section className="flex flex-col">
-                        <label htmlFor="confirmPassword">
-                            Confirm Password:
-                        </label>
-                        <input
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            value={confirmPassword}
-                            id="confirmPassword"
-                            className="p-2 rounded-md"
-                            type="password"
-                            placeholder="confirm password"
-                            required
-                        />
-                    </section>
                 </fieldset>
                 <button className="py-4 bg-blue-400 text-gray-50 rounded-md hover:bg-blue-500">
                     Register
