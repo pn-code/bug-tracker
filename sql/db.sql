@@ -2,7 +2,7 @@
 CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(50) NOT NULL,
-    email VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     role VARCHAR(30) NOT NULL,
     assigned_project INT NOT NULL,
