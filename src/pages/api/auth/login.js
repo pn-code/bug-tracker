@@ -1,17 +1,17 @@
 import db from "../../../../db";
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const cookie = require("cookie");
+const { serialize } = require("cookie");
 
 export default async function loginHandler(req, res) {
   if (req.method === "POST") {
     const { email, password } = req.body;
 
-    const userQuery = await db.query("SELECT * FROM users WHERE email = $1", [
+    const { rows } = await db.query("SELECT * FROM users WHERE email = $1", [
       email,
     ]);
 
-    const user = userQuery.rows[0];
+    const user = rows[0];
 
     if (user && (await bcrypt.compare(password, user.password))) {
       const accessToken = jwt.sign(
@@ -26,11 +26,14 @@ export default async function loginHandler(req, res) {
         { expiresIn: "1d" }
       );
 
-      res.cookie("jwt", refreshToken, {
-        httpOnly: true,
-        secure: true,
-        maxAge: 24 * 60 * 60 * 1000,
-      });
+      res.setHeader(
+        "Set-Cookie",
+        serialize("jwt", refreshToken, {
+          httpOnly: true,
+          secure: true,
+          maxAge: 24 * 60 * 60 * 1000,
+        })
+      );
 
       res.json({
         id: user.id,
