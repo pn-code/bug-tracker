@@ -1,11 +1,11 @@
 import React from "react";
 
-const UserRoleCard = () => {
+const UserRoleCard = ({ user }) => {
   return (
     <tr className="bg-gray-200">
-      <td>User Name</td>
-      <td>Email</td>
-      <td>Role</td>
+      <td>{user.name}</td>
+      <td>{user.email}</td>
+      <td>{user.role}</td>
     </tr>
   );
 };
