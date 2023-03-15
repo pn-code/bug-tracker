@@ -24,13 +24,17 @@ const Role = () => {
     <div className="bg-gray-100 h-[90vh] w-full flex px-4 pt-5 gap-10 lg:justify-between lg:gap-20 flex-col lg:flex-row">
       <form className="lg:w-[50%] flex flex-col gap-4">
         <h1 className="text-xl font-bold">Manage User Roles</h1>
-        <label htmlFor="">User: </label>
-        <select name="" id="">
-          <option value="">User</option>
+        <label htmlFor="user">User: </label>
+        <select name="user" id="user">
+          {users.map((user) => (
+            <option value={user.id}>{user.name}</option>
+          ))}
         </select>
-        <label htmlFor="">Role: </label>
-        <select name="" id="">
-          <option value="">Role</option>
+        <label htmlFor="role">Role: </label>
+        <select name="role" id="role">
+          <option value="user">User</option>
+          <option value="manager">Manager</option>
+          <option value="admin">Admin</option>
         </select>
         <button className="text-white bg-blue-400 hover:bg-blue-500 py-2 rounded-md">
           Submit
