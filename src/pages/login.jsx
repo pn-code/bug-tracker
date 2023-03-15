@@ -7,13 +7,17 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const router = useRouter()
+  const router = useRouter();
 
   const handleUserLogin = async (e) => {
     e.preventDefault();
 
-    const res = await serverAPI.post("/api/auth/login", { email, password });
-    router.push("/")
+    try {
+      await serverAPI.post("/api/auth/login", { email, password });
+      router.push("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

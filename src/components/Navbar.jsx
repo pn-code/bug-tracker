@@ -16,7 +16,7 @@ const Navbar = () => {
             </button>
 
             {/* Mobile NavMenu */}
-            {openNavMenu && session?.data?.user && (
+            {openNavMenu && (
                 <div className="fixed bg-[#1cba9b] h-[100vh] w-full top-0 left-0 flex items-center justify-center">
                     <div className="w-[290px] flex flex-col mx-3 gap-12">
                         <section className="flex justify-between w-full">
