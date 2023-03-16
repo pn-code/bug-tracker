@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import Link from "next/link";
 import serverAPI from "@/api/axios";
 import { useRouter } from "next/router";
+import { useUser } from "@/contexts/UserContext";
 
 const NewProject = () => {
     const [loading, setLoading] = useState(false);
     const [projectName, setProjectName] = useState("");
+
+    const user = useUser()[0];
 
     const router = useRouter()
 
@@ -17,7 +20,7 @@ const NewProject = () => {
             await serverAPI.post("/api/v1/projects", {
                 name: projectName,
                 // Change to reflect current user shown through user authorization later...
-                createdBy: "admin",
+                createdBy: user.id,
             });
 
             setLoading(false);
