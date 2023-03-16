@@ -77,7 +77,12 @@ const NewIssue = () => {
                 <fieldset className="flex flex-col gap-4">
                     <section className="flex flex-col gap-2">
                         <label htmlFor="project">Related Project: </label>
-                        <select name="project" id="project">
+                        <select
+                            onChange={(e) => handleInputChange(e)}
+                            name="project"
+                            id="project"
+                        >
+                            <option default value="">SELECT A PROJECT</option>
                             {projects.map((project) => (
                                 <option value={project.id} key={project.id}>
                                     {project.name}
