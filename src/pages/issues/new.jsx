@@ -83,11 +83,12 @@ const NewIssue = () => {
 
                 <fieldset className="flex flex-col gap-4">
                     <section className="flex flex-col gap-2">
-                        <label htmlFor="project">Related Project: </label>
+                        <label htmlFor="relatedProject">Related Project: </label>
                         <select
                             onChange={(e) => handleInputChange(e)}
-                            name="project"
-                            id="project"
+                            value={issue.project}
+                            name="relatedProject"
+                            id="relatedProject"
                         >
                             <option default value="">
                                 SELECT A PROJECT
@@ -163,6 +164,7 @@ const NewIssue = () => {
                             onChange={(e) => handleInputChange(e)}
                             name="assignedTo"
                             id="assignedTo"
+                            value={issue.assignedTo}
                         >
                             <option default value="">
                                 SELECT ASSIGNED USER
