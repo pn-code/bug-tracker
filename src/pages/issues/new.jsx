@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import serverAPI from "@/api/axios";
+import { useUser } from "@/contexts/UserContext";
 
 const NewIssue = () => {
     const [loading, setLoading] = useState(false);
@@ -15,8 +16,19 @@ const NewIssue = () => {
         status: "",
         priority: "",
     });
+    const [projects, setProjects] = useState([]);
 
+    const user = useUser()[0];
     const router = useRouter();
+
+    const fetchProjects = async () => {
+        const res = await serverAPI.get("/api/v1/projects");
+        setProjects(res.data.data.projects);
+    };
+
+    useEffect(() => {
+        fetchProjects();
+    }, []);
 
     const submitIssue = async (e) => {
         e.preventDefault();
@@ -25,7 +37,7 @@ const NewIssue = () => {
                 setLoading(true);
                 await serverAPI.post("/api/v1/issues", {
                     ...issue,
-                    createdBy: 1,
+                    createdBy: user.id,
                     relatedProject: Number(issue.relatedProject),
                     assignedTo: Number(issue.assignedTo),
                 });
@@ -65,15 +77,13 @@ const NewIssue = () => {
                 <fieldset className="flex flex-col gap-4">
                     <section className="flex flex-col gap-2">
                         <label htmlFor="project">Related Project: </label>
-                        <input
-                            onChange={(e) => handleInputChange(e)}
-                            name="relatedProject"
-                            value={issue.relatedProject}
-                            className="px-2 py-1 rounded-md"
-                            id="project"
-                            type="text"
-                            placeholder="related project"
-                        />
+                        <select name="project" id="project">
+                            {projects.map((project) => (
+                                <option value={project.id} key={project.id}>
+                                    {project.name}
+                                </option>
+                            ))}
+                        </select>
                     </section>
 
                     <section className="flex flex-col gap-2">
