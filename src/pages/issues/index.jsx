@@ -23,6 +23,7 @@ const Issues = ({ issues }) => {
                 <table className="w-full">
                     <tbody>
                         <tr className="bg-gray-300 h-10 text-sm sm:text-[16px]">
+                            <th>ID</th>
                             <th>Title</th>
                             <th>Project</th>
                             <th>Priority</th>
