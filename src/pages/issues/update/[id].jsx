@@ -1,22 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import serverAPI from "@/api/axios";
 
 const UpdateIssue = ({ issue }) => {
     const [loading, setLoading] = useState(false);
+
     const [updatedIssue, setUpdatedIssue] = useState({
         relatedProject: issue.related_project,
         title: issue.title,
         description: issue.description,
-        targetResolutionDate: issue.target_resolution_date.substring(0,10),
-        actualResolutionDate: issue.actual_resolution_date.substring(0,10),
+        targetResolutionDate: issue.target_resolution_date.substring(0, 10),
+        actualResolutionDate:
+            issue.actual_resolution_date?.substring(0, 10) || "",
         assignedTo: issue.assigned_to,
         status: issue.status,
         priority: issue.priority,
     });
 
     const router = useRouter();
+
+    const [projects, setProjects] = useState([]);
+    const [users, setUsers] = useState([]);
+
+
+    const fetchProjects = async () => {
+        const res = await serverAPI.get("/api/v1/projects");
+        setProjects(res.data.data.projects);
+    };
+
+    const fetchUsers = async () => {
+        const res = await serverAPI.get("/api/v1/users");
+        setUsers(res.data.users);
+    };
+
+    useEffect(() => {
+        fetchProjects();
+        fetchUsers();
+    }, []);
 
     const submitUpdatedIssue = async (e) => {
         e.preventDefault();
@@ -64,16 +85,21 @@ const UpdateIssue = ({ issue }) => {
 
                 <fieldset className="flex flex-col gap-4">
                     <section className="flex flex-col gap-2">
-                        <label htmlFor="project">Related Project: </label>
-                        <input
+                        <label htmlFor="relatedProject">
+                            Related Project:{" "}
+                        </label>
+                        <select
                             onChange={(e) => handleInputChange(e)}
+                            value={issue.project}
                             name="relatedProject"
-                            value={updatedIssue.relatedProject}
-                            className="px-2 py-1 rounded-md"
-                            id="project"
-                            type="text"
-                            placeholder="related project"
-                        />
+                            id="relatedProject"
+                        >
+                            {projects.map((project) => (
+                                <option value={project.id} key={project.id}>
+                                    {project.name}
+                                </option>
+                            ))}
+                        </select>
                     </section>
 
                     <section className="flex flex-col gap-2">
@@ -135,15 +161,19 @@ const UpdateIssue = ({ issue }) => {
 
                     <section className="flex flex-col gap-2">
                         <label htmlFor="assignedTo">Assigned to: </label>
-                        <input
+                        <select
                             onChange={(e) => handleInputChange(e)}
                             name="assignedTo"
-                            value={updatedIssue.assignedTo}
-                            className="px-2 py-1 rounded-md"
                             id="assignedTo"
-                            type="text"
-                            placeholder="assigned to"
-                        />
+                            value={issue.assignedTo}
+                        >
+                            {users.map((user) => (
+                                <option
+                                    value={user.id}
+                                    key={user.id}
+                                >{`${user.name} (${user.id})`}</option>
+                            ))}
+                        </select>
                     </section>
 
                     <section className="flex flex-col gap-2">

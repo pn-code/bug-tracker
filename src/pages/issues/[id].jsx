@@ -91,7 +91,7 @@ const IssueDetails = ({ issue }) => {
                                 <h2 className="font-semibold">
                                     Actual Resolution Date:
                                 </h2>
-                                <p>{issue.actual_resolution_date.substring(0,10)}</p>
+                                <p>{issue.actual_resolution_date?.substring(0,10) || null}</p>
                             </article>
 
                             <section className="flex gap-4">
