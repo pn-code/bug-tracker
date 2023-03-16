@@ -30,11 +30,10 @@ export default async function handler(req, res) {
                 status,
                 priority,
                 targetResolutionDate,
-                actualResolutionDate,
             } = req.body;
 
             const results = await db.query(
-                "INSERT INTO issues (title, description, related_project, assigned_to, created_on, created_by, status, priority, target_resolution_date, actual_resolution_date) VALUES ($1, $2, $3, $4, NOW(), $5, $6, $7, $8, $9) returning *",
+                "INSERT INTO issues (title, description, related_project, assigned_to, created_on, created_by, status, priority, target_resolution_date) VALUES ($1, $2, $3, $4, NOW(), $5, $6, $7, $8) returning *",
                 [
                     title,
                     description,
@@ -44,7 +43,6 @@ export default async function handler(req, res) {
                     status,
                     priority,
                     targetResolutionDate,
-                    actualResolutionDate
                 ]
             );
 

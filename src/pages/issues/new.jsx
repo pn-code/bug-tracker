@@ -11,11 +11,11 @@ const NewIssue = () => {
         title: "",
         description: "",
         targetResolutionDate: "",
-        actualResolutionDate: "",
         assignedTo: "",
         status: "",
         priority: "",
     });
+
     const [projects, setProjects] = useState([]);
     const [users, setUsers] = useState([]);
 
@@ -140,21 +140,6 @@ const NewIssue = () => {
                             id="targetResolutionDate"
                             type="date"
                             placeholder="target resolution date"
-                        />
-                    </section>
-
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="actualResolutionDate">
-                            Actual Resolution Date:{" "}
-                        </label>
-                        <input
-                            onChange={(e) => handleInputChange(e)}
-                            name="actualResolutionDate"
-                            value={issue.actualResolutionDate}
-                            className="px-2 py-1 rounded-md"
-                            id="actualResolutionDate"
-                            type="date"
-                            placeholder="actual resolution date"
                         />
                     </section>
 
