@@ -1,17 +1,8 @@
 import Head from "next/head";
 import DashboardCard from "../components/DashboardCard";
 import serverAPI from "@/api/axios";
-import { useUserUpdate } from "@/contexts/UserContext";
-import { useEffect } from "react";
-
 
 export default function Home({ projects, issues }) {
-    const fetchUserToken = useUserUpdate();
-    
-    useEffect(() => {
-        fetchUserToken()
-    }, [])
-
     return (
         <>
             <Head>

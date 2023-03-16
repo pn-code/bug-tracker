@@ -1,7 +1,5 @@
 import db from "../../../../db";
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const cookie = require("cookie");
 
 export default async function refreshHandler(req, res) {
     if (req.method === "GET") {
