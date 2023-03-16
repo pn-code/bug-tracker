@@ -65,15 +65,17 @@ const Navbar = () => {
                                     Dashboard
                                 </Link>
                             </li>
-                            <li className="w-full">
-                                <Link
-                                    className="hover:bg-[#29947e] px-2 py-2 rounded-md"
-                                    onClick={() => setOpenNavMenu(false)}
-                                    href="/roles"
-                                >
-                                    Roles
-                                </Link>
-                            </li>
+                            {user?.role === "admin" && (
+                                <li className="w-full">
+                                    <Link
+                                        className="hover:bg-[#29947e] px-2 py-2 rounded-md"
+                                        onClick={() => setOpenNavMenu(false)}
+                                        href="/roles"
+                                    >
+                                        Roles
+                                    </Link>
+                                </li>
+                            )}
                             <li className="w-full">
                                 <Link
                                     className="hover:bg-[#29947e] px-2 py-2 rounded-md"
@@ -109,7 +111,11 @@ const Navbar = () => {
             {user && (
                 <ul className="gap-12 text-sm hidden sm:flex">
                     <Link href="/">Dashboard</Link>
-                    <Link href="/roles">User Roles</Link>
+
+                    {user?.role === "admin" && (
+                        <Link href="/roles">User Roles</Link>
+                    )}
+                    
                     <Link href="/issues">Issues</Link>
                     <Link href="/projects">Projects</Link>
                     <Link href="/profile">Profile</Link>
