@@ -17,6 +17,7 @@ const NewIssue = () => {
         priority: "",
     });
     const [projects, setProjects] = useState([]);
+    const [users, setUsers] = useState([]);
 
     const user = useUser()[0];
     const router = useRouter();
@@ -26,8 +27,14 @@ const NewIssue = () => {
         setProjects(res.data.data.projects);
     };
 
+    const fetchUsers = async () => {
+        const res = await serverAPI.get("/api/v1/users");
+        setUsers(res.data.users);
+    };
+
     useEffect(() => {
         fetchProjects();
+        fetchUsers();
     }, []);
 
     const submitIssue = async (e) => {
@@ -82,7 +89,9 @@ const NewIssue = () => {
                             name="project"
                             id="project"
                         >
-                            <option default value="">SELECT A PROJECT</option>
+                            <option default value="">
+                                SELECT A PROJECT
+                            </option>
                             {projects.map((project) => (
                                 <option value={project.id} key={project.id}>
                                     {project.name}
@@ -150,15 +159,22 @@ const NewIssue = () => {
 
                     <section className="flex flex-col gap-2">
                         <label htmlFor="assignedTo">Assigned to: </label>
-                        <input
+                        <select
                             onChange={(e) => handleInputChange(e)}
                             name="assignedTo"
-                            value={issue.assignedTo}
-                            className="px-2 py-1 rounded-md"
                             id="assignedTo"
-                            type="text"
-                            placeholder="assigned to"
-                        />
+                        >
+                            <option default value="">
+                                SELECT ASSIGNED USER
+                            </option>
+
+                            {users.map((user) => (
+                                <option
+                                    value={user.id}
+                                    key={user.id}
+                                >{`${user.name} (${user.id})`}</option>
+                            ))}
+                        </select>
                     </section>
 
                     <section className="flex flex-col gap-2">
