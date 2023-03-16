@@ -42,7 +42,6 @@ export default async function loginHandler(req, res) {
                 name: user.name,
                 email: user.email,
                 role: user.role,
-                assigned_project: user.assigned_project,
                 token: accessToken,
             });
         } else {

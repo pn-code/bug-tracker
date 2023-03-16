@@ -8,7 +8,7 @@ const ProjectDetails = ({ project }) => {
 
     const deleteProject = async () => {
         const res = await serverAPI.delete(`/api/v1/projects/${project.id}`);
-        if (res.status == 204) {
+        if (res.status == 200) {
             router.push("/projects");
         }
     };

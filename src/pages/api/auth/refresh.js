@@ -19,7 +19,7 @@ export default async function refreshHandler(req, res) {
                         return res.status(403).json({ message: "Forbidden" });
 
                     const { rows } = await db.query(
-                        "SELECT id, name, email, role, assigned_project FROM users WHERE id = $1",
+                        "SELECT id, name, email, role FROM users WHERE id = $1",
                         [decoded.id]
                     );
 
@@ -34,7 +34,6 @@ export default async function refreshHandler(req, res) {
                         name: rows[0].name,
                         email: rows[0].email,
                         role: rows[0].role,
-                        assigned_project: rows[0].assigned_project,
                         accessToken,
                     });
                 }
