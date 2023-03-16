@@ -10,16 +10,18 @@ const Navbar = () => {
     const setUser = useUser()[1];
 
     useEffect(() => {
-        // Check for refresh token
-        async function fetchRefreshToken() {
-            const res = await serverAPI.get("/api/auth/refresh");
-            setUser(res.data)
-        }
+        if (!user) {
+            // Check for refresh token
+            async function fetchRefreshToken() {
+                const res = await serverAPI.get("/api/auth/refresh");
+                setUser(res.data);
+            }
 
-        try {
-            fetchRefreshToken();
-        } catch (error) {
-            console.error(error);
+            try {
+                fetchRefreshToken();
+            } catch (error) {
+                console.error(error);
+            }
         }
     }, []);
 
