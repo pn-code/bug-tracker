@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import serverAPI from "@/api/axios";
+import { useUser } from "@/contexts/UserContext";
 
 const UpdateIssue = ({ issue, users }) => {
     const [loading, setLoading] = useState(false);
@@ -15,6 +16,8 @@ const UpdateIssue = ({ issue, users }) => {
 
     const router = useRouter();
 
+    const user = useUser()[0];
+
     const submitUpdatedIssue = async (e) => {
         e.preventDefault();
         if (!loading) {
@@ -23,6 +26,7 @@ const UpdateIssue = ({ issue, users }) => {
                 await serverAPI.put(`/api/v1/issues/${issue.id}`, {
                     ...updatedIssue,
                 });
+                await updateLog()
                 router.push("/issues");
                 setLoading(false);
             } catch (error) {
@@ -33,9 +37,14 @@ const UpdateIssue = ({ issue, users }) => {
 
     const updateLog = async () => {
         try {
-            // const res = await serverAPI.post("/api/v1/log", {
-            //     user
-            // })
+            const res = await serverAPI.post("/api/v1/logs", {
+                modified_by: user.id,
+                issue_id: issue.id,
+                new_actual_resolution_date: updatedIssue.actualResolutionDate,
+                new_assigned_to: updatedIssue.assignedTo,
+                new_status: updatedIssue.status,
+            });
+            console.log(res)
         } catch (error) {
             console.error(error);
         }
@@ -55,7 +64,7 @@ const UpdateIssue = ({ issue, users }) => {
                 className="px-4 pt-5 flex flex-col gap-4"
             >
                 <header className="flex justify-between items-center">
-                    <h1 className="text-xl font-bold">Edit Issue Form</h1>
+                    <h1 className="text-xl font-bold">Update Issue Form</h1>
                     <div className="text-[16px] font-semibold">
                         <Link
                             href={`/issues/${issue.id}`}
