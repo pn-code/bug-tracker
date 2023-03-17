@@ -1,14 +1,15 @@
-import React from 'react'
+import React from "react";
 
-const IssueHistoryCard = () => {
-  return (
-    <tr>
-        <td>Property Modified</td>
-        <td>Old Value</td>
-        <td>New Value</td>
-        <td>Date Modified</td>
-    </tr>
-  )
-}
+const IssueHistoryCard = ({ log }) => {
+    return (
+        <tr>
+            <td>{log.modified_by}</td>
+            <td>{log.modified_date.substring(0, 10)}</td>
+            <td>{log.new_assigned_to}</td>
+            <td>{log.new_actual_resolution_date.substring(0,10)}</td>
+            <td>{log.new_status}</td>
+        </tr>
+    );
+};
 
-export default IssueHistoryCard
+export default IssueHistoryCard;
