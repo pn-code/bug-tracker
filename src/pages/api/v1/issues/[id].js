@@ -4,16 +4,14 @@ export default async function handler(req, res) {
     const issueId = req.query.id;
 
     if (req.method === "GET") {
-        const results = await db.query("select * from issues where id = $1", [
+        const { rows } = await db.query("select * from issues where id = $1", [
             issueId,
         ]);
         try {
             res.status(200).json({
                 status: "Success",
-                results: results.rows.length,
-                data: {
-                    issues: results.rows[0],
-                },
+                results: rows.length,
+                issue: rows[0],
             });
         } catch (error) {
             res.status(500).json({
@@ -27,16 +25,14 @@ export default async function handler(req, res) {
         try {
             const { assignedTo, status, actualResolutionDate } = req.body;
 
-            const results = await db.query(
+            const { rows } = await db.query(
                 "UPDATE issues SET assigned_to = $1, status = $2, actual_resolution_date = $3 WHERE id = $4",
                 [assignedTo, status, actualResolutionDate, issueId]
             );
 
             res.status(200).json({
                 status: "Success",
-                data: {
-                    issues: results.rows[0],
-                },
+                issues: rows[0],
             });
         } catch (error) {
             res.status(500).json({
