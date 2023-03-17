@@ -16,6 +16,18 @@ const Role = () => {
 
     const [users, setUsers] = useState([]);
 
+    const [managedUser, setManagedUser] = useState({
+        id: "",
+        role: "",
+    });
+
+    const handleInputChange = (e) => {
+        setManagedUser((prevManagedUser) => ({
+            ...prevManagedUser,
+            [e.target.name]: e.target.value,
+        }));
+    };
+
     const fetchUsers = async () => {
         try {
             const res = await serverAPI.get("/api/v1/users");
@@ -35,14 +47,27 @@ const Role = () => {
         <div className="bg-gray-100 h-[90vh] w-full flex px-4 pt-5 gap-10 lg:justify-between lg:gap-20 flex-col lg:flex-row">
             <form className="lg:w-[50%] flex flex-col gap-4">
                 <h1 className="text-xl font-bold">Manage User Roles</h1>
-                <label htmlFor="user">User: </label>
-                <select name="user" id="user">
+                <label htmlFor="id">User: </label>
+                <select
+                    onChange={(e) => handleInputChange(e)}
+                    name="id"
+                    id="id"
+                >
+                    <option value="">SELECT A USER</option>
                     {users.map((user) => (
                         <option value={user.id}>{user.name}</option>
                     ))}
                 </select>
                 <label htmlFor="role">Role: </label>
-                <select name="role" id="role">
+                <select
+                    onChange={(e) => handleInputChange(e)}
+                    name="role"
+                    id="role"
+                    value={managedUser.role}
+                >
+                    <option value="" default>
+                        SELECT A ROLE
+                    </option>
                     <option value="user">User</option>
                     <option value="manager">Manager</option>
                     <option value="admin">Admin</option>
