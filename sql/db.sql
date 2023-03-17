@@ -29,9 +29,6 @@ CREATE TABLE log (
     modified_date TIMESTAMPTZ NOT NULL,
     modified_by BIGSERIAL REFERENCES users (id),
     issue_id BIGSERIAL REFERENCES issues (id),
-    prev_actual_resolution_date DATE,
-    prev_assigned_to INT,
-    prev_status VARCHAR(30),
     new_resolution_date DATE,
     new_assigned_to INT,
     new_status VARCHAR(30)
