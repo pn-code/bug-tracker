@@ -5,7 +5,6 @@ CREATE TABLE users (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     role VARCHAR(30) NOT NULL,
-    assigned_project INT NOT NULL,
     created_on TIMESTAMP NOT NULL
 );
 
@@ -22,6 +21,20 @@ CREATE TABLE issues (
     priority VARCHAR(30),
     target_resolution_date DATE,
     actual_resolution_date DATE
+);
+
+-- Creating Log Table
+CREATE TABLE log (
+    id BIGSERIAL PRIMARY KEY NOT NULL,
+    modified_date TIMESTAMPTZ NOT NULL,
+    modified_by BIGSERIAL REFERENCES users (id),
+    issue_id BIGSERIAL REFERENCES issues (id),
+    prev_actual_resolution_date DATE,
+    prev_assigned_to INT,
+    prev_status VARCHAR(30),
+    new_resolution_date DATE,
+    new_assigned_to INT,
+    new_status VARCHAR(30)
 );
 
 -- Creating Projects Table
@@ -48,3 +61,6 @@ SELECT full_name, role from users;
 
 -- Drop Table
 DROP TABLE users;
+
+-- UPDATE USER ROLE
+UPDATE users SET role = 'admin' WHERE id = 2;
