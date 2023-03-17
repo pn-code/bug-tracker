@@ -5,21 +5,21 @@ import IssueCommentCard from "@/components/IssueCommentCard";
 import serverAPI from "@/api/axios";
 import { useRouter } from "next/router";
 
-const IssueDetails = ({ issue }) => {
-
+const IssueDetails = ({ issue, logs }) => {
     const router = useRouter();
+
     const deleteIssue = async () => {
         try {
-            await serverAPI.delete(`/api/v1/issues/${issue.id}`)
-            router.push("/issues")
+            await serverAPI.delete(`/api/v1/issues/${issue.id}`);
+            router.push("/issues");
         } catch (error) {
-            console.error(error)
+            console.error(error);
         }
-    }
+    };
 
     const navigateToUpdateIssue = () => {
-        router.push(`/issues/update/${issue.id}`)
-    }
+        router.push(`/issues/update/${issue.id}`);
+    };
 
     return (
         <div>
@@ -48,9 +48,7 @@ const IssueDetails = ({ issue }) => {
                                 <p>{issue.title}</p>
                             </article>
                             <article className="flex gap-2">
-                                <h2 className="font-semibold">
-                                    Description:
-                                </h2>
+                                <h2 className="font-semibold">Description:</h2>
                                 <p>{issue.description}</p>
                             </article>
                             <article className="flex gap-2">
@@ -73,7 +71,7 @@ const IssueDetails = ({ issue }) => {
                                 <h2 className="font-semibold">
                                     Identified Date:
                                 </h2>
-                                <p>{issue.created_on.substring(0,10)}</p>
+                                <p>{issue.created_on.substring(0, 10)}</p>
                             </article>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">
@@ -85,18 +83,40 @@ const IssueDetails = ({ issue }) => {
                                 <h2 className="font-semibold">
                                     Target Resolution Date:
                                 </h2>
-                                <p>{issue.target_resolution_date.substring(0,10)}</p>
+                                <p>
+                                    {issue.target_resolution_date.substring(
+                                        0,
+                                        10
+                                    )}
+                                </p>
                             </article>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">
                                     Actual Resolution Date:
                                 </h2>
-                                <p>{issue.actual_resolution_date?.substring(0,10) || null}</p>
+                                <p>
+                                    {issue.actual_resolution_date?.substring(
+                                        0,
+                                        10
+                                    ) || null}
+                                </p>
                             </article>
 
                             <section className="flex gap-4">
-                                <button onClick={navigateToUpdateIssue} type="button" className="bg-green-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-600">Update</button>
-                                <button onClick={deleteIssue} type="button" className="bg-red-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-600">Delete</button>
+                                <button
+                                    onClick={navigateToUpdateIssue}
+                                    type="button"
+                                    className="bg-green-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-600"
+                                >
+                                    Update
+                                </button>
+                                <button
+                                    onClick={deleteIssue}
+                                    type="button"
+                                    className="bg-red-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-600"
+                                >
+                                    Delete
+                                </button>
                             </section>
                         </section>
 
@@ -108,12 +128,18 @@ const IssueDetails = ({ issue }) => {
                             <table className="text-left">
                                 <tbody>
                                     <tr>
-                                        <th>Property</th>
-                                        <th>Old Value</th>
-                                        <th>New Value</th>
+                                        <th>Modified By</th>
                                         <th>Date Modified</th>
+                                        <th>Assigned To</th>
+                                        <th>Actual Resolution Date</th>
+                                        <th>Status</th>
                                     </tr>
-                                    <IssueHistoryCard />
+                                    {logs?.map((log) => (
+                                        <IssueHistoryCard
+                                            key={log.id}
+                                            log={log}
+                                        />
+                                    ))}
                                 </tbody>
                             </table>
                         </section>
@@ -157,12 +183,14 @@ export default IssueDetails;
 
 export async function getServerSideProps({ params }) {
     const issueId = params.id;
-    const res = await serverAPI.get(`/api/v1/issues/${issueId}`);
+    const resIssue = await serverAPI.get(`/api/v1/issues/${issueId}`);
+    const resLogs = await serverAPI.get(`/api/v1/logs/${issueId}`);
 
     // Pass data to the page via props
     return {
         props: {
-            issue: res.data.data.issues,
+            issue: resIssue.data.issue,
+            logs: resLogs.data.logs,
         },
     };
 }
