@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import serverAPI from "@/api/axios";
 
-const UpdateIssue = ({ issue }) => {
+const UpdateIssue = ({ issue, users }) => {
     const [loading, setLoading] = useState(false);
 
     const [updatedIssue, setUpdatedIssue] = useState({
@@ -14,17 +14,6 @@ const UpdateIssue = ({ issue }) => {
     });
 
     const router = useRouter();
-
-    const [users, setUsers] = useState([]);
-
-    const fetchUsers = async () => {
-        const res = await serverAPI.get("/api/v1/users");
-        setUsers(res.data.users);
-    };
-
-    useEffect(() => {
-        fetchUsers();
-    }, []);
 
     const submitUpdatedIssue = async (e) => {
         e.preventDefault();
@@ -39,6 +28,16 @@ const UpdateIssue = ({ issue }) => {
             } catch (error) {
                 console.error(error);
             }
+        }
+    };
+
+    const updateLog = async () => {
+        try {
+            // const res = await serverAPI.post("/api/v1/log", {
+            //     user
+            // })
+        } catch (error) {
+            console.error(error);
         }
     };
 
@@ -144,12 +143,14 @@ export default UpdateIssue;
 
 export async function getServerSideProps({ params }) {
     const issueId = params.id;
-    const res = await serverAPI.get(`/api/v1/issues/${issueId}`);
+    const resIssues = await serverAPI.get(`/api/v1/issues/${issueId}`);
+    const resUsers = await serverAPI.get(`/api/v1/users`);
 
     // Pass data to the page via props
     return {
         props: {
-            issue: res.data.data.issues,
+            issue: resIssues.data.issue,
+            users: resUsers.data.users,
         },
     };
 }
