@@ -21,6 +21,14 @@ const Role = () => {
         role: "",
     });
 
+    const updateUserRole = async (e) => {
+        e.preventDefault();
+        const res = await serverAPI.put(`/api/v1/users/${managedUser.id}`, {
+            role: managedUser.role,
+        });
+        console.log(res);
+    };
+
     const handleInputChange = (e) => {
         setManagedUser((prevManagedUser) => ({
             ...prevManagedUser,
@@ -45,7 +53,10 @@ const Role = () => {
 
     return (
         <div className="bg-gray-100 h-[90vh] w-full flex px-4 pt-5 gap-10 lg:justify-between lg:gap-20 flex-col lg:flex-row">
-            <form className="lg:w-[50%] flex flex-col gap-4">
+            <form
+                onSubmit={(e) => updateUserRole(e)}
+                className="lg:w-[50%] flex flex-col gap-4"
+            >
                 <h1 className="text-xl font-bold">Manage User Roles</h1>
                 <label htmlFor="id">User: </label>
                 <select
@@ -55,7 +66,9 @@ const Role = () => {
                 >
                     <option value="">SELECT A USER</option>
                     {users.map((user) => (
-                        <option value={user.id}>{user.name}</option>
+                        <option value={user.id} key={user.id}>
+                            {user.name}
+                        </option>
                     ))}
                 </select>
                 <label htmlFor="role">Role: </label>
