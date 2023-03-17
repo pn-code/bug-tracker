@@ -50,7 +50,7 @@ export async function getServerSideProps() {
     // Pass data to the page via props
     return {
         props: {
-            projects: res.data.data.projects,
+            projects: res.data.projects,
         },
     };
 }

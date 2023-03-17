@@ -24,7 +24,7 @@ const NewIssue = () => {
 
     const fetchProjects = async () => {
         const res = await serverAPI.get("/api/v1/projects");
-        setProjects(res.data.data.projects);
+        setProjects(res.data.projects);
     };
 
     const fetchUsers = async () => {

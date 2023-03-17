@@ -2,16 +2,12 @@ import db from "../../../../../db";
 
 export default async function handler(req, res) {
     if (req.method === "GET") {
-        const results = await db.query(
-            "select * from projects",
-        );
+        const results = await db.query("select * from projects");
         try {
             res.status(201).json({
                 status: "Success",
                 results: results.rows.length,
-                data: {
-                    projects: results.rows,
-                },
+                projects: results.rows,
             });
         } catch (error) {
             res.status(500).json({
@@ -32,11 +28,8 @@ export default async function handler(req, res) {
 
             res.status(201).json({
                 status: "Success",
-                data: {
-                    user: results.rows[0],
-                },
+                user: results.rows[0],
             });
-
         } catch (error) {
             res.status(500).json({
                 status: "Unsuccessful",

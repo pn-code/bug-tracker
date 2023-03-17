@@ -93,7 +93,7 @@ export async function getServerSideProps({ params }) {
     // Pass data to the page via props
     return {
         props: {
-            project: res.data.data.projects,
+            project: res.data.projects,
         },
     };
 }
