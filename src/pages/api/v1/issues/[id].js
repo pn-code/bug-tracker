@@ -4,18 +4,18 @@ export default async function handler(req, res) {
     const issueId = req.query.id;
 
     if (req.method === "GET") {
-        const { rows } = await db.query("select * from issues where id = $1", [
+        const { rows } = await db.query("SELECT * FROM issues WHERE id = $1", [
             issueId,
         ]);
         try {
             res.status(200).json({
-                status: "Success",
+                success: true,
                 results: rows.length,
                 issue: rows[0],
             });
         } catch (error) {
             res.status(500).json({
-                status: "Unsuccessful",
+                success: false,
                 error,
             });
         }

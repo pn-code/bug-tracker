@@ -3,15 +3,16 @@ import db from "../../../../../db";
 export default async function handler(req, res) {
   if (req.method === "GET") {
     try {
-      const results = await db.query("select * from users");
+      const { rows } = await db.query("select * from users");
       res.status(201).json({
-        status: "Success",
-        results: results.rows.length,
-        users: results.rows,
+        success: true,
+        results: rows.length,
+        users: rows,
       });
+      
     } catch (error) {
       res.status(500).json({
-        status: "Unsuccessful",
+        success: false,
         error,
       });
     }
@@ -27,14 +28,12 @@ export default async function handler(req, res) {
       );
 
       res.status(201).json({
-        status: "Success",
-        data: {
-          user: results.rows[0],
-        },
+        success: true,
+        user: results.rows[0],
       });
     } catch (error) {
       res.status(500).json({
-        status: "Unsuccessful",
+        success: true,
         error,
       });
     }

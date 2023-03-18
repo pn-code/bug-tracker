@@ -6,13 +6,13 @@ export default async function handler(req, res) {
       const { rows } = await db.query("SELECT * FROM projects");
 
       res.status(201).json({
-        status: "Success",
+        success: true,
         results: rows.length,
         projects: rows,
       });
     } catch (error) {
       res.status(500).json({
-        status: "Unsuccessful",
+        success: false,
         error,
       });
     }
