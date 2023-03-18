@@ -34,6 +34,15 @@ CREATE TABLE logs (
     new_status VARCHAR(30)
 );
 
+-- Creating Comments Table
+CREATE TABLE comments (
+    id BIGSERIAL PRIMARY KEY NOT NULL,
+    created_on TIMESTAMPTZ NOT NULL,
+    content VARCHAR(300) NOT NULL,
+    issue_id BIGSERIAL REFERENCES issues (id),
+    user_id BIGSERIAL REFERENCES users (id)
+);
+
 -- Creating Projects Table
 CREATE TABLE projects (
     id BIGSERIAL PRIMARY KEY NOT NULL,
