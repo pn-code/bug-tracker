@@ -5,7 +5,7 @@ import IssueCommentCard from "@/components/IssueCommentCard";
 import serverAPI from "@/api/axios";
 import { useRouter } from "next/router";
 
-const IssueDetails = ({ issue, logs }) => {
+const IssueDetails = ({ issue, logs, comments }) => {
     const router = useRouter();
 
     const deleteIssue = async () => {
@@ -150,7 +150,12 @@ const IssueDetails = ({ issue, logs }) => {
                                 Issue Comments
                             </h1>
                             <form className="flex flex-col gap-2 mb-4">
-                                <label className="font-semibold" htmlFor="comment">Add Comment: </label>
+                                <label
+                                    className="font-semibold"
+                                    htmlFor="comment"
+                                >
+                                    Add Comment:{" "}
+                                </label>
                                 <textarea
                                     className="rounded-md px-2 py-1 resize-none"
                                     type="text"
@@ -164,16 +169,14 @@ const IssueDetails = ({ issue, logs }) => {
                                 </button>
                             </form>
 
-                            <table className="text-left">
-                                <tbody>
-                                    <tr>
-                                        <th>User</th>
-                                        <th>Message</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    <IssueCommentCard />
-                                </tbody>
-                            </table>
+                            <section className="text-left">
+                                    {comments?.map((comment) => (
+                                        <IssueCommentCard
+                                            key={comment.id}
+                                            comment={comment}
+                                        />
+                                    ))}
+                            </section>
                         </section>
                     </div>
                 </section>
@@ -188,12 +191,14 @@ export async function getServerSideProps({ params }) {
     const issueId = params.id;
     const resIssue = await serverAPI.get(`/api/v1/issues/${issueId}`);
     const resLogs = await serverAPI.get(`/api/v1/logs/${issueId}`);
+    const resComments = await serverAPI.get(`/api/v1/comments/${issueId}`);
 
     // Pass data to the page via props
     return {
         props: {
             issue: resIssue.data.issue,
             logs: resLogs.data.logs,
+            comments: resComments.data.comments,
         },
     };
 }
