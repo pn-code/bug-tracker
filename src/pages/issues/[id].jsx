@@ -145,10 +145,25 @@ const IssueDetails = ({ issue, logs }) => {
                         </section>
 
                         {/* Issue Comments */}
-                        <section className="flex flex-col bg-gray-200 gap-4 px-4 py-4 rounded-md w-full">
+                        <section className="flex flex-col bg-gray-200 gap-4 px-4 py-4 rounded-md w-full mb-4">
                             <h1 className="font-semibold text-xl">
                                 Issue Comments
                             </h1>
+                            <form className="flex flex-col gap-2 mb-4">
+                                <label className="font-semibold" htmlFor="comment">Add Comment: </label>
+                                <textarea
+                                    className="rounded-md px-2 py-1 resize-none"
+                                    type="text"
+                                    placeholder="comment"
+                                    id="comment"
+                                    rows={5}
+                                ></textarea>
+
+                                <button className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md">
+                                    Submit
+                                </button>
+                            </form>
+
                             <table className="text-left">
                                 <tbody>
                                     <tr>
@@ -159,18 +174,6 @@ const IssueDetails = ({ issue, logs }) => {
                                     <IssueCommentCard />
                                 </tbody>
                             </table>
-                            <form className="flex flex-col gap-2">
-                                <label htmlFor="comment">Comment: </label>
-                                <textarea
-                                    className="rounded-md px-2 py-1 resize-none"
-                                    type="text"
-                                    placeholder="comment"
-                                    id="comment"
-                                ></textarea>
-                                <button className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md">
-                                    Submit
-                                </button>
-                            </form>
                         </section>
                     </div>
                 </section>
