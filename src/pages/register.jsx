@@ -41,8 +41,6 @@ const Register = () => {
         setLoading(false);
     };
 
-    console.log(inputError);
-
     const checkPassword = (str) => {
         // Regex for password: 8-30 characters, w/ at least 1 symbol, uppercase, lowercase, and a number.
         const regEx =

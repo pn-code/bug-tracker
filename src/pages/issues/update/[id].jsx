@@ -1,39 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import serverAPI from "@/api/axios";
+import { useUser } from "@/contexts/UserContext";
 
-const UpdateIssue = ({ issue }) => {
+const UpdateIssue = ({ issue, users }) => {
     const [loading, setLoading] = useState(false);
+
     const [updatedIssue, setUpdatedIssue] = useState({
-        relatedProject: issue.related_project,
-        title: issue.title,
-        description: issue.description,
-        targetResolutionDate: issue.target_resolution_date.substring(0,10),
-        actualResolutionDate: issue.actual_resolution_date.substring(0,10),
+        actualResolutionDate:
+            issue.actual_resolution_date?.substring(0, 10) || "",
         assignedTo: issue.assigned_to,
         status: issue.status,
-        priority: issue.priority,
     });
 
     const router = useRouter();
+
+    const user = useUser()[0];
 
     const submitUpdatedIssue = async (e) => {
         e.preventDefault();
         if (!loading) {
             try {
                 setLoading(true);
-                const res = await serverAPI.put(`/api/v1/issues/${issue.id}`, {
+                await serverAPI.put(`/api/v1/issues/${issue.id}`, {
                     ...updatedIssue,
-                    createdBy: 1,
-                    relatedProject: Number(updatedIssue.relatedProject),
-                    assignedTo: Number(updatedIssue.assignedTo),
                 });
+                await updateLog()
                 router.push("/issues");
                 setLoading(false);
             } catch (error) {
                 console.error(error);
             }
+        }
+    };
+
+    const updateLog = async () => {
+        try {
+            const res = await serverAPI.post("/api/v1/logs", {
+                modified_by: user.id,
+                issue_id: issue.id,
+                new_actual_resolution_date: updatedIssue.actualResolutionDate,
+                new_assigned_to: updatedIssue.assignedTo,
+                new_status: updatedIssue.status,
+            });
+            console.log(res)
+        } catch (error) {
+            console.error(error);
         }
     };
 
@@ -51,72 +64,31 @@ const UpdateIssue = ({ issue }) => {
                 className="px-4 pt-5 flex flex-col gap-4"
             >
                 <header className="flex justify-between items-center">
-                    <h1 className="text-xl font-bold">New Issue Form</h1>
+                    <h1 className="text-xl font-bold">Update Issue Form</h1>
                     <div className="text-[16px] font-semibold">
                         <Link
-                            href="/issues"
+                            href={`/issues/${issue.id}`}
                             className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md"
                         >
-                            Return to Issues
+                            Return to Issue
                         </Link>
                     </div>
                 </header>
 
                 <fieldset className="flex flex-col gap-4">
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="project">Related Project: </label>
-                        <input
-                            onChange={(e) => handleInputChange(e)}
-                            name="relatedProject"
-                            value={updatedIssue.relatedProject}
-                            className="px-2 py-1 rounded-md"
-                            id="project"
-                            type="text"
-                            placeholder="related project"
-                        />
-                    </section>
-
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="title">Title: </label>
-                        <input
-                            onChange={(e) => handleInputChange(e)}
-                            name="title"
-                            value={updatedIssue.title}
-                            className="px-2 py-1 resize-none rounded-md"
-                            id="title"
-                            type="text"
-                            placeholder="title"
-                        />
-                    </section>
-
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="description">Description: </label>
-                        <textarea
-                            onChange={(e) => handleInputChange(e)}
-                            name="description"
-                            value={updatedIssue.description}
-                            className="px-2 py-1 resize-none rounded-md"
-                            id="description"
-                            type="text"
-                            placeholder="description"
-                            rows={10}
-                        ></textarea>
-                    </section>
-
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="targetResolutionDate">
-                            Target Resolution Date:{" "}
-                        </label>
-                        <input
-                            onChange={(e) => handleInputChange(e)}
-                            name="targetResolutionDate"
-                            value={updatedIssue.targetResolutionDate}
-                            className="px-2 py-1 rounded-md"
-                            id="targetResolutionDate"
-                            type="date"
-                            placeholder="target resolution date"
-                        />
-                    </section>
+                    <h2 className="font-semibold">Title: </h2>
+                    <p>{issue.title}</p>
+                    <h2 className="font-semibold">Description:</h2>
+                    <p> {issue.description}</p>
+                    <h2 className="font-semibold">Target Resolution Date:</h2>
+                    <span>
+                        {`${issue.target_resolution_date.substring(
+                            5,
+                            10
+                        )}-${issue.target_resolution_date.substring(0, 4)}`}
+                    </span>
+                    <h2 className="font-semibold">Priority: </h2>
+                    <span>{issue.priority}</span>
 
                     <section className="flex flex-col gap-2">
                         <label htmlFor="actualResolutionDate">
@@ -135,15 +107,19 @@ const UpdateIssue = ({ issue }) => {
 
                     <section className="flex flex-col gap-2">
                         <label htmlFor="assignedTo">Assigned to: </label>
-                        <input
+                        <select
                             onChange={(e) => handleInputChange(e)}
                             name="assignedTo"
-                            value={updatedIssue.assignedTo}
-                            className="px-2 py-1 rounded-md"
                             id="assignedTo"
-                            type="text"
-                            placeholder="assigned to"
-                        />
+                            value={issue.assignedTo}
+                        >
+                            {users.map((user) => (
+                                <option
+                                    value={user.id}
+                                    key={user.id}
+                                >{`${user.name} (${user.id})`}</option>
+                            ))}
+                        </select>
                     </section>
 
                     <section className="flex flex-col gap-2">
@@ -163,22 +139,6 @@ const UpdateIssue = ({ issue }) => {
                             <option value="closed">Closed</option>
                         </select>
                     </section>
-
-                    <section className="flex flex-col gap-2">
-                        <label htmlFor="priority">Priority: </label>
-                        <select
-                            onChange={(e) => handleInputChange(e)}
-                            name="priority"
-                            value={updatedIssue.priority}
-                            className="px-2 py-1 rounded-md"
-                            id="priority"
-                        >
-                            <option value={null}>SELECT PRIORITY</option>
-                            <option value="low">Low</option>
-                            <option value="medium">Medium</option>
-                            <option value="high">High</option>
-                        </select>
-                    </section>
                 </fieldset>
                 <button className="bg-blue-400 text-white rounded-md py-2 my-4">
                     Submit Issue
@@ -192,12 +152,14 @@ export default UpdateIssue;
 
 export async function getServerSideProps({ params }) {
     const issueId = params.id;
-    const res = await serverAPI.get(`/api/v1/issues/${issueId}`);
+    const resIssues = await serverAPI.get(`/api/v1/issues/${issueId}`);
+    const resUsers = await serverAPI.get(`/api/v1/users`);
 
     // Pass data to the page via props
     return {
         props: {
-            issue: res.data.data.issues,
+            issue: resIssues.data.issue,
+            users: resUsers.data.users,
         },
     };
 }

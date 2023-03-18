@@ -33,15 +33,18 @@ export default async function handler(req, res) {
 
     if (req.method === "DELETE") {
         try {
-            const results = await db.query("DELETE FROM projects WHERE id = $1",
-            [req.query.id])
-            res.status(204).json({
-                status: "Success",
-                results
+            const results = await db.query(
+                "DELETE FROM projects WHERE id = $1",
+                [req.query.id]
+            );
+            res.status(200).json({
+                success: true,
+                results,
             });
+
         } catch (error) {
             res.status(500).json({
-                status: "Unsuccessful",
+                success: false,
                 error,
             });
         }

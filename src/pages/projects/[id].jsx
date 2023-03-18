@@ -1,11 +1,17 @@
 import React from "react";
 import Link from "next/link";
 import serverAPI from "@/api/axios";
+import { useRouter } from "next/router";
 
 const ProjectDetails = ({ project }) => {
+    const router = useRouter();
+
     const deleteProject = async () => {
-        const res = await serverAPI.delete(`/api/v1/projects/${project.id}`)
-    }
+        const res = await serverAPI.delete(`/api/v1/projects/${project.id}`);
+        if (res.status == 200) {
+            router.push("/projects");
+        }
+    };
 
     return (
         <div>
@@ -30,9 +36,7 @@ const ProjectDetails = ({ project }) => {
                                 Project Information
                             </h1>
                             <article className="flex gap-2">
-                                <h2 className="font-semibold">
-                                    Title:
-                                </h2>
+                                <h2 className="font-semibold">Title:</h2>
                                 <p>{project.name}</p>
                             </article>
                             <article className="flex gap-2">
@@ -45,8 +49,19 @@ const ProjectDetails = ({ project }) => {
                             </article>
 
                             <section className="flex gap-4">
-                                <button type="button" className="bg-green-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-600">Update</button>
-                                <button onClick={deleteProject} type="button" className="bg-red-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-600">Delete</button>
+                                <button
+                                    type="button"
+                                    className="bg-green-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-600"
+                                >
+                                    Update
+                                </button>
+                                <button
+                                    onClick={deleteProject}
+                                    type="button"
+                                    className="bg-red-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-600"
+                                >
+                                    Delete
+                                </button>
                             </section>
                         </section>
 
@@ -78,7 +93,7 @@ export async function getServerSideProps({ params }) {
     // Pass data to the page via props
     return {
         props: {
-            project: res.data.data.projects,
+            project: res.data.projects,
         },
     };
 }

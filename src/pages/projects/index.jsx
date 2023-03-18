@@ -23,6 +23,7 @@ const Projects = ({ projects }) => {
                 <table className="w-full">
                     <tbody>
                         <tr className="bg-gray-300 h-10 text-sm sm:text-[16px]">
+                            <th>ID</th>
                             <th>Project Name</th>
                             <th>Created By</th>
                             <th>Created On</th>
@@ -49,7 +50,7 @@ export async function getServerSideProps() {
     // Pass data to the page via props
     return {
         props: {
-            projects: res.data.data.projects,
+            projects: res.data.projects,
         },
     };
 }

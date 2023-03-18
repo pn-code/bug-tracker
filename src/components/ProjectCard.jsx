@@ -9,9 +9,10 @@ const ProjectCard = ({ project }) => {
                     className="hover:underline"
                     href={`/projects/${project.id}`}
                 >
-                    {project.name}
+                    #{project.id}
                 </Link>
             </td>
+            <td>{project.name}</td>
             <td>{project.created_by}</td>
             <td>{project.created_on.substring(0, 10)}</td>
         </tr>

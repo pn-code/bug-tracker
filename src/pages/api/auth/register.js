@@ -31,7 +31,7 @@ export default async function register(req, res) {
 
         // Create user
         const user = await db.query(
-            "INSERT INTO users (name, email, password, role, assigned_project, created_on) VALUES ($1, $2, $3, 'user', 0, NOW()) RETURNING id",
+            "INSERT INTO users (name, email, password, role, created_on) VALUES ($1, $2, $3, 'user', NOW()) RETURNING id",
             [name, email, hashedPassword]
         );
 

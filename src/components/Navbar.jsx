@@ -1,9 +1,29 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { useUser } from "@/contexts/UserContext";
+import serverAPI from "@/api/axios";
 
 const Navbar = () => {
     const [openNavMenu, setOpenNavMenu] = useState(false);
+    const user = useUser()[0];
+    const setUser = useUser()[1];
+
+    useEffect(() => {
+        if (!user) {
+            // Check for refresh token
+            async function fetchRefreshToken() {
+                const res = await serverAPI.get("/api/auth/refresh");
+                setUser(res.data);
+            }
+
+            try {
+                fetchRefreshToken();
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    }, []);
 
     return (
         <nav className="flex justify-between px-4 py-6 bg-[#1cba9b] text-white font-semibold items-center">
@@ -11,12 +31,19 @@ const Navbar = () => {
                 <h1 className="text-xl">Bug Tracker</h1>
             </Link>
 
-            <button onClick={() => setOpenNavMenu(true)} className="sm:hidden">
-                <GiHamburgerMenu size={28} />
-            </button>
+            {user && (
+                <button
+                    onClick={() => setOpenNavMenu(true)}
+                    className="sm:hidden"
+                >
+                    <GiHamburgerMenu size={28} />
+                </button>
+            )}
+
+            {!user && <Link href="/login">Login</Link>}
 
             {/* Mobile NavMenu */}
-            {openNavMenu && (
+            {openNavMenu && user && (
                 <div className="fixed bg-[#1cba9b] h-[100vh] w-full top-0 left-0 flex items-center justify-center">
                     <div className="w-[290px] flex flex-col mx-3 gap-12">
                         <section className="flex justify-between w-full">
@@ -38,15 +65,17 @@ const Navbar = () => {
                                     Dashboard
                                 </Link>
                             </li>
-                            <li className="w-full">
-                                <Link
-                                    className="hover:bg-[#29947e] px-2 py-2 rounded-md"
-                                    onClick={() => setOpenNavMenu(false)}
-                                    href="/roles"
-                                >
-                                    Roles
-                                </Link>
-                            </li>
+                            {user?.role === "admin" && (
+                                <li className="w-full">
+                                    <Link
+                                        className="hover:bg-[#29947e] px-2 py-2 rounded-md"
+                                        onClick={() => setOpenNavMenu(false)}
+                                        href="/roles"
+                                    >
+                                        Roles
+                                    </Link>
+                                </li>
+                            )}
                             <li className="w-full">
                                 <Link
                                     className="hover:bg-[#29947e] px-2 py-2 rounded-md"
@@ -79,13 +108,19 @@ const Navbar = () => {
                 </div>
             )}
 
-            <ul className="gap-12 text-sm hidden sm:flex">
-                <Link href="/">Dashboard</Link>
-                <Link href="/roles">User Roles</Link>
-                <Link href="/issues">Issues</Link>
-                <Link href="/projects">Projects</Link>
-                <Link href="/profile">Profile</Link>
-            </ul>
+            {user && (
+                <ul className="gap-12 text-sm hidden sm:flex">
+                    <Link href="/">Dashboard</Link>
+
+                    {user?.role === "admin" && (
+                        <Link href="/roles">User Roles</Link>
+                    )}
+                    
+                    <Link href="/issues">Issues</Link>
+                    <Link href="/projects">Projects</Link>
+                    <Link href="/profile">Profile</Link>
+                </ul>
+            )}
         </nav>
     );
 };
