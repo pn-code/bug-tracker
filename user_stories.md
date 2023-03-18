@@ -2,19 +2,19 @@
 
 ## Project should have...
 1. [ ] User authentication and authorization.
-2. [ ] User roles.
+2. [X] User roles.
 3. [ ] Task management
 4. [X] A dashboard
 5. [ ] Agile project management
 6. [X] Bug report submissions
 
 ## Users should be able to...
-7. [ ] Create issues.
-8. [ ] Edit issues.
-9. [ ] Assign issues.
-10. [ ] Create projects
-11. [ ] Remove projects
-12. [ ] Maintain projects
+7. [X] Create issues.
+8. [X] Edit issues.
+9. [X] Assign issues.
+10. [X] Create projects
+11. [X] Delete projects
+12. [X] Maintain projects
 
 ## The bug report must have...
 13. [X] Summary/title of the issue.
