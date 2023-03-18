@@ -1,6 +1,6 @@
 import React from "react";
 
-const IssueHistoryCard = ({ log }) => {
+const HistoryCard = ({ log }) => {
     return (
         <tr>
             <td>{log.modified_by}</td>
@@ -12,4 +12,4 @@ const IssueHistoryCard = ({ log }) => {
     );
 };
 
-export default IssueHistoryCard;
+export default HistoryCard;

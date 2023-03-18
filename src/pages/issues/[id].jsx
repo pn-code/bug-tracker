@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import IssueHistoryCard from "@/components/IssueHistoryCard";
-import IssueCommentCard from "@/components/IssueCommentCard";
+import HistoryCard from "@/components/HistoryCard";
+import CommentCard from "@/components/CommentCard";
 import serverAPI from "@/api/axios";
 import { useRouter } from "next/router";
 
@@ -135,7 +135,7 @@ const IssueDetails = ({ issue, logs, comments }) => {
                                         <th>Status</th>
                                     </tr>
                                     {logs?.map((log) => (
-                                        <IssueHistoryCard
+                                        <HistoryCard
                                             key={log.id}
                                             log={log}
                                         />
@@ -171,7 +171,7 @@ const IssueDetails = ({ issue, logs, comments }) => {
 
                             <section className="text-left">
                                     {comments?.map((comment) => (
-                                        <IssueCommentCard
+                                        <CommentCard
                                             key={comment.id}
                                             comment={comment}
                                         />
