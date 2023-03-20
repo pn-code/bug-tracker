@@ -1,9 +1,25 @@
-import React from "react";
+import { useState } from "react";
 import Link from "next/link";
 import ProjectCard from "@/components/ProjectCard";
 import serverAPI from "@/api/axios";
+import Pagination from "@/components/Pagination";
 
 const Projects = ({ projects }) => {
+    // Setting up pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+
+    // Get current projects
+    const indexOfLastProjects = currentPage * itemsPerPage;
+    const indexOfFirstProjects = indexOfLastProjects - itemsPerPage;
+    const currentProjects = projects.slice(
+        indexOfFirstProjects,
+        indexOfLastProjects
+    );
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <div className="bg-gray-100 h-[100vh] w-full">
             <section className="mx-4 pt-5 flex flex-col gap-4">
@@ -29,7 +45,7 @@ const Projects = ({ projects }) => {
                             <th>Created On</th>
                         </tr>
                         {projects &&
-                            projects.map((project) => (
+                            currentProjects.map((project) => (
                                 <ProjectCard
                                     project={project}
                                     key={project.id}
@@ -37,6 +53,14 @@ const Projects = ({ projects }) => {
                             ))}
                     </tbody>
                 </table>
+
+                <Pagination
+                    itemsPerPage={itemsPerPage}
+                    totalItems={projects.length}
+                    currentPage={currentPage}
+                    paginate={paginate}
+                />
+
             </section>
         </div>
     );
