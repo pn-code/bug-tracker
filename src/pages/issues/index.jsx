@@ -53,8 +53,9 @@ const Issues = ({ issues }) => {
                             : "No Issues Found"}
                     </tbody>
                 </table>
-                
+
                 <Pagination
+                    currentPage={currentPage}
                     itemsPerPage={itemsPerPage}
                     totalItems={issues.length}
                     paginate={paginate}
