@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import IssueCard from "@/components/IssueCard";
 import serverAPI from "@/api/axios";
+import Pagination from "@/components/Pagination";
 
 const Issues = ({ issues }) => {
+    // Setting up pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 2;
+
+    // Get current issues
+    const indexOfLastIssue = currentPage * itemsPerPage;
+    const indexOfFirstIssue = indexOfLastIssue - itemsPerPage;
+    const currentIssues = issues.slice(indexOfFirstIssue, indexOfLastIssue);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
         <div className="bg-gray-100 h-[100vh] w-[100%]">
             <section className="mx-4 pt-5 flex flex-col gap-4">
@@ -34,12 +47,18 @@ const Issues = ({ issues }) => {
                     </tbody>
                     <tbody>
                         {issues
-                            ? issues.map((issue) => (
+                            ? currentIssues.map((issue) => (
                                   <IssueCard issue={issue} key={issue.id} />
                               ))
                             : "No Issues Found"}
                     </tbody>
                 </table>
+                
+                <Pagination
+                    itemsPerPage={itemsPerPage}
+                    totalItems={issues.length}
+                    paginate={paginate}
+                />
             </section>
         </div>
     );
