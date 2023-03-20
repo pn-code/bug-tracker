@@ -7,7 +7,7 @@ import Pagination from "@/components/Pagination";
 const Issues = ({ issues }) => {
     // Setting up pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 2;
+    const itemsPerPage = 10;
 
     // Get current issues
     const indexOfLastIssue = currentPage * itemsPerPage;
