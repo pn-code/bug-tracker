@@ -2,8 +2,14 @@ import React from "react";
 import Link from "next/link";
 
 const IssueCard = ({ issue }) => {
+    const isIssueClosed = issue.status === "closed";
+
     return (
-        <tr className="w-full font-semibold bg-green-200 rounded-md h-20 text-sm sm:text-[16px] text-center">
+        <tr
+            className={`w-full font-semibold ${
+                isIssueClosed ? "bg-gray-300" : "bg-green-200"
+            }   rounded-md h-20 text-sm sm:text-[16px] text-center`}
+        >
             <td className="hover:underline">
                 <Link href={`/issues/${issue.id}`}>#{issue.id}</Link>
             </td>
