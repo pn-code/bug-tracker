@@ -1,10 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import IssueCard from "@/components/IssueCard";
 import serverAPI from "@/api/axios";
 import Pagination from "@/components/Pagination";
 
 const Issues = ({ issues }) => {
+    // Searchbar Functionality
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filteredIssues, setFilteredIssues] = useState(issues);
+
+    // Filter issues based on search term
+    const handleSearch = () => {
+        const newFilteredIssues = issues.filter((issue) =>
+            issue.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredIssues(newFilteredIssues);
+    };
+
+    useEffect(() => {
+        handleSearch();
+    }, [searchTerm]);
+
+
+    
     // Setting up pagination
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
@@ -12,7 +30,10 @@ const Issues = ({ issues }) => {
     // Get current issues
     const indexOfLastIssue = currentPage * itemsPerPage;
     const indexOfFirstIssue = indexOfLastIssue - itemsPerPage;
-    const currentIssues = issues.slice(indexOfFirstIssue, indexOfLastIssue);
+    const currentIssues = filteredIssues.slice(
+        indexOfFirstIssue,
+        indexOfLastIssue
+    );
 
     // Change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -27,7 +48,7 @@ const Issues = ({ issues }) => {
                     <form>
                         <label htmlFor="search">Search: </label>
                         <input
-                            onChange={(e) => setText(e.target.value)}
+                            onChange={(e) => setSearchTerm(e.target.value)}
                             value={searchTerm}
                             type="text"
                             placeholder="Search..."
