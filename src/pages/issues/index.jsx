@@ -22,6 +22,18 @@ const Issues = ({ issues }) => {
             <section className="mx-4 pt-5 flex flex-col gap-4">
                 <header className="flex justify-between items-center">
                     <h1 className="text-xl font-bold">Issues</h1>
+
+                    {/* Searchbar */}
+                    <form>
+                        <label htmlFor="search">Search: </label>
+                        <input
+                            onChange={(e) => setText(e.target.value)}
+                            value={searchTerm}
+                            type="text"
+                            placeholder="Search..."
+                        />
+                    </form>
+
                     <div className="text-[16px] font-semibold">
                         <Link
                             href="/issues/new"
