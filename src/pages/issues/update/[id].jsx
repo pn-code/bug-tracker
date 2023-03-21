@@ -64,7 +64,7 @@ const UpdateIssue = ({ issue, users }) => {
                 className="px-4 pt-5 flex flex-col gap-4"
             >
                 <header className="flex justify-between items-center">
-                    <h1 className="text-xl font-bold">Update Issue Form</h1>
+                    <h1 className="text-xl font-bold">Update Issue</h1>
                     <div className="text-[16px] font-semibold">
                         <Link
                             href={`/issues/${issue.id}`}
