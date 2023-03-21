@@ -3,6 +3,7 @@ import Link from "next/link";
 import IssueCard from "@/components/IssueCard";
 import serverAPI from "@/api/axios";
 import Pagination from "@/components/Pagination";
+import { GoSearch } from "react-icons/go";
 
 const Issues = ({ issues }) => {
     // Searchbar Functionality
@@ -21,8 +22,6 @@ const Issues = ({ issues }) => {
         handleSearch();
     }, [searchTerm]);
 
-
-    
     // Setting up pagination
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
@@ -45,13 +44,15 @@ const Issues = ({ issues }) => {
                     <h1 className="text-xl font-bold">Issues</h1>
 
                     {/* Searchbar */}
-                    <form>
-                        <label htmlFor="search">Search: </label>
+                    <form className="sm:flex items-center gap-2 bg-slate-200 relative hidden">
+                        <GoSearch className="absolute left-2 top-2" size={18}/>
                         <input
+                            className="w-full focus:border-2 focus:border-[#007bff] outline-none rounded-md px-12 h-8 "
                             onChange={(e) => setSearchTerm(e.target.value)}
                             value={searchTerm}
                             type="text"
-                            placeholder="Search..."
+                            placeholder="Search for issues."
+                            aria-label="Search bar"
                         />
                     </form>
 
