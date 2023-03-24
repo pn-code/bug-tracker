@@ -1,8 +1,21 @@
 import Head from "next/head";
 import DashboardCard from "../components/DashboardCard";
 import serverAPI from "@/api/axios";
+import { useRouter } from "next/router";
+import { useUser } from "@/contexts/UserContext";
+import { useEffect } from "react";
 
 export default function Home({ projects, issues }) {
+    const router = useRouter()
+
+    const { user, isLoading, isAuthenticated } = useUser();
+
+    useEffect(() => {
+        if (!user && !isLoading && !isAuthenticated) {
+          router.push('/login');
+        }
+      }, [user, isLoading, isAuthenticated]);
+
     return (
         <>
             <Head>
