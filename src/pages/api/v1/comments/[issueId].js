@@ -5,7 +5,14 @@ export default async function commentsIssueIdHandler(req, res) {
         const { issueId } = req.query;
 
         const { rows } = await db.query(
-            "SELECT * FROM comments WHERE issue_id = $1",
+            `SELECT 
+            comments.*, 
+            users.name AS user_name
+          FROM 
+            comments 
+            JOIN users ON comments.user_id::bigint = users.id
+          WHERE 
+            comments.issue_id = $1;`,
             [issueId]
         );
 
