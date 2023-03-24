@@ -84,3 +84,13 @@ FROM
   JOIN projects ON issues.related_project::bigint = projects.id
 WHERE 
   issues.id = 1;
+
+-- JOIN query for logs and users
+SELECT 
+  logs.*, 
+  users.name AS modified_by_name,
+  users1.name AS new_assigned_to_name
+FROM
+  logs 
+  JOIN users ON logs.modified_by::bigint = users.id
+  JOIN users users1 ON logs.new_assigned_to::bigint = users1.id;
