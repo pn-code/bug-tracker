@@ -12,7 +12,8 @@ export default async function commentsIssueIdHandler(req, res) {
             comments 
             JOIN users ON comments.user_id::bigint = users.id
           WHERE 
-            comments.issue_id = $1;`,
+            comments.issue_id = $1
+            ORDER BY created_on DESC;`,
             [issueId]
         );
 
