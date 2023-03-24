@@ -90,7 +90,10 @@ SELECT
   logs.*, 
   users.name AS modified_by_name,
   users1.name AS new_assigned_to_name
-FROM
-  logs 
-  JOIN users ON logs.modified_by::bigint = users.id
-  JOIN users users1 ON logs.new_assigned_to::bigint = users1.id;
+FROM 
+  issues 
+  JOIN users ON issues.created_by::bigint = users.id
+  JOIN users users1 ON issues.assigned_to::bigint = users1.id
+  JOIN logs ON issues.id = logs.issue_id
+WHERE 
+  issues.id = $1;
