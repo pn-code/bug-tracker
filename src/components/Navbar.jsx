@@ -2,28 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useUser } from "@/contexts/UserContext";
-import serverAPI from "@/api/axios";
 
 const Navbar = () => {
     const [openNavMenu, setOpenNavMenu] = useState(false);
-    const user = useUser()[0];
-    const setUser = useUser()[1];
-
-    useEffect(() => {
-        if (!user) {
-            // Check for refresh token
-            async function fetchRefreshToken() {
-                const res = await serverAPI.get("/api/auth/refresh");
-                setUser(res.data);
-            }
-
-            try {
-                fetchRefreshToken();
-            } catch (error) {
-                console.error(error);
-            }
-        }
-    }, []);
+    const user = useUser().user;
 
     return (
         <nav className="flex justify-between px-4 py-6 bg-[#1cba9b] text-white font-semibold items-center">
