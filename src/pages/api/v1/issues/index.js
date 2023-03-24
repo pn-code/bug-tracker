@@ -4,12 +4,16 @@ export default async function handler(req, res) {
     if (req.method === "GET") {
         try {
             const { rows } = await db.query(`
-            SELECT issues.*, 
+            SELECT 
+            issues.*, 
             users.name AS created_by_name,
-            users1.name AS assigned_to_name
-            FROM issues
+            users1.name AS assigned_to_name,
+            projects.name AS project_name
+          FROM 
+            issues 
             JOIN users ON issues.created_by::bigint = users.id
-            LEFT JOIN users users1 ON issues.assigned_to::bigint = users1.id
+            JOIN users users1 ON issues.assigned_to::bigint = users1.id
+            JOIN projects ON issues.related_project::bigint = projects.id
             `);
             res.status(200).json({
                 status: "Success",

@@ -80,7 +80,7 @@ const IssueDetails = ({ issue, logs, comments }) => {
                                 <h2 className="font-semibold">
                                     Related Project:{" "}
                                 </h2>
-                                <p>{issue.related_project}</p>
+                                <p>{issue.project_name}</p>
                             </article>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">Priority:</h2>

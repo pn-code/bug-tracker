@@ -5,13 +5,17 @@ export default async function handler(req, res) {
 
     if (req.method === "GET") {
         const { rows } = await db.query(
-        `SELECT issues.*, 
-        users.name AS created_by_name, 
-        users1.name AS assigned_to_name 
-        FROM issues 
-        JOIN users ON issues.created_by::bigint = users.id 
-        LEFT JOIN users users1 ON issues.assigned_to::bigint = users1.id 
-        WHERE issues.id = $1
+        `SELECT 
+        issues.*, 
+        users.name AS created_by_name,
+        users1.name AS assigned_to_name,
+        projects.name AS project_name
+        FROM 
+        issues 
+        JOIN users ON issues.created_by::bigint = users.id
+        JOIN users users1 ON issues.assigned_to::bigint = users1.id
+        JOIN projects ON issues.related_project::bigint = projects.id
+        WHERE issues.id = $1;
         `,
             [issueId]
         );

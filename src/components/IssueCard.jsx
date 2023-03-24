@@ -3,6 +3,7 @@ import Link from "next/link";
 
 const IssueCard = ({ issue }) => {
     const isIssueClosed = issue.status === "closed";
+    console.log(issue)
 
     return (
         <tr
@@ -14,7 +15,7 @@ const IssueCard = ({ issue }) => {
                 <Link href={`/issues/${issue.id}`}>#{issue.id}</Link>
             </td>
             <td>{issue.title}</td>
-            <td>{issue.related_project}</td>
+            <td>{issue.project_name}</td>
             <td>{issue.priority}</td>
             <td>{issue.status}</td>
             <td>{`${issue.assigned_to_name} (${issue.assigned_to})`}</td>
