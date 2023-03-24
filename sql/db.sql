@@ -71,10 +71,16 @@ DROP TABLE users;
 -- UPDATE USER ROLE
 UPDATE users SET role = 'admin' WHERE id = 2;
 
--- JOIN query for issues
-SELECT issues.*, 
-    users.name AS created_by_name,
-    users1.name AS assigned_user_name
-FROM issues
-JOIN users ON issues.created_by::bigint = users.id
-LEFT JOIN users users1 ON issues.assigned_to::bigint = users1.id
+-- JOIN query for issues and users and projects
+SELECT 
+  issues.*, 
+  users.name AS created_by_name,
+  users1.name AS assigned_to_name,
+  projects.name AS project_name
+FROM 
+  issues 
+  JOIN users ON issues.created_by::bigint = users.id
+  JOIN users users1 ON issues.assigned_to::bigint = users1.id
+  JOIN projects ON issues.related_project::bigint = projects.id
+WHERE 
+  issues.id = 1;
