@@ -3,7 +3,14 @@ import db from "../../../../../db";
 export default async function handler(req, res) {
     if (req.method === "GET") {
         try {
-            const { rows } = await db.query("select * from issues");
+            const { rows } = await db.query(`
+            SELECT issues.*, 
+            users.name AS created_by_name,
+            users1.name AS assigned_user_name
+            FROM issues
+            JOIN users ON issues.created_by::bigint = users.id
+            LEFT JOIN users users1 ON issues.assigned_to::bigint = users1.id
+            `);
             res.status(200).json({
                 status: "Success",
                 results: rows.length,
@@ -48,7 +55,6 @@ export default async function handler(req, res) {
                 status: "Success",
                 issue: rows[0],
             });
-
         } catch (error) {
             res.status(500).json({
                 status: "Unsuccessful",
