@@ -6,7 +6,7 @@ import Pagination from "./Pagination";
 
 const CommentSection = ({ comments, setComments, issueId }) => {
     const [comment, setComment] = useState("");
-    const user = useUser()[0];
+    const user = useUser().user;
 
     // Setting up pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -33,7 +33,7 @@ const CommentSection = ({ comments, setComments, issueId }) => {
             });
 
             if (res.status === 200) {
-                const newComment = res.data.comment;
+                const newComment = {...res.data.comment, user_name: user.name};
                 setComments((comments) => [newComment, ...comments]);
                 setComment("");
             }
