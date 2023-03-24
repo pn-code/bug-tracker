@@ -10,7 +10,7 @@ const Login = () => {
 
     const router = useRouter();
 
-    const setUser = useUser()[1];
+    const authenticateUser = useUser().authenticate
 
     const handleUserLogin = async (e) => {
         e.preventDefault();
@@ -20,7 +20,10 @@ const Login = () => {
                 email,
                 password,
             });
-            setUser(res.data);
+            console.log(res)
+            if (res.status === 200){
+                authenticateUser(res.data)
+            }
             router.push("/");
         } catch (error) {
             console.error(error);
