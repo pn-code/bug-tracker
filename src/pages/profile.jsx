@@ -4,7 +4,7 @@ import React from "react";
 import { serialize } from "cookie";
 
 const Profile = () => {
-    const user = useUser()[0];
+    const user = useUser().user;
 
     const logoutUser = async () => {
         const res = await serverAPI.get("/api/auth/logout");

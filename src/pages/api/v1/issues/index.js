@@ -6,7 +6,7 @@ export default async function handler(req, res) {
             const { rows } = await db.query(`
             SELECT issues.*, 
             users.name AS created_by_name,
-            users1.name AS assigned_user_name
+            users1.name AS assigned_to_name
             FROM issues
             JOIN users ON issues.created_by::bigint = users.id
             LEFT JOIN users users1 ON issues.assigned_to::bigint = users1.id

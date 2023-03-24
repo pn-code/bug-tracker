@@ -17,7 +17,7 @@ const IssueCard = ({ issue }) => {
             <td>{issue.related_project}</td>
             <td>{issue.priority}</td>
             <td>{issue.status}</td>
-            <td>{issue.assigned_to}</td>
+            <td>{`${issue.assigned_to_name} (${issue.assigned_to})`}</td>
             <td>{issue.created_on.substring(5, 10)}</td>
         </tr>
     );

@@ -90,7 +90,7 @@ const IssueDetails = ({ issue, logs, comments }) => {
                                 <h2 className="font-semibold">
                                     Identifier (user):
                                 </h2>
-                                <p>{issue.created_by}</p>
+                                <p>{`${issue.created_by_name} (${issue.created_by})`}</p>
                             </article>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">
@@ -102,7 +102,7 @@ const IssueDetails = ({ issue, logs, comments }) => {
                                 <h2 className="font-semibold">
                                     Assigned User:
                                 </h2>
-                                <p>{issue.assigned_to}</p>
+                                <p>{`${issue.assigned_to_name} (${issue.assigned_to})`}</p>
                             </article>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">

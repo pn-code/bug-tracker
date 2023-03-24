@@ -4,9 +4,17 @@ export default async function handler(req, res) {
     const issueId = req.query.id;
 
     if (req.method === "GET") {
-        const { rows } = await db.query("SELECT * FROM issues WHERE id = $1", [
-            issueId,
-        ]);
+        const { rows } = await db.query(
+        `SELECT issues.*, 
+        users.name AS created_by_name, 
+        users1.name AS assigned_to_name 
+        FROM issues 
+        JOIN users ON issues.created_by::bigint = users.id 
+        LEFT JOIN users users1 ON issues.assigned_to::bigint = users1.id 
+        WHERE issues.id = $1
+        `,
+            [issueId]
+        );
         try {
             res.status(200).json({
                 success: true,
