@@ -97,3 +97,13 @@ FROM
   JOIN logs ON issues.id = logs.issue_id
 WHERE 
   issues.id = $1;
+
+-- JOIN query for comments and users
+SELECT 
+  comments.*, 
+  users.name AS user_name
+FROM 
+  comments 
+  JOIN users ON comments.user_id::bigint = users.id
+WHERE 
+  comments.issue_id = $1;
