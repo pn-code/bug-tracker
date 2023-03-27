@@ -1,20 +1,21 @@
 import Head from "next/head";
 import DashboardCard from "../components/DashboardCard";
 import serverAPI from "@/api/axios";
+import LoadingScreen from "@/components/LoadingScreen";
 import { useRouter } from "next/router";
 import { useUser } from "@/contexts/UserContext";
 import { useEffect } from "react";
 
 export default function Home({ projects, issues }) {
-    const router = useRouter()
+    const router = useRouter();
 
     const { user, isLoading, isAuthenticated } = useUser();
 
     useEffect(() => {
         if (!user && !isLoading && !isAuthenticated) {
-          router.push('/login');
+            router.push("/login");
         }
-      }, [user, isLoading, isAuthenticated]);
+    }, [user, isLoading, isAuthenticated]);
 
     return (
         <>
@@ -28,22 +29,26 @@ export default function Home({ projects, issues }) {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
+            {isLoading && <LoadingScreen />}
+
             {/* Dashboard Home */}
-            <main className="bg-gray-100 h-[90vh] w-full flex flex-col px-4 pt-5 gap-4">
-                <h1 className="text-xl font-bold">Overview</h1>
-                <section className="w-full flex gap-2 flex-col md:flex-row">
-                    <DashboardCard
-                        title="Projects"
-                        quantity={projects.length}
-                        hrefLink="/projects"
-                    />
-                    <DashboardCard
-                        title="Issues"
-                        quantity={issues.length}
-                        hrefLink="/issues"
-                    />
-                </section>
-            </main>
+            {!isLoading && (
+                <main className="bg-gray-100 h-[90vh] w-full flex flex-col px-4 pt-5 gap-4">
+                    <h1 className="text-xl font-bold">Overview</h1>
+                    <section className="w-full flex gap-2 flex-col md:flex-row">
+                        <DashboardCard
+                            title="Projects"
+                            quantity={projects.length}
+                            hrefLink="/projects"
+                        />
+                        <DashboardCard
+                            title="Issues"
+                            quantity={issues.length}
+                            hrefLink="/issues"
+                        />
+                    </section>
+                </main>
+            )}
         </>
     );
 }
