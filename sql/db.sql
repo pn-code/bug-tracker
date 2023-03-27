@@ -117,4 +117,4 @@ FROM
   projects 
   JOIN users ON projects.created_by::bigint = users.id
 WHERE 
-  projects.issue_id = $1;
+  projects.id = $1;
