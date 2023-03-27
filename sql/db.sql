@@ -107,3 +107,14 @@ FROM
   JOIN users ON comments.user_id::bigint = users.id
 WHERE 
   comments.issue_id = $1;
+
+
+-- JOIN query for projects and users
+SELECT 
+  projects.*, 
+  users.name AS user_name
+FROM 
+  projects 
+  JOIN users ON projects.created_by::bigint = users.id
+WHERE 
+  projects.issue_id = $1;
