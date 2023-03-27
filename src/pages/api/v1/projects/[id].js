@@ -3,7 +3,17 @@ import db from "../../../../../db";
 export default async function handler(req, res) {
   if (req.method === "GET") {
     try {
-      const results = await db.query("select * from projects where id = $1", [
+      const results = await db.query(`
+      SELECT 
+        projects.*, 
+        users.name AS user_name
+      FROM 
+        projects 
+      JOIN 
+        users ON projects.created_by::bigint = users.id
+      WHERE 
+        projects.id = $1
+      `, [
         req.query.id,
       ]);
       res.status(200).json({

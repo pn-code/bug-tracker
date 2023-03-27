@@ -64,7 +64,7 @@ const ProjectDetails = ({ project }) => {
                             </article>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">Created by:</h2>
-                                <p>{project.created_by}</p>
+                                <p>{`${project.user_name} (${project.created_by})`}</p>
                             </article>
                             <article className="flex gap-2">
                                 <h2 className="font-semibold">Created on:</h2>
