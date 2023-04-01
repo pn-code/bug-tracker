@@ -16,7 +16,7 @@ const UpdateIssue = ({ issue, users }) => {
 
     const router = useRouter();
 
-    const user = useUser()[0];
+    const user = useUser().user;
 
     const submitUpdatedIssue = async (e) => {
         e.preventDefault();
