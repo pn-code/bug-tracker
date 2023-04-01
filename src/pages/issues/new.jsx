@@ -19,7 +19,7 @@ const NewIssue = () => {
     const [projects, setProjects] = useState([]);
     const [users, setUsers] = useState([]);
 
-    const user = useUser()[0];
+    const user = useUser().user;
     const router = useRouter();
 
     const fetchProjects = async () => {
