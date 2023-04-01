@@ -2,7 +2,7 @@
 
 ## Keep track of bugs for annihilation.
 
-This NextJS project is used for keeping track of the bugs I find across my projects. 
+This NextJS project is used for keeping track of the bugs and progress made towards fixing them across several projects.
 
 ## Technologies Used:
 
@@ -17,3 +17,17 @@ This NextJS project is used for keeping track of the bugs I find across my proje
 - Issues Management / Tracking
 - User Comments and Logs to Track Changes Across Issues
 - User Roles Management Page (Admin Only)
+
+## Preview:
+
+### Home Page
+<img src="./preview/home.png" alt="home page"/>
+
+### Projects Page
+<img src="./preview/projects.png" alt="projects page"/>
+
+### Issues Page
+<img src="./preview/issues.png" alt="issues page"/>
+
+### Issue Details Page
+<img src="./preview/issue-details.png" alt="issue details page"/>
