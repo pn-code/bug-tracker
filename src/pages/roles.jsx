@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useUser } from "@/contexts/UserContext";
 
 const Role = () => {
-    const user = useUser()[0];
+    const user = useUser().user;
     const router = useRouter();
 
     useEffect(() => {

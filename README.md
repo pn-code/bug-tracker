@@ -31,3 +31,6 @@ This NextJS project is used for keeping track of the bugs and progress made towa
 
 ### Issue Details Page
 <img src="./preview/issue-details.png" alt="issue details page"/>
+
+### User Roles Page
+<img src="./preview/roles.png" alt="user roles page"/>
