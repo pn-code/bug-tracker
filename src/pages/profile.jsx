@@ -19,7 +19,7 @@ const Profile = () => {
     };
 
     return (
-        <div className="bg-gray-100 h-[90vh] w-full flex flex-col px-4 pt-5 items-center lg:justify-center lg:items-start gap-12 lg:flex-row">
+        <div className="text-text h-[90vh] w-full flex flex-col px-4 pt-5 items-center lg:justify-center lg:items-start gap-12 lg:flex-row">
             <section className="flex flex-col gap-4">
                 <h1 className="text-xl font-bold">User Information</h1>
                 <article>
@@ -35,7 +35,7 @@ const Profile = () => {
                 <h1 className="text-xl font-bold">User Actions</h1>
                 <button
                     onClick={() => logoutUser()}
-                    className="w-full px-4 py-2 bg-red-500 text-white rounded-md"
+                    className="w-full px-4 py-2 bg-red-600/90 text-white rounded-md hover:bg-red-600/80"
                 >
                     Log Out
                 </button>

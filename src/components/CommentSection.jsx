@@ -43,7 +43,7 @@ const CommentSection = ({ comments, setComments, issueId }) => {
     };
 
     return (
-        <section className="flex flex-col bg-gray-200 gap-4 px-4 py-4 rounded-md w-full mb-4">
+        <section className="flex flex-col bg-gray-700/50 gap-4 px-4 py-4 rounded-md w-full mb-4">
             <header className="flex justify-between">
                 <h1 className="font-semibold text-xl">Issue Comments</h1>
                 <Pagination
@@ -62,14 +62,14 @@ const CommentSection = ({ comments, setComments, issueId }) => {
                 <textarea
                     onChange={(e) => setComment(e.target.value)}
                     value={comment}
-                    className="rounded-md px-2 py-1 resize-none"
+                    className="rounded-md px-2 py-1 resize-none text-background"
                     type="text"
                     placeholder="comment"
                     id="comment"
                     rows={5}
                 ></textarea>
 
-                <button className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md">
+                <button className="bg-primary hover:bg-primary/80 px-4 py-2 text-gray-50 rounded-md">
                     Submit
                 </button>
             </form>

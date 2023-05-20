@@ -64,17 +64,17 @@ const NewIssue = () => {
     };
 
     return (
-        <div className="bg-gray-100 h-[100vh] w-full">
+        <div className="h-[100vh] w-full text-text">
             <form
                 onSubmit={(e) => submitIssue(e)}
                 className="px-4 pt-5 flex flex-col gap-4"
             >
                 <header className="flex justify-between items-center">
-                    <h1 className="text-xl font-bold">New Issue</h1>
+                    <h1 className="text-2xl font-bold">New Issue</h1>
                     <div className="text-[16px] font-semibold">
                         <Link
                             href="/issues"
-                            className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md"
+                            className="bg-secondary hover:bg-secondary/80 px-4 py-2 text-background rounded-md"
                         >
                             Return to Issues
                         </Link>
@@ -85,6 +85,7 @@ const NewIssue = () => {
                     <section className="flex flex-col gap-2">
                         <label htmlFor="relatedProject">Related Project: </label>
                         <select
+                        className="text-background px-2 rounded-md"
                             onChange={(e) => handleInputChange(e)}
                             value={issue.project}
                             name="relatedProject"
@@ -107,7 +108,7 @@ const NewIssue = () => {
                             onChange={(e) => handleInputChange(e)}
                             name="title"
                             value={issue.title}
-                            className="px-2 py-1 resize-none rounded-md"
+                            className="px-2 py-1 resize-none rounded-md text-background"
                             id="title"
                             type="text"
                             placeholder="title"
@@ -120,7 +121,7 @@ const NewIssue = () => {
                             onChange={(e) => handleInputChange(e)}
                             name="description"
                             value={issue.description}
-                            className="px-2 py-1 resize-none rounded-md"
+                            className="px-2 py-1 resize-none rounded-md text-background"
                             id="description"
                             type="text"
                             placeholder="description"
@@ -136,7 +137,7 @@ const NewIssue = () => {
                             onChange={(e) => handleInputChange(e)}
                             name="targetResolutionDate"
                             value={issue.targetResolutionDate}
-                            className="px-2 py-1 rounded-md"
+                            className="px-2 py-1 rounded-md text-background"
                             id="targetResolutionDate"
                             type="date"
                             placeholder="target resolution date"
@@ -146,6 +147,7 @@ const NewIssue = () => {
                     <section className="flex flex-col gap-2">
                         <label htmlFor="assignedTo">Assigned to: </label>
                         <select
+                            className="px-2 py-1 rounded-md text-background"
                             onChange={(e) => handleInputChange(e)}
                             name="assignedTo"
                             id="assignedTo"
@@ -170,7 +172,7 @@ const NewIssue = () => {
                             onChange={(e) => handleInputChange(e)}
                             name="status"
                             value={issue.status}
-                            className="px-2 py-1 rounded-md"
+                            className="px-2 py-1 rounded-md text-background"
                             id="status"
                         >
                             <option value={null}>SELECT STATUS</option>
@@ -188,7 +190,7 @@ const NewIssue = () => {
                             onChange={(e) => handleInputChange(e)}
                             name="priority"
                             value={issue.priority}
-                            className="px-2 py-1 rounded-md"
+                            className="px-2 py-1 rounded-md text-background"
                             id="priority"
                         >
                             <option value={null}>SELECT PRIORITY</option>
@@ -198,7 +200,7 @@ const NewIssue = () => {
                         </select>
                     </section>
                 </fieldset>
-                <button className="bg-blue-400 text-white rounded-md py-2 my-4">
+                <button className="bg-primary text-white rounded-md py-2 my-4">
                     Submit Issue
                 </button>
             </form>

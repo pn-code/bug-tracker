@@ -18,14 +18,14 @@ const ProjectDetails = ({ project }) => {
 
     return (
         <div>
-            <div className="bg-gray-100 h-[100vh] w-full">
+            <div className="h-[100vh] w-full text-white">
                 <section className="mx-4 pt-5 flex flex-col gap-4">
                     <header className="flex justify-between items-center">
-                        <h1 className="text-xl font-bold">{project.name}</h1>
+                        <h1 className="text-xl font-bold">Project: {project.name}</h1>
                         <div className="text-[16px] font-semibold flex gap-2">
                             <Link
                                 href="/projects"
-                                className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md"
+                                className="bg-secondary hover:bg-secondary/80 px-4 py-2 text-background rounded-md"
                             >
                                 Back to Projects
                             </Link>
@@ -34,7 +34,7 @@ const ProjectDetails = ({ project }) => {
 
                     {/* Project Information */}
                     <div className="flex w-full gap-2 justify-between flex-col lg:flex-row">
-                        <section className="flex flex-col bg-gray-200 gap-4 px-4 py-4 rounded-md w-full flex-[2]">
+                        <section className="flex flex-col bg-gray-700/50 gap-4 px-4 py-4 rounded-md w-full flex-[2]">
                             <header className="flex justify-between">
                                 <h1 className="font-semibold text-xl">
                                     Project Info

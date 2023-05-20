@@ -27,14 +27,14 @@ const IssueDetails = ({ issue, logs, comments }) => {
 
     return (
         <div>
-            <div className="bg-gray-100 h-[100vh] w-full">
+            <div className="h-[100vh] w-full text-text">
                 <section className="mx-4 pt-5 flex flex-col gap-4">
                     <header className="flex justify-between items-center">
                         <h1 className="text-xl font-bold">{issue.title}</h1>
                         <div className="text-[16px] font-semibold flex gap-2">
                             <Link
                                 href="/issues"
-                                className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md"
+                                className="bg-secondary hover:bg-secondary/80 px-4 py-2 text-background rounded-md"
                             >
                                 Back to Issues
                             </Link>
@@ -43,7 +43,7 @@ const IssueDetails = ({ issue, logs, comments }) => {
 
                     {/* Issue Information */}
                     <div className="flex w-full gap-2 justify-between flex-col">
-                        <section className="flex flex-col bg-gray-200 gap-4 px-4 py-4 rounded-md w-full">
+                        <section className="flex flex-col bg-gray-700/50 gap-4 p-4 rounded-md w-full">
                             <header className="flex justify-between items-center">
                                 <h1 className="font-semibold text-xl">
                                     Issue Information
@@ -53,7 +53,7 @@ const IssueDetails = ({ issue, logs, comments }) => {
                                     <button
                                         onClick={navigateToUpdateIssue}
                                         type="button"
-                                        className="bg-green-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-600"
+                                        className="bg-primary px-4 py-2 rounded-md text-white font-semibold hover:bg-primary/80"
                                     >
                                         Update
                                     </button>
@@ -129,13 +129,13 @@ const IssueDetails = ({ issue, logs, comments }) => {
                         </section>
 
                         {/* Issue History */}
-                        <section className="flex flex-col bg-gray-200 gap-4 px-4 py-4 rounded-md w-full">
+                        <section className="flex flex-col bg-gray-700/50 gap-4 px-4 py-4 rounded-md w-full">
                             <h1 className="font-semibold text-xl">
                                 Issue History
                             </h1>
                             <table className="text-left">
                                 <tbody>
-                                    <tr>
+                                    <tr className="bg-primary">
                                         <th>Modified By</th>
                                         <th>Date Modified</th>
                                         <th>Assigned To</th>

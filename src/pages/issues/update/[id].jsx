@@ -58,7 +58,7 @@ const UpdateIssue = ({ issue, users }) => {
     };
 
     return (
-        <div className="bg-gray-100 h-[100vh] w-full">
+        <div className="h-[100vh] w-full text-text">
             <form
                 onSubmit={(e) => submitUpdatedIssue(e)}
                 className="px-4 pt-5 flex flex-col gap-4"
@@ -68,14 +68,14 @@ const UpdateIssue = ({ issue, users }) => {
                     <div className="text-[16px] font-semibold">
                         <Link
                             href={`/issues/${issue.id}`}
-                            className="bg-blue-400 hover:bg-blue-500 px-4 py-2 text-gray-50 rounded-md"
+                            className="bg-secondary hover:bg-secondary/80 px-4 py-2 text-background rounded-md"
                         >
                             Return to Issue
                         </Link>
                     </div>
                 </header>
 
-                <fieldset className="flex flex-col gap-4">
+                <fieldset className="flex flex-col gap-4 bg-gray-700/50 p-4 rounded-md">
                     <h2 className="font-semibold">Title: </h2>
                     <p>{issue.title}</p>
                     <h2 className="font-semibold">Description:</h2>
@@ -98,7 +98,7 @@ const UpdateIssue = ({ issue, users }) => {
                             onChange={(e) => handleInputChange(e)}
                             name="actualResolutionDate"
                             value={updatedIssue.actualResolutionDate}
-                            className="px-2 py-1 rounded-md"
+                            className="text-background py-1 px-2 rounded-md"
                             id="actualResolutionDate"
                             type="date"
                             placeholder="actual resolution date"
@@ -108,6 +108,7 @@ const UpdateIssue = ({ issue, users }) => {
                     <section className="flex flex-col gap-2">
                         <label htmlFor="assignedTo">Assigned to: </label>
                         <select
+                            className="text-background py-1 px-2 rounded-md"
                             onChange={(e) => handleInputChange(e)}
                             name="assignedTo"
                             id="assignedTo"
@@ -128,7 +129,7 @@ const UpdateIssue = ({ issue, users }) => {
                             onChange={(e) => handleInputChange(e)}
                             name="status"
                             value={updatedIssue.status}
-                            className="px-2 py-1 rounded-md"
+                            className="text-background py-1 px-2 rounded-md"
                             id="status"
                         >
                             <option value={null}>SELECT STATUS</option>
@@ -140,7 +141,7 @@ const UpdateIssue = ({ issue, users }) => {
                         </select>
                     </section>
                 </fieldset>
-                <button className="bg-blue-400 text-white rounded-md py-2 my-4">
+                <button className="bg-primary rounded-md py-2 my-4">
                     Submit Issue
                 </button>
             </form>
