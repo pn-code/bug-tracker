@@ -13,9 +13,9 @@ const Pagination = ({ itemsPerPage, totalItems, paginate, currentPage }) => {
                 <li
                     className={`w-10 text-center border-2 ${
                         pageNumber === currentPage
-                            ? "border-green-400"
-                            : "border-gray-400"
-                    } text-green-600 font-semibold px-1 rounded-md cursor-pointer`}
+                            ? "border-secondary"
+                            : "border-primary"
+                    } text-text font-semibold px-1 rounded-md cursor-pointer bg-primary`}
                     onClick={() => paginate(pageNumber)}
                     key={pageNumber}
                 >

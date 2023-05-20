@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const ProjectCard = ({ project }) => {
     return (
-        <tr className="w-full font-semibold bg-green-200 rounded-md h-20 text-sm sm:text-[16px] text-center">
+        <tr className="w-full font-semibold bg-gray-600/40 rounded-md h-20 text-sm sm:text-[16px] text-center">
             <td>
                 <Link
                     className="hover:underline"
