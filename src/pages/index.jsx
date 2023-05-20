@@ -33,8 +33,8 @@ export default function Home({ projects, issues }) {
 
             {/* Dashboard Home */}
             {!isLoading && (
-                <main className="bg-gray-100 h-[90vh] w-full flex flex-col px-4 pt-5 gap-4">
-                    <h1 className="text-xl font-bold">Overview</h1>
+                <main className="h-[90vh] w-full flex flex-col px-4 pt-5 gap-4 text-text">
+                    <h1 className="text-2xl font-bold">Overview</h1>
                     <section className="w-full flex gap-2 flex-col md:flex-row">
                         <DashboardCard
                             title="Projects"

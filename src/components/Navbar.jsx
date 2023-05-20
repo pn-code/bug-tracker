@@ -8,7 +8,7 @@ const Navbar = () => {
     const user = useUser().user;
 
     return (
-        <nav className="flex justify-between px-4 py-6 bg-[#1cba9b] text-white font-semibold items-center">
+        <nav className="flex justify-between px-4 py-6 bg-background text-text font-semibold items-center">
             <Link href="/">
                 <h1 className="text-xl">Bug Tracker</h1>
             </Link>
@@ -26,13 +26,13 @@ const Navbar = () => {
 
             {/* Mobile NavMenu */}
             {openNavMenu && user && (
-                <div className="fixed bg-[#1cba9b] h-[100vh] w-full top-0 left-0 flex items-center justify-center">
+                <div className="fixed bg-background h-[100vh] w-full top-0 left-0 flex items-center justify-center">
                     <div className="w-[290px] flex flex-col mx-3 gap-12">
                         <section className="flex justify-between w-full">
                             <h1 className="text-3xl font-bold">Bug Tracker</h1>
                             <button
                                 onClick={() => setOpenNavMenu(false)}
-                                className="text-xl font-bold hover:bg-gray-50 hover:text-[#1cba9b] rounded-full px-3 py-1"
+                                className="text-xl font-bold hover:bg-gray-50 hover:text-background rounded-full px-3 py-1"
                             >
                                 X
                             </button>
