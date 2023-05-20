@@ -31,7 +31,7 @@ const Login = () => {
     };
 
     return (
-        <div className="w-full h-[92vh] bg-[#1cba9b] flex items-center justify-center">
+        <div className="w-full h-[92vh] flex items-center justify-center">
             <form
                 onSubmit={(e) => handleUserLogin(e)}
                 className="bg-gray-100 p-10 rounded-md flex flex-col gap-4"
@@ -68,7 +68,7 @@ const Login = () => {
                         />
                     </section>
                 </fieldset>
-                <button className="py-4 bg-blue-400 text-gray-50 rounded-md hover:bg-blue-500">
+                <button className="py-4 bg-primary text-gray-50 rounded-md hover:bg-primary/80">
                     Login
                 </button>
                 <span>
