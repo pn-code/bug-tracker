@@ -1,11 +1,11 @@
 # user_stories
 
 ## Project should have...
-1. [ ] User authentication and authorization.
+1. [X] User authentication and authorization.
 2. [X] User roles.
-3. [ ] Task management
+3. [X] Task management
 4. [X] A dashboard
-5. [ ] Agile project management
+5. [X] Agile project management
 6. [X] Bug report submissions
 
 ## Users should be able to...
