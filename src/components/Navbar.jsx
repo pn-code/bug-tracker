@@ -92,15 +92,15 @@ const Navbar = () => {
 
             {user && (
                 <ul className="gap-12 text-sm hidden sm:flex">
-                    <Link href="/">Dashboard</Link>
+                    <Link className="border-b-4 border-transparent hover:border-accent" href="/">Dashboard</Link>
 
                     {user?.role === "admin" && (
-                        <Link href="/roles">User Roles</Link>
+                        <Link className="border-b-4 border-transparent hover:border-accent" href="/roles">User Roles</Link>
                     )}
                     
-                    <Link href="/issues">Issues</Link>
-                    <Link href="/projects">Projects</Link>
-                    <Link href="/profile">Profile</Link>
+                    <Link className="border-b-4 border-transparent hover:border-accent" href="/issues">Issues</Link>
+                    <Link className="border-b-4 border-transparent hover:border-accent" href="/projects">Projects</Link>
+                    <Link className="border-b-4 border-transparent hover:border-accent" href="/profile">Profile</Link>
                 </ul>
             )}
         </nav>
