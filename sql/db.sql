@@ -56,9 +56,6 @@ CREATE TABLE projects (
 -- For Number Constraints, include:
 check(<number> >=1 and <number> <= 5)
 
--- Manually inserting data into our table
-INSERT INTO users (full_name, email, role, assigned_project, created_on) VALUES ('Admin', 'admin@gmail.com', 'admin', 0, NOW());
-
 -- To select all data entries from a specific table
 SELECT * from users;
 
