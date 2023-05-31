@@ -72,7 +72,7 @@ const Login = () => {
                     Login
                 </button>
                 <span>
-                    Don't have an account?{" "}
+                    Don&apos;t have an account?{" "}
                     <Link className="underline" href="/register">
                         Register here.
                     </Link>

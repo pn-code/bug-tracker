@@ -15,7 +15,7 @@ export default function Home({ projects, issues }) {
         if (!user && !isLoading && !isAuthenticated) {
             router.push("/login");
         }
-    }, [user, isLoading, isAuthenticated]);
+    }, [user, isLoading, isAuthenticated, router]);
 
     return (
         <>

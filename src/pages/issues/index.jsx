@@ -6,108 +6,112 @@ import Pagination from "@/components/Pagination";
 import { GoSearch } from "react-icons/go";
 
 const Issues = ({ issues }) => {
-    // Searchbar Functionality
-    const [searchTerm, setSearchTerm] = useState("");
-    const [filteredIssues, setFilteredIssues] = useState(issues);
+  // Searchbar Functionality
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredIssues, setFilteredIssues] = useState(issues);
 
+  useEffect(() => {
     // Filter issues based on search term
     const handleSearch = () => {
-        const newFilteredIssues = issues.filter((issue) =>
-            issue.title.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        setFilteredIssues(newFilteredIssues);
+      const newFilteredIssues = issues.filter((issue) =>
+        issue.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredIssues(newFilteredIssues);
     };
 
-    useEffect(() => {
-        handleSearch();
-    }, [searchTerm]);
+    handleSearch();
+  }, [searchTerm, issues]);
 
-    // Setting up pagination
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
+  // Setting up pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
-    // Get current issues
-    const indexOfLastIssue = currentPage * itemsPerPage;
-    const indexOfFirstIssue = indexOfLastIssue - itemsPerPage;
-    const currentIssues = filteredIssues.slice(
-        indexOfFirstIssue,
-        indexOfLastIssue
-    );
+  // Get current issues
+  const indexOfLastIssue = currentPage * itemsPerPage;
+  const indexOfFirstIssue = indexOfLastIssue - itemsPerPage;
+  const currentIssues = filteredIssues.slice(
+    indexOfFirstIssue,
+    indexOfLastIssue
+  );
 
-    // Change page
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-    return (
-        <div className="h-[100vh] w-[100%] text-text">
-            <section className="mx-4 pt-5 flex flex-col gap-4">
-                <header className="flex justify-between items-center">
-                    <h1 className="text-2xl font-bold">Issues</h1>
+  return (
+    <div className="h-[100vh] w-[100%] text-text">
+      <section className="mx-4 pt-5 flex flex-col gap-4">
+        <header className="flex justify-between items-center">
+          <h1 className="text-2xl font-bold">Issues</h1>
 
-                    {/* Searchbar */}
-                    <form className="sm:flex items-center gap-2 bg-slate-200 relative hidden rounded-md">
-                        <GoSearch className="absolute left-2 top-2" size={18} color={"black"}/>
-                        <input
-                            className="w-full focus:border-2 focus:border-accent outline-none rounded-md px-12 h-8 text-background"
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            value={searchTerm}
-                            type="text"
-                            placeholder="Search for issues."
-                            aria-label="Search bar"
-                        />
-                    </form>
+          {/* Searchbar */}
+          <form className="sm:flex items-center gap-2 bg-slate-200 relative hidden rounded-md">
+            <GoSearch
+              className="absolute left-2 top-2"
+              size={18}
+              color={"black"}
+            />
+            <input
+              className="w-full focus:border-2 focus:border-accent outline-none rounded-md px-12 h-8 text-background"
+              onChange={(e) => setSearchTerm(e.target.value)}
+              value={searchTerm}
+              type="text"
+              placeholder="Search for issues."
+              aria-label="Search bar"
+            />
+          </form>
 
-                    <div className="text-[16px] font-semibold">
-                        <Link
-                            href="/issues/new"
-                            className="bg-primary hover:bg-primary/80 px-4 py-2 rounded-md"
-                        >
-                            Add Issue
-                        </Link>
-                    </div>
-                </header>
+          <div className="text-[16px] font-semibold">
+            <Link
+              href="/issues/new"
+              className="bg-primary hover:bg-primary/80 px-4 py-2 rounded-md"
+            >
+              Add Issue
+            </Link>
+          </div>
+        </header>
 
-                {/* Sorting Row */}
-                <table className="w-full">
-                    <tbody>
-                        <tr className="bg-primary h-10 text-sm sm:text-[16px]">
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Project</th>
-                            <th>Priority</th>
-                            <th>Status</th>
-                            <th>Assigned User</th>
-                            <th>Identified Date</th>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        {issues
-                            ? currentIssues.map((issue) => (
-                                  <IssueCard issue={issue} key={issue.id} />
-                              ))
-                            : "No Issues Found"}
-                    </tbody>
-                </table>
+        {/* Sorting Row */}
+        <table className="w-full">
+          <tbody>
+            <tr className="bg-primary h-10 text-sm sm:text-[16px]">
+              <th>ID</th>
+              <th>Title</th>
+              <th>Project</th>
+              <th>Priority</th>
+              <th>Status</th>
+              <th>Assigned User</th>
+              <th>Identified Date</th>
+            </tr>
+          </tbody>
+          <tbody>
+            {issues
+              ? currentIssues.map((issue) => (
+                  <IssueCard issue={issue} key={issue.id} />
+                ))
+              : "No Issues Found"}
+          </tbody>
+        </table>
 
-                <Pagination
-                    currentPage={currentPage}
-                    itemsPerPage={itemsPerPage}
-                    totalItems={issues.length}
-                    paginate={paginate}
-                />
-            </section>
-        </div>
-    );
+        <Pagination
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          totalItems={issues.length}
+          paginate={paginate}
+        />
+      </section>
+    </div>
+  );
 };
 
 export default Issues;
 
 export async function getServerSideProps() {
-    const issuesRes = await serverAPI.get("/api/v1/issues");
+  const issuesRes = await serverAPI.get("/api/v1/issues");
 
-    // Pass data to the page via props
-    return {
-        props: {
-            issues: issuesRes.data.issues,
-        },
-    };
+  // Pass data to the page via props
+  return {
+    props: {
+      issues: issuesRes.data.issues,
+    },
+  };
 }

@@ -12,7 +12,7 @@ const Role = () => {
         if (user?.role != "admin") {
             router.push("/");
         }
-    }, []);
+    }, [router, user?.role]);
 
     const [users, setUsers] = useState([]);
 
