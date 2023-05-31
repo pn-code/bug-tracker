@@ -8,7 +8,7 @@ const NewProject = () => {
     const [loading, setLoading] = useState(false);
     const [projectName, setProjectName] = useState("");
 
-    const user = useUser()[0];
+    const user = useUser().user;
 
     const router = useRouter()
 
