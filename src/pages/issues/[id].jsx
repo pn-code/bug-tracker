@@ -68,43 +68,43 @@ const IssueDetails = ({ issue, logs, comments }) => {
                                     )}
                                 </section>
                             </header>
-                            <article className="flex gap-2">
+                            <article className="flex gap-1 flex-col">
                                 <h2 className="font-semibold">Title:</h2>
                                 <p>{issue.title}</p>
                             </article>
-                            <article className="flex gap-2">
+                            <article className="flex gap-1 flex-col">
                                 <h2 className="font-semibold">Description:</h2>
                                 <p>{issue.description}</p>
                             </article>
-                            <article className="flex gap-2">
+                            <article className="flex gap-1 flex-col">
                                 <h2 className="font-semibold">
                                     Related Project:{" "}
                                 </h2>
                                 <p>{issue.project_name}</p>
                             </article>
-                            <article className="flex gap-2">
+                            <article className="flex gap-1 flex-col">
                                 <h2 className="font-semibold">Priority:</h2>
                                 <p>{issue.priority}</p>
                             </article>
-                            <article className="flex gap-2">
+                            <article className="flex gap-1 flex-col">
                                 <h2 className="font-semibold">
                                     Identifier (user):
                                 </h2>
                                 <p>{`${issue.created_by_name} (${issue.created_by})`}</p>
                             </article>
-                            <article className="flex gap-2">
+                            <article className="flex gap-1 flex-col">
                                 <h2 className="font-semibold">
                                     Identified Date:
                                 </h2>
                                 <p>{issue.created_on.substring(0, 10)}</p>
                             </article>
-                            <article className="flex gap-2">
+                            <article className="flex gap-1 flex-col">
                                 <h2 className="font-semibold">
                                     Assigned User:
                                 </h2>
                                 <p>{`${issue.assigned_to_name} (${issue.assigned_to})`}</p>
                             </article>
-                            <article className="flex gap-2">
+                            <article className="flex gap-1 flex-col">
                                 <h2 className="font-semibold">
                                     Target Resolution Date:
                                 </h2>
@@ -115,7 +115,7 @@ const IssueDetails = ({ issue, logs, comments }) => {
                                     )}
                                 </p>
                             </article>
-                            <article className="flex gap-2">
+                            <article className="flex gap-1 flex-col">
                                 <h2 className="font-semibold">
                                     Actual Resolution Date:
                                 </h2>
@@ -135,7 +135,7 @@ const IssueDetails = ({ issue, logs, comments }) => {
                             </h1>
                             <table className="text-left">
                                 <tbody>
-                                    <tr className="bg-primary">
+                                    <tr className="bg-primary text-xs">
                                         <th>Modified By</th>
                                         <th>Date Modified</th>
                                         <th>Assigned To</th>
