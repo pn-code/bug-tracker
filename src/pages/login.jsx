@@ -31,12 +31,9 @@ const Login = () => {
         const errorMessage = error.response.data.message;
         setFormError(errorMessage);
       }
-
       console.error(error);
     }
   };
-
-  console.log(formError)
 
   return (
     <div className="w-full h-[92vh] flex items-center justify-center">
