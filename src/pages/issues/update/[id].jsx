@@ -9,7 +9,7 @@ const UpdateIssue = ({ issue, users }) => {
 
   const [updatedIssue, setUpdatedIssue] = useState({
     actualResolutionDate: issue.actual_resolution_date?.substring(0, 10) || "",
-    assignedTo: issue.assigned_to,
+    assignedTo: Number(issue.assigned_to),
     status: issue.status,
   });
 
@@ -26,7 +26,7 @@ const UpdateIssue = ({ issue, users }) => {
           ...updatedIssue,
         });
         await updateLog();
-        router.push("/issues");
+        router.push(`/issues/${issue.id}`);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -69,7 +69,7 @@ const UpdateIssue = ({ issue, users }) => {
               href={`/issues/${issue.id}`}
               className="bg-secondary hover:bg-secondary/80 px-4 py-2 text-background rounded-md"
             >
-              Return to Issue
+              Return
             </Link>
           </div>
         </header>
@@ -114,7 +114,7 @@ const UpdateIssue = ({ issue, users }) => {
               onChange={(e) => handleInputChange(e)}
               name="assignedTo"
               id="assignedTo"
-              value={issue.assignedTo}
+              value={updatedIssue.assignedTo}
             >
               {users.map((user) => (
                 <option
