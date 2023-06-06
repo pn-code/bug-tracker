@@ -6,6 +6,8 @@ import Pagination from "./Pagination";
 
 const CommentSection = ({ comments, setComments, issueId }) => {
   const [comment, setComment] = useState("");
+  const [formError, setFormError] = useState("");
+
   const user = useUser().user;
 
   // Setting up pagination
@@ -23,20 +25,28 @@ const CommentSection = ({ comments, setComments, issueId }) => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const validateComment = comment.trim().length > 0;
+
   const submitComment = async (e) => {
     e.preventDefault();
     try {
-      const res = await serverAPI.post("/api/v1/comments", {
-        user_id: user.id,
-        issue_id: issueId,
-        content: comment,
-      });
+      if (validateComment) {
+        const res = await serverAPI.post("/api/v1/comments", {
+          user_id: user.id,
+          issue_id: issueId,
+          content: comment,
+        });
 
-      if (res.status === 200) {
-        const newComment = { ...res.data.comment, user_name: user.name };
-        setComments((comments) => [newComment, ...comments]);
-        setComment("");
+        if (res.status === 200) {
+          const newComment = { ...res.data.comment, user_name: user.name };
+          setComments((comments) => [newComment, ...comments]);
+          setComment("");
+          setFormError("");
+        }
+      } else {
+        setFormError("Comment cannot be empty. Please try again.");
       }
+
     } catch (error) {
       console.error(error);
     }
@@ -56,9 +66,12 @@ const CommentSection = ({ comments, setComments, issueId }) => {
 
       <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
         <form onSubmit={submitComment} className="flex flex-col gap-2 mb-4">
-          <label className="font-semibold" htmlFor="comment">
-            Add Comment:{" "}
-          </label>
+          <section className="flex justify-between">
+            <label className="font-semibold" htmlFor="comment">
+              Add Comment:{" "}
+            </label>
+            <span className="text-sm text-red-400">{formError}</span>
+          </section>
 
           <textarea
             onChange={(e) => setComment(e.target.value)}
@@ -68,6 +81,7 @@ const CommentSection = ({ comments, setComments, issueId }) => {
             placeholder="comment"
             id="comment"
             rows={5}
+            minLength={5}
           ></textarea>
 
           <button className="bg-primary hover:bg-primary/80 px-4 py-2 text-gray-50 rounded-md">
