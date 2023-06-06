@@ -35,6 +35,29 @@ const Login = () => {
     }
   };
 
+  const loginWithTestAcc = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await serverAPI.post("/api/auth/login", {
+        email: "admin@admin.com",
+        password: "Password123!",
+      });
+
+      if (res.status === 200) {
+        authenticateUser(res.data);
+        router.push("/");
+      }
+      
+    } catch (error) {
+      if (error.response.status === 400) {
+        const errorMessage = error.response.data.message;
+        setFormError(errorMessage);
+      }
+      console.error(error);
+    }
+  };
+
   return (
     <div className="w-full h-[92vh] flex items-center justify-center">
       <form
@@ -74,9 +97,15 @@ const Login = () => {
             />
           </section>
         </fieldset>
-        <button className="py-4 bg-primary text-gray-50 rounded-md hover:bg-primary/80">
-          Login
-        </button>
+        <section className="flex justify-between">
+          <button className="py-4 px-8 bg-primary text-gray-50 rounded-md hover:bg-primary/80">
+            Login
+          </button>
+          <button onClick={loginWithTestAcc} type="button" className="py-4 px-8 bg-primary/10 text-primary rounded-md hover:bg-primary/20">
+            Test Account
+          </button>
+        </section>
+
         <span>
           Don&apos;t have an account?{" "}
           <Link className="underline" href="/register">
