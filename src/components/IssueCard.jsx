@@ -1,13 +1,11 @@
-import React from "react";
 import Link from "next/link";
 
 const IssueCard = ({ issue }) => {
     const isIssueClosed = issue.status === "closed";
-    console.log(issue)
 
     return (
         <tr
-            className={`w-full font-semibold ${
+            className={`w-full font-semibold text-xs ${
                 isIssueClosed ? "bg-background" : "bg-gray-700/50"
             }   rounded-md h-20 text-sm sm:text-[16px] text-center`}
         >

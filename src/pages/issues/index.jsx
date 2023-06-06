@@ -73,7 +73,7 @@ const Issues = ({ issues }) => {
         {/* Sorting Row */}
         <table className="w-full">
           <tbody>
-            <tr className="bg-primary h-10 text-sm sm:text-[16px]">
+            <tr className="bg-primary h-10 text-xs sm:text-[16px]">
               <th>ID</th>
               <th>Title</th>
               <th>Project</th>

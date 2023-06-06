@@ -7,7 +7,7 @@ import Pagination from "@/components/Pagination";
 const Projects = ({ projects }) => {
     // Setting up pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
+    const itemsPerPage = 5;
 
     // Get current projects
     const indexOfLastProjects = currentPage * itemsPerPage;
@@ -38,7 +38,7 @@ const Projects = ({ projects }) => {
                 {/* Sorting Row */}
                 <table className="w-full">
                     <tbody>
-                        <tr className="bg-primary h-10 text-sm sm:text-[16px]">
+                        <tr className="bg-primary h-10 text-xs sm:text-[16px]">
                             <th>ID</th>
                             <th>Project Name</th>
                             <th>Created By</th>
