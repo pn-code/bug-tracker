@@ -16,7 +16,7 @@ const Issues = ({ issues }) => {
       const newFilteredIssues = issues.filter(
         (issue) =>
           issue.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          issue.project_name.toLowerCase().includes(searchTerm)
+          issue.project_name.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setFilteredIssues(newFilteredIssues);
     };
