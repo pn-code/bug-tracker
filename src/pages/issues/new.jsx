@@ -15,6 +15,7 @@ const NewIssue = () => {
     status: "",
     priority: "",
   });
+  const [formError, setFormError] = useState("");
 
   const [projects, setProjects] = useState([]);
   const [users, setUsers] = useState([]);
@@ -37,9 +38,18 @@ const NewIssue = () => {
     fetchUsers();
   }, []);
 
+  const validateInputs =
+    issue.relatedProject.trim().length > 0 &&
+    issue.title.trim().length > 0 &&
+    issue.description.trim().length > 0 &&
+    issue.targetResolutionDate.trim().length > 0 &&
+    issue.assignedTo.trim().length > 0 &&
+    issue.status.trim().length > 0 &&
+    issue.priority.trim().length > 0;
+
   const submitIssue = async (e) => {
     e.preventDefault();
-    if (!loading) {
+    if (!loading && validateInputs) {
       try {
         setLoading(true);
         await serverAPI.post("/api/v1/issues", {
@@ -53,6 +63,8 @@ const NewIssue = () => {
       } catch (error) {
         console.error(error);
       }
+    } else {
+      setFormError("You must fill out all fields to submit issue.");
     }
   };
 
@@ -82,6 +94,7 @@ const NewIssue = () => {
         </header>
 
         <fieldset className="flex flex-col gap-4 items-center">
+          <span className="text-sm text-red-400">{formError}</span>
           <section className="flex flex-col gap-2">
             <label htmlFor="relatedProject">Related Project: </label>
             <select
