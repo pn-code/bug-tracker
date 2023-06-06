@@ -8,5 +8,5 @@ body {
 }
 
 input, select, option, textarea {
-  @apply text-black
+  @apply text-black w-[280px]
 }
