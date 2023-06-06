@@ -2,7 +2,7 @@ import React from "react";
 
 const UserRoleCard = ({ user }) => {
   return (
-    <tr className="bg-gray-200">
+    <tr className="bg-primary/20">
       <td>{user.name}</td>
       <td>{user.email}</td>
       <td>{user.role}</td>
