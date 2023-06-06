@@ -13,8 +13,10 @@ const Issues = ({ issues }) => {
   useEffect(() => {
     // Filter issues based on search term
     const handleSearch = () => {
-      const newFilteredIssues = issues.filter((issue) =>
-        issue.title.toLowerCase().includes(searchTerm.toLowerCase())
+      const newFilteredIssues = issues.filter(
+        (issue) =>
+          issue.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          issue.project_name.toLowerCase().includes(searchTerm)
       );
       setFilteredIssues(newFilteredIssues);
     };
