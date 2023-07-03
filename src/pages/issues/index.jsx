@@ -31,7 +31,9 @@ const Issues = ({ issues }) => {
 
     // Filter closed issues
     const allIssues = filteredIssues;
-    const onlyOpenIssues = filteredIssues.filter((issue) => issue.status != "closed");
+    const onlyOpenIssues = filteredIssues.filter(
+        (issue) => issue.status != "closed"
+    );
     const displayedIssues = showClosedIssues ? allIssues : onlyOpenIssues;
 
     // Setting up pagination
@@ -125,7 +127,7 @@ const Issues = ({ issues }) => {
                 <Pagination
                     currentPage={currentPage}
                     itemsPerPage={itemsPerPage}
-                    totalItems={issues.length}
+                    totalItems={displayedIssues.length}
                     paginate={paginate}
                 />
             </section>
