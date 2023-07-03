@@ -14,6 +14,8 @@ export default async function handler(req, res) {
             JOIN users ON issues.created_by::bigint = users.id
             JOIN users users1 ON issues.assigned_to::bigint = users1.id
             JOIN projects ON issues.related_project::bigint = projects.id
+          ORDER BY
+            issues.id DESC
             `);
             res.status(200).json({
                 status: "Success",
