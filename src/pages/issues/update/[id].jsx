@@ -143,7 +143,7 @@ const UpdateIssue = ({ issue, users }) => {
             </select>
           </section>
           <button className="bg-primary rounded-md py-2 my-4 w-[280px]">
-            Submit Issue
+            Update Issue
           </button>
         </fieldset>
       </form>
