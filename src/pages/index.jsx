@@ -1,10 +1,12 @@
 import Head from "next/head";
-import DashboardCard from "../components/DashboardCard";
 import serverAPI from "@/api/axios";
 import LoadingScreen from "@/components/LoadingScreen";
 import { useRouter } from "next/router";
 import { useUser } from "@/contexts/UserContext";
 import { useEffect } from "react";
+import RecentIssues from "@/components/Dashboard/RecentIssues";
+import DashboardStats from "@/components/Dashboard/DashboardStats";
+import OpenIssuesByProject from "@/components/Dashboard/OpenIssuesByProject";
 
 export default function Home({ projects, issues }) {
     const router = useRouter();
@@ -34,18 +36,13 @@ export default function Home({ projects, issues }) {
             {/* Dashboard Home */}
             {!isLoading && (
                 <main className="h-[90vh] w-full flex flex-col px-4 pt-5 gap-4 text-text">
-                    <h1 className="text-2xl font-bold">Overview</h1>
-                    <section className="w-full flex gap-2 flex-col md:flex-row">
-                        <DashboardCard
-                            title="Projects"
-                            quantity={projects.length}
-                            hrefLink="/projects"
-                        />
-                        <DashboardCard
-                            title="Issues"
-                            quantity={issues.length}
-                            hrefLink="/issues"
-                        />
+                    <h1 className="text-2xl font-bold">Dashboard</h1>
+
+                    {/* Dashboard Contents */}
+                    <section className="w-full flex justify-between gap-4 flex-col md:flex-row">
+                        <RecentIssues issues={issues}/>
+                        <DashboardStats projects={projects} issues={issues}/>
+                        <OpenIssuesByProject issues={issues}/>
                     </section>
                 </main>
             )}
