@@ -1,21 +1,21 @@
-import { BookMarked } from "lucide-react";
+import { ArrowUp, BookMarked } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { LineChart, Line } from "recharts";
 
 export default function StatCard({ title, stat, data, navLink, color }) {
-    const datas = [
-        { name: "Page A", uv: 400, amt: 2400 },
-        { name: "Page B", uv: 600, amt: 2600 },
-        { name: "Page C", uv: 300, amt: 2200 },
-        { name: "Page D", uv: 400, amt: 2200 },
-    ];
+    // const datas = [
+    //     { name: "Page A", uv: 400, amt: 2400 },
+    //     { name: "Page B", uv: 600, amt: 2600 },
+    //     { name: "Page C", uv: 300, amt: 2200 },
+    //     { name: "Page D", uv: 400, amt: 2200 },
+    // ];
 
-    const renderLineChart = (
-        <LineChart width={120} height={50} data={datas}>
-            <Line type="monotone" dataKey="uv" stroke={color} />
-        </LineChart>
-    );
+    // const renderLineChart = (
+    //     <LineChart width={120} height={50} data={datas}>
+    //         <Line type="monotone" dataKey="uv" stroke={color} />
+    //     </LineChart>
+    // );
 
     const textColor = `text-[${color}]`;
 
@@ -28,7 +28,7 @@ export default function StatCard({ title, stat, data, navLink, color }) {
                     <BookMarked color={color} />
                     <h2 className="text-lg">{title}</h2>
                 </div>
-                {renderLineChart}
+                {/* {renderLineChart} */}
             </header>
 
             <span className="text-2xl font-semibold">{stat}</span>
@@ -38,7 +38,7 @@ export default function StatCard({ title, stat, data, navLink, color }) {
                     View all
                 </Link>
                 <div className="flex flex-col items-end">
-                    <div className="text-lg font-bold text-green-600">21%</div>
+                    <div className="flex gap-1 items-center text-lg font-bold text-green-600"><ArrowUp/> {data ? data.length: "21%"}</div>
                     <span className="text-sm text-gray-400">this month</span>
                 </div>
             </div>
