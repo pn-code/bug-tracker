@@ -24,7 +24,8 @@ export default function RecentIssues({ issues }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {issues.map((issue) => (
+                        {/* Display 10 most recent issues */}
+                        {issues.slice(0, 10).map((issue) => (
                             <RecentIssueCard key={issue.id} issue={issue} />
                         ))}
                     </tbody>
