@@ -19,17 +19,35 @@ export default function DashboardStats({ projects, issues }) {
         }
 
         // Create a new Date object with the previous month and today's day
-        const previousMonthDate = new Date(year, previousMonth, today.getDate());
+        const previousMonthDate = new Date(
+            year,
+            previousMonth,
+            today.getDate()
+        );
         return previousMonthDate;
     };
 
     const formatTotalProjectsData = () => {
         const prevMonthDate = findPreviousMonthDate().toISOString();
 
-        const projectsCreatedThisMonth = projects.filter(project => project.created_on >= prevMonthDate);
+        const projectsCreatedThisMonth = projects.filter(
+            (project) => project.created_on >= prevMonthDate
+        );
         return projectsCreatedThisMonth;
     };
-    console.log(formatTotalProjectsData())
+
+    const formatIssuesOpenedData = () => {
+        const prevMonthDate = findPreviousMonthDate().toISOString();
+
+        const openIssuesCreatedThisMonth = unsolvedIssues.filter(
+            (issue) => issue.created_on >= prevMonthDate
+        );
+        return openIssuesCreatedThisMonth;
+    };
+
+    const closedIssuesPercentage =
+        (issues.filter((issue) => issue.status == "closed").length /
+        issues.length).toFixed(2) * 100;
 
     return (
         <section className="flex flex-col gap-4 w-full h-full flex-1">
@@ -42,16 +60,18 @@ export default function DashboardStats({ projects, issues }) {
                 data={formatTotalProjectsData()}
             />
             <StatCard
-                title={"Open Issues"}
+                title={"Issues Opened"}
                 stat={`${unsolvedIssues.length} issues`}
                 color="#eb4646"
                 navLink={"/issues"}
+                data={formatIssuesOpenedData()}
             />
             <StatCard
                 title={"Closed Issues"}
                 stat={`${issues.length - unsolvedIssues.length} issues`}
                 color="#4f72ff"
                 navLink={"/issues"}
+                closedIssuesPercentage={closedIssuesPercentage}
             />
         </section>
     );
