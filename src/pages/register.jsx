@@ -54,7 +54,7 @@ const Register = () => {
         <div className="w-full h-[92vh] flex items-center justify-center">
             <form
                 onSubmit={(e) => handleRegisterUser(e)}
-                className="bg-gray-100 p-10 rounded-md flex flex-col gap-4 w-[320px]"
+                className="bg-gray-100 p-10 rounded-md flex flex-col gap-6 w-[320px]"
             >
                 <section>
                     <h1 className="text-3xl font-bold">Bug Tracker</h1>
@@ -76,7 +76,7 @@ const Register = () => {
                             onChange={(e) => setName(e.target.value)}
                             value={name}
                             id="name"
-                            className="p-2 rounded-md"
+                            className="p-2 rounded-md w-64"
                             type="text"
                             placeholder="full name"
                             required
@@ -87,7 +87,7 @@ const Register = () => {
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                             id="email"
-                            className="p-2 rounded-md"
+                            className="p-2 rounded-md w-64"
                             type="email"
                             placeholder="email"
                             required
@@ -100,7 +100,7 @@ const Register = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             value={password}
                             id="password"
-                            className="p-2 rounded-md"
+                            className="p-2 rounded-md w-64"
                             type={showPassword ? "text" : "password"}
                             placeholder="password"
                             required
@@ -109,6 +109,7 @@ const Register = () => {
 
                     <section className="flex gap-2">
                         <input
+                            className="w-4"
                             onChange={() => setShowPassword((show) => !show)}
                             id="showPassword"
                             type="checkbox"
