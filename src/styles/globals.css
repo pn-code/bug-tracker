@@ -10,3 +10,7 @@ body {
 input, select, option, textarea {
   @apply text-black w-[280px]
 }
+
+.custom-bg {
+  background-image: url("/assets/bg.jpg");
+}
