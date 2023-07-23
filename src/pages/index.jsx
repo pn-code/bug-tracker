@@ -15,7 +15,7 @@ export default function Home({ projects, issues }) {
 
     useEffect(() => {
         if (!user && !isLoading && !isAuthenticated) {
-            router.push("/login");
+            router.push("/landing");
         }
     }, [user, isLoading, isAuthenticated, router]);
 
