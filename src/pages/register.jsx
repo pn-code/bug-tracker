@@ -51,16 +51,13 @@ const Register = () => {
     const checkName = (str) => (str.length > 2 ? true : false);
 
     return (
-        <div className="w-full h-[92vh] flex items-center justify-center">
+        <div className="w-full h-[calc(100vh-78px)] flex sm:items-center sm:justify-center">
             <form
                 onSubmit={(e) => handleRegisterUser(e)}
-                className="bg-gray-100 p-10 rounded-md flex flex-col gap-6 w-[320px]"
+                className="bg-gray-100 p-10 h-screen sm:max-h-[540px] sm:rounded-md flex flex-col gap-6 w-[340px]"
             >
                 <section>
-                    <h1 className="text-3xl font-bold">Bug Tracker</h1>
-                    <h2 className="text-[16px] font-semibold">
-                        User Registration
-                    </h2>
+                    <h1 className="text-3xl font-bold">User Registration</h1>
                 </section>
 
                 {inputError && (
@@ -81,7 +78,8 @@ const Register = () => {
                             placeholder="full name"
                             required
                         />
-
+                    </section>
+                    <section className="flex flex-col gap-1">
                         <label htmlFor="email">Email:</label>
                         <input
                             onChange={(e) => setEmail(e.target.value)}
@@ -94,7 +92,7 @@ const Register = () => {
                         />
                     </section>
 
-                    <section className="flex flex-col">
+                    <section className="flex flex-col gap-1">
                         <label htmlFor="password">Password:</label>
                         <input
                             onChange={(e) => setPassword(e.target.value)}
