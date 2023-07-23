@@ -59,14 +59,13 @@ const Login = () => {
   };
 
   return (
-    <div className="w-full h-[92vh] flex items-center justify-center">
+    <div className="w-full h-[calc(100vh-78px)] flex sm:items-center sm:justify-center">
       <form
         onSubmit={(e) => handleUserLogin(e)}
-        className="bg-gray-100 p-10 rounded-md flex flex-col gap-4"
+        className="bg-gray-100 p-10 h-screen sm:max-h-[460px] sm:rounded-md flex flex-col gap-6 w-[340px]"
       >
         <section>
-          <h1 className="text-3xl font-bold">Bug Tracker</h1>
-          <h2 className="text-[16px] font-semibold">User Login</h2>
+          <h1 className="text-3xl font-bold">User Login</h1>
           <span className="text-sm text-red-600 font-bold">{formError}</span>
         </section>
 
@@ -77,7 +76,7 @@ const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
               value={email}
               id="email"
-              className="p-2 rounded-md"
+              className="p-2 rounded-md w-64"
               type="email"
               placeholder="email"
               required
@@ -90,7 +89,7 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
               value={password}
               id="password"
-              className="p-2 rounded-md"
+              className="p-2 rounded-md w-64"
               type="password"
               placeholder="password"
               required
