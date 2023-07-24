@@ -35,11 +35,11 @@ export default function Home({ projects, issues }) {
 
             {/* Dashboard Home */}
             {!isLoading && (
-                <main className="h-[90vh] w-full flex flex-col px-4 pt-5 gap-4 text-text">
+                <main className="h-full sm:h-[90vh] w-full flex flex-col px-4 pt-5 gap-4 text-text">
                     <h1 className="text-2xl font-bold">Dashboard</h1>
 
                     {/* Dashboard Contents */}
-                    <section className="w-full flex justify-between gap-4 flex-col md:flex-row">
+                    <section className="w-full flex flex-col justify-between gap-4 lg:flex-row">
                         <RecentIssues issues={issues}/>
                         <DashboardStats projects={projects} issues={issues}/>
                         <OpenIssuesByProject issues={issues}/>
