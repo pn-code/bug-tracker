@@ -22,7 +22,7 @@ export default function StatCard({ title, stat, data, navLink, color, closedIssu
     console.log(textColor)
 
     return (
-        <article className="flex min-h-[180px] min-w-[360px] flex-col gap-4 w-full py-4 px-6 border rounded-md border-gray-300">
+        <article className="flex min-h-[180px] w-full sm:min-w-[360px] flex-col gap-4 py-4 px-6 border rounded-md border-gray-300">
             <header className="flex justify-between">
                 <div className="flex gap-2">
                     <BookMarked color={color} />
