@@ -6,7 +6,7 @@ const IssueCard = ({ issue }) => {
     return (
         <tr
             className={`w-full font-semibold text-xs ${
-                isIssueClosed ? "bg-background" : "bg-gray-700/50"
+                isIssueClosed ? "bg-red-900" : "bg-gray-700/50"
             }   rounded-md h-20 text-sm sm:text-[16px] text-center`}
         >
             <td className="hover:underline">
