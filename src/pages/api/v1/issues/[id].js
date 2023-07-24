@@ -5,7 +5,7 @@ export default async function handler(req, res) {
 
     if (req.method === "GET") {
         const { rows } = await db.query(
-        `SELECT 
+            `SELECT 
         issues.*, 
         users.name AS created_by_name,
         users1.name AS assigned_to_name,
@@ -36,17 +36,31 @@ export default async function handler(req, res) {
     if (req.method === "PUT") {
         try {
             const { assignedTo, status, actualResolutionDate } = req.body;
+            console.log(assignedTo, status, actualResolutionDate)
+            if (!actualResolutionDate) {
+                console.log("hit")
+                const { rows } = await db.query(
+                    "UPDATE issues SET assigned_to = $1, status = $2 WHERE id = $3",
+                    [assignedTo, status, Number(issueId)]
+                );
 
-            const { rows } = await db.query(
-                "UPDATE issues SET assigned_to = $1, status = $2, actual_resolution_date = $3 WHERE id = $4",
-                [assignedTo, status, actualResolutionDate, issueId]
-            );
+                res.status(200).json({
+                    status: "Success",
+                    issues: rows[0],
+                });
+            } else {
+                const { rows } = await db.query(
+                    "UPDATE issues SET assigned_to = $1, status = $2, actual_resolution_date = $3 WHERE id = $4",
+                    [assignedTo, status, actualResolutionDate, issueId]
+                );
 
-            res.status(200).json({
-                status: "Success",
-                issues: rows[0],
-            });
+                res.status(200).json({
+                    status: "Success",
+                    issues: rows[0],
+                });
+            }
         } catch (error) {
+            console.error(error)
             res.status(500).json({
                 status: "Unsuccessful",
                 error,
