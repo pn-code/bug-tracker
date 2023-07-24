@@ -31,12 +31,13 @@ export default function OpenIssuesByProject({ issues }) {
     };
 
     return (
-        <div className="flex-1">
-            <h2 className="text-xl mb-4">Open Issues by Project</h2>
+        <div className="flex-1 w-full text-gray-900 mb-4 text-sm">
+            <h2 className="text-xl mb-4 text-white">Open Issues by Project</h2>
             <BarChart
-                width={500}
-                height={300}
+                width={300}
+                height={200}
                 data={formattedData()}
+                margin={{top: 0, right: 0, left:0, bottom:0}}
             >
                 <XAxis dataKey="name" />
                 <YAxis allowDecimals={false}/>
