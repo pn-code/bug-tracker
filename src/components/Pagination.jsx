@@ -8,7 +8,7 @@ const Pagination = ({ itemsPerPage, totalItems, paginate, currentPage }) => {
     }
 
     return (
-        <nav className="flex list-none gap-1">
+        <nav className="flex list-none gap-1 mb-2">
             {pageNumbers.map((pageNumber) => (
                 <li
                     className={`w-10 text-center border-2 ${
