@@ -26,7 +26,7 @@ const Navbar = () => {
 
             {/* Mobile NavMenu */}
             {openNavMenu && user && (
-                <div className="fixed bg-background h-[100vh] w-full top-0 left-0 flex items-center justify-center">
+                <div className="fixed bg-background h-[100vh] z-[999] w-full top-0 left-0 flex items-center justify-center">
                     <div className="w-[290px] flex flex-col mx-3 gap-12">
                         <section className="flex justify-between w-full">
                             <h1 className="text-3xl font-bold">Bug Tracker</h1>
