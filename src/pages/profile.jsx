@@ -19,28 +19,29 @@ const Profile = () => {
     };
 
     return (
-        <div className="text-text h-[90vh] w-full flex flex-col px-4 pt-5 items-center lg:justify-center lg:items-start gap-12 lg:flex-row">
-            <section className="flex flex-col gap-4">
-                <h1 className="text-xl font-bold">User Information</h1>
+        <main className="h-full sm:h-[90vh] w-full flex flex-col px-4 pt-5 gap-4 text-text">
+            <header className="flex justify-between">
+            <h1 className="text-2xl font-bold">User Profile</h1>
+                <button
+                    onClick={() => logoutUser()}
+                    className="w-24 px-4 py-2 bg-red-600/90 text-white rounded-md hover:bg-red-600/80"
+                >
+                    Log Out
+                </button></header>
+            
+
+            <section>
                 <article>
                     <h2 className="font-semibold">Full Name: </h2>
-                    <p>{user?.name}</p>
+                    <p className="text-green-300">{user?.name}</p>
                 </article>
                 <article>
                     <h2 className="font-semibold">Role: </h2>
-                    <p>{user?.role}</p>
+                    <p className="text-green-300">{user?.role}</p>
                 </article>
             </section>
-            <section className="flex flex-col gap-4">
-                <h1 className="text-xl font-bold">User Actions</h1>
-                <button
-                    onClick={() => logoutUser()}
-                    className="w-full px-4 py-2 bg-red-600/90 text-white rounded-md hover:bg-red-600/80"
-                >
-                    Log Out
-                </button>
-            </section>
-        </div>
+
+        </main>
     );
 };
 
