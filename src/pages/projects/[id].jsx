@@ -21,7 +21,7 @@ const ProjectDetails = ({ project }) => {
             <div className="h-[100vh] w-full text-white">
                 <section className="mx-4 pt-5 flex flex-col gap-4">
                     <header className="flex justify-between items-center">
-                        <h1 className="text-xl font-bold">Project: {project.name}</h1>
+                        <h1 className="text-xl font-bold">{project.name}</h1>
                         <div className="text-[16px] font-semibold flex gap-2">
                             <Link
                                 href="/projects"
@@ -41,16 +41,16 @@ const ProjectDetails = ({ project }) => {
                                 </h1>
                                 {user?.role !== "user" && (
                                     <section className="flex gap-4">
-                                        <button
+                                        {/* <button
                                             type="button"
-                                            className="bg-green-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-green-600"
+                                            className="bg-primary px-4 py-2 rounded-md text-white font-semibold hover:bg-primary/80"
                                         >
                                             Update
-                                        </button>
+                                        </button> */}
                                         <button
                                             onClick={deleteProject}
                                             type="button"
-                                            className="bg-red-500 px-2 py-1 rounded-md text-white font-semibold hover:bg-red-600"
+                                            className="bg-red-500 px-4 py-2 rounded-md text-white font-semibold hover:bg-red-500/80"
                                         >
                                             Delete
                                         </button>
@@ -58,17 +58,17 @@ const ProjectDetails = ({ project }) => {
                                 )}
                             </header>
 
-                            <article className="flex gap-2">
+                            <article className="flex flex-col gap-2">
                                 <h2 className="font-semibold">Title:</h2>
-                                <p>{project.name}</p>
+                                <p className="text-green-300">{project.name}</p>
                             </article>
-                            <article className="flex gap-2">
+                            <article className="flex flex-col gap-2">
                                 <h2 className="font-semibold">Created by:</h2>
-                                <p>{`${project.user_name} (${project.created_by})`}</p>
+                                <p className="text-green-300">{`${project.user_name} (${project.created_by})`}</p>
                             </article>
-                            <article className="flex gap-2">
+                            <article className="flex flex-col gap-2">
                                 <h2 className="font-semibold">Created on:</h2>
-                                <p>{project.created_on.substring(0, 10)}</p>
+                                <p className="text-green-300">{project.created_on.substring(0, 10)}</p>
                             </article>
                         </section>
                     </div>
