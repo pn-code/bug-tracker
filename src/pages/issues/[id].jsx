@@ -68,39 +68,39 @@ const IssueDetails = ({ issue, logs, comments }) => {
               </header>
               <article className="flex gap-1 flex-col">
                 <h2 className="font-semibold">Title:</h2>
-                <p>{issue.title}</p>
+                <p className="text-green-300">{issue.title}</p>
               </article>
               <article className="flex gap-1 flex-col">
                 <h2 className="font-semibold">Description:</h2>
-                <p>{issue.description}</p>
+                <p className="text-green-300">{issue.description}</p>
               </article>
               <article className="flex gap-1 flex-col">
                 <h2 className="font-semibold">Related Project: </h2>
-                <p>{issue.project_name}</p>
+                <p className="text-green-300">{issue.project_name}</p>
               </article>
               <article className="flex gap-1 flex-col">
                 <h2 className="font-semibold">Priority:</h2>
-                <p>{issue.priority}</p>
+                <p className="text-green-300">{issue.priority}</p>
               </article>
               <article className="flex gap-1 flex-col">
                 <h2 className="font-semibold">Identifier (user):</h2>
-                <p>{`${issue.created_by_name} (${issue.created_by})`}</p>
+                <p className="text-green-300">{`${issue.created_by_name} (${issue.created_by})`}</p>
               </article>
               <article className="flex gap-1 flex-col">
                 <h2 className="font-semibold">Identified Date:</h2>
-                <p>{issue.created_on.substring(0, 10)}</p>
+                <p className="text-green-300">{issue.created_on.substring(0, 10)}</p>
               </article>
               <article className="flex gap-1 flex-col">
                 <h2 className="font-semibold">Assigned User:</h2>
-                <p>{`${issue.assigned_to_name} (${issue.assigned_to})`}</p>
+                <p className="text-green-300">{`${issue.assigned_to_name} (${issue.assigned_to})`}</p>
               </article>
               <article className="flex gap-1 flex-col">
                 <h2 className="font-semibold">Target Resolution Date:</h2>
-                <p>{issue.target_resolution_date.substring(0, 10)}</p>
+                <p className="text-green-300">{issue.target_resolution_date.substring(0, 10)}</p>
               </article>
               <article className="flex gap-1 flex-col">
                 <h2 className="font-semibold">Actual Resolution Date:</h2>
-                <p>{issue.actual_resolution_date?.substring(0, 10) || "Not yet resolved"}</p>
+                <p className="text-green-300">{issue.actual_resolution_date?.substring(0, 10) || "Not yet resolved"}</p>
               </article>
             </section>
 
