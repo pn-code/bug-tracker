@@ -91,9 +91,9 @@ const CommentSection = ({ comments, setComments, issueId }) => {
 
         <section className="text-left lg:w-[700px]">
           <h3 className="font-semibold">Comments</h3>
-          {currentComments?.map((comment) => (
+          {currentComments?.length > 0 ? currentComments.map((comment) => (
             <CommentCard key={comment.id} comment={comment} />
-          ))}
+          )) : <p className="text-sm mt-2">No Comments Found</p>}
         </section>
       </section>
     </section>
