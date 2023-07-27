@@ -110,10 +110,10 @@ const IssueDetails = ({ issue, logs, comments }) => {
               <table className="text-left">
                 <tbody>
                   <tr className="bg-primary text-xs">
-                    <th>Modified By</th>
+                    <th className="hidden sm:table-cell">Modified By</th>
                     <th>Date Modified</th>
                     <th>Assigned To</th>
-                    <th>Actual Resolution Date</th>
+                    <th className="hidden sm:table-cell">Actual Resolution Date</th>
                     <th>Status</th>
                   </tr>
                   {logs?.map((log) => (
