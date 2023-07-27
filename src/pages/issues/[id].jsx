@@ -43,7 +43,7 @@ const IssueDetails = ({ issue, logs, comments }) => {
 
           <section className="flex flex-col gap-4 lg:flex-row">
             {/* Issue Information */}
-            <section className="flex flex-col bg-gray-700/50 gap-4 p-4 rounded-md w-full flex-[3]">
+            <section className="flex flex-col bg-gray-700/50 gap-4 p-4 rounded-md w-full flex-[2]">
               <header className="flex justify-between items-center">
                 <h1 className="font-semibold text-xl">Issue Information</h1>
 
@@ -100,7 +100,7 @@ const IssueDetails = ({ issue, logs, comments }) => {
               </article>
               <article className="flex gap-1 flex-col">
                 <h2 className="font-semibold">Actual Resolution Date:</h2>
-                <p>{issue.actual_resolution_date?.substring(0, 10) || null}</p>
+                <p>{issue.actual_resolution_date?.substring(0, 10) || "Not yet resolved"}</p>
               </article>
             </section>
 
