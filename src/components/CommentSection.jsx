@@ -64,11 +64,11 @@ const CommentSection = ({ comments, setComments, issueId }) => {
         />
       </header>
 
-      <section className="flex flex-col gap-4 lg:flex-row lg:justify-between">
+      <section className="flex flex-col gap-4">
         <form onSubmit={submitComment} className="flex flex-col gap-2 mb-4">
           <section className="flex justify-between">
             <label className="font-semibold" htmlFor="comment">
-              Add Comment:{" "}
+              Comment:{" "}
             </label>
             <span className="text-sm text-red-400">{formError}</span>
           </section>
@@ -76,15 +76,15 @@ const CommentSection = ({ comments, setComments, issueId }) => {
           <textarea
             onChange={(e) => setComment(e.target.value)}
             value={comment}
-            className="rounded-md px-2 py-1 resize-none text-background w-full lg:w-[400px]"
+            className="rounded-sm px-2 py-1 resize-none text-background w-full lg:w-[700px]"
             type="text"
-            placeholder="comment"
+            placeholder="Add a comment"
             id="comment"
-            rows={5}
+            rows={1}
             minLength={5}
           ></textarea>
 
-          <button className="bg-primary hover:bg-primary/80 px-4 py-2 text-gray-50 rounded-md">
+          <button className="lg:w-[700px] bg-primary hover:bg-primary/80 px-4 py-2 text-gray-50 rounded-md">
             Submit
           </button>
         </form>
