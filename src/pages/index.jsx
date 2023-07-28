@@ -6,7 +6,7 @@ import { useUser } from "@/contexts/UserContext";
 import { useEffect } from "react";
 import RecentIssues from "@/components/Dashboard/RecentIssues";
 import DashboardStats from "@/components/Dashboard/DashboardStats";
-import OpenIssuesByProject from "@/components/Dashboard/OpenIssuesByProject";
+import YourAssignedIssues from "@/components/Dashboard/YourAssignedIssues";
 
 export default function Home({ projects, issues }) {
     const router = useRouter();
@@ -40,9 +40,9 @@ export default function Home({ projects, issues }) {
 
                     {/* Dashboard Contents */}
                     <section className="w-full flex flex-col justify-between gap-4 lg:flex-row">
-                        <RecentIssues issues={issues}/>
-                        <DashboardStats projects={projects} issues={issues}/>
-                        <OpenIssuesByProject issues={issues}/>
+                        <YourAssignedIssues issues={issues} userId={user?.id} />
+                        <RecentIssues issues={issues} />
+                        <DashboardStats projects={projects} issues={issues} />
                     </section>
                 </main>
             )}
