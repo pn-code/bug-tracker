@@ -62,7 +62,7 @@ const Login = () => {
     <div className="w-full h-[calc(100vh-78px)] flex sm:items-center sm:justify-center">
       <form
         onSubmit={(e) => handleUserLogin(e)}
-        className="bg-gray-100 p-10 h-screen sm:max-h-[460px] sm:rounded-md flex flex-col gap-6 w-[340px]"
+        className="bg-gray-100 p-10 h-screen sm:max-h-[460px] sm:rounded-md flex flex-col gap-6 w-full sm:w-[340px]"
       >
         <section>
           <h1 className="text-3xl font-bold">User Login</h1>
@@ -96,7 +96,7 @@ const Login = () => {
             />
           </section>
         </fieldset>
-        <section className="flex justify-between">
+        <section className="flex gap-4">
           <button className="py-4 px-8 bg-primary text-gray-50 rounded-md hover:bg-primary/80">
             Login
           </button>
