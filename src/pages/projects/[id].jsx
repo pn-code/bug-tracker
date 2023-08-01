@@ -6,8 +6,7 @@ import { useUser } from "@/contexts/UserContext";
 
 const ProjectDetails = ({ project }) => {
     const router = useRouter();
-
-    const user = useUser()[0];
+    const user = useUser().user;
 
     const deleteProject = async () => {
         const res = await serverAPI.delete(`/api/v1/projects/${project.id}`);
@@ -39,7 +38,7 @@ const ProjectDetails = ({ project }) => {
                                 <h1 className="font-semibold text-xl">
                                     Project Info
                                 </h1>
-                                {user?.role !== "user" && (
+                                {(user?.role !== "user" || project.created_by == user.id) && (
                                     <section className="flex gap-4">
                                         <Link
                                             href={`/projects/update/${project.id}`}
