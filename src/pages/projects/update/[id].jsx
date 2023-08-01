@@ -4,7 +4,7 @@ import serverAPI from "@/api/axios";
 import { useRouter } from "next/router";
 import { useUser } from "@/contexts/UserContext";
 
-export default function updateProject({ project }) {
+export default function UpdateProject({ project }) {
     const [updatedProjectName, setUpdatedProjectName] = useState(project.name);
 
     const router = useRouter();
