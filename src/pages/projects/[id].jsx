@@ -18,7 +18,7 @@ const ProjectDetails = ({ project }) => {
 
     return (
         <div>
-            <div className="h-[100vh] w-full text-white">
+            <div className="h-[90vh] w-full text-white">
                 <section className="mx-4 pt-5 flex flex-col gap-4">
                     <header className="flex justify-between items-center">
                         <h1 className="text-xl font-bold">{project.name}</h1>
@@ -41,12 +41,12 @@ const ProjectDetails = ({ project }) => {
                                 </h1>
                                 {user?.role !== "user" && (
                                     <section className="flex gap-4">
-                                        {/* <button
-                                            type="button"
+                                        <Link
+                                            href={`/projects/update/${project.id}`}
                                             className="bg-primary px-4 py-2 rounded-md text-white font-semibold hover:bg-primary/80"
                                         >
                                             Update
-                                        </button> */}
+                                        </Link>
                                         <button
                                             onClick={deleteProject}
                                             type="button"
@@ -68,7 +68,9 @@ const ProjectDetails = ({ project }) => {
                             </article>
                             <article className="flex flex-col gap-2">
                                 <h2 className="font-semibold">Created on:</h2>
-                                <p className="text-green-300">{project.created_on.substring(0, 10)}</p>
+                                <p className="text-green-300">
+                                    {project.created_on.substring(0, 10)}
+                                </p>
                             </article>
                         </section>
                     </div>
