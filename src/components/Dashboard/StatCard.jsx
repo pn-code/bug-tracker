@@ -1,26 +1,8 @@
 import { ArrowUp, BookMarked } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { LineChart, Line } from "recharts";
 
 export default function StatCard({ title, stat, data, navLink, color, closedIssuesPercentage }) {
-    // const datas = [
-    //     { name: "Page A", uv: 400, amt: 2400 },
-    //     { name: "Page B", uv: 600, amt: 2600 },
-    //     { name: "Page C", uv: 300, amt: 2200 },
-    //     { name: "Page D", uv: 400, amt: 2200 },
-    // ];
-
-    // const renderLineChart = (
-    //     <LineChart width={120} height={50} data={datas}>
-    //         <Line type="monotone" dataKey="uv" stroke={color} />
-    //     </LineChart>
-    // );
-
-    const textColor = `text-[${color}]`;
-
-    console.log(textColor)
-
     return (
         <article className="flex min-h-[180px] w-full sm:min-w-[360px] flex-col gap-4 py-4 px-6 border rounded-md border-gray-300">
             <header className="flex justify-between">

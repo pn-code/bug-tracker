@@ -48,7 +48,6 @@ export default async function handler(req, res) {
 
     if (req.method === "PUT") {
         const { updatedProjectName, project, user } = req.body;
-        console.log(project.created_by == user.id)
         const checkForPermission =
             project.created_by == user.id || user.role == "admin";
 
