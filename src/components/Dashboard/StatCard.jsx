@@ -16,7 +16,7 @@ export default function StatCard({ title, stat, data, navLink, color, closedIssu
             <span className="text-2xl font-semibold">{stat}</span>
 
             <div className="flex justify-between items-end">
-                <Link href={navLink} className="text-gray-200 underline text-sm hover:text-gray-300">
+                <Link href={navLink} className="text-gray-200 underline text-sm hover:text-green-500">
                     View all
                 </Link>
                 {data && <div className="flex flex-col items-end">
