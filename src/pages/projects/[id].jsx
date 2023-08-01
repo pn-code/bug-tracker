@@ -4,7 +4,7 @@ import serverAPI from "@/api/axios";
 import { useRouter } from "next/router";
 import { useUser } from "@/contexts/UserContext";
 
-const ProjectDetails = ({ project }) => {
+const ProjectDetails = ({ project, issues }) => {
     const router = useRouter();
     const user = useUser().user;
 
@@ -14,6 +14,9 @@ const ProjectDetails = ({ project }) => {
             router.push("/projects");
         }
     };
+
+    const openIssues = issues.filter(issue => issue.related_project == project.id && issue.status != "closed")
+    const closedIssues = issues.filter(issue => issue.related_project == project.id && issue.status == "closed")
 
     return (
         <div>
@@ -71,6 +74,24 @@ const ProjectDetails = ({ project }) => {
                                     {project.created_on.substring(0, 10)}
                                 </p>
                             </article>
+                            <article className="flex flex-col gap-2">
+                                <h2 className="font-semibold">Open Issues:</h2>
+                                <p className="text-green-300">
+                                    {openIssues.length}
+                                </p>
+                            </article>
+                            <article className="flex flex-col gap-2">
+                                <h2 className="font-semibold">Closed Issues:</h2>
+                                <p className="text-green-300">
+                                    {closedIssues.length}
+                                </p>
+                            </article>
+                            <article className="flex flex-col gap-2">
+                                <h2 className="font-semibold">Total Issues:</h2>
+                                <p className="text-green-300">
+                                    {closedIssues.length + openIssues.length}
+                                </p>
+                            </article>
                         </section>
                     </div>
                 </section>
@@ -83,12 +104,13 @@ export default ProjectDetails;
 
 export async function getServerSideProps({ params }) {
     const projectId = params.id;
-    const res = await serverAPI.get(`/api/v1/projects/${projectId}`);
-
+    const projectRes = await serverAPI.get(`/api/v1/projects/${projectId}`);
+    const issuesRes = await serverAPI.get("/api/v1/issues");
     // Pass data to the page via props
     return {
         props: {
-            project: res.data.projects,
+            project: projectRes.data.projects,
+            issues: issuesRes.data.issues,
         },
     };
 }
