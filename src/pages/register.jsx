@@ -54,7 +54,7 @@ const Register = () => {
         <div className="w-full h-[calc(100vh-78px)] flex sm:items-center sm:justify-center">
             <form
                 onSubmit={(e) => handleRegisterUser(e)}
-                className="bg-gray-100 p-10 h-screen sm:max-h-[540px] sm:rounded-md flex flex-col gap-6 w-[340px]"
+                className="bg-gray-100 p-10 h-screen sm:max-h-[540px] sm:rounded-md flex flex-col gap-6 w-full sm:w-[340px]"
             >
                 <section>
                     <h1 className="text-3xl font-bold">User Registration</h1>
