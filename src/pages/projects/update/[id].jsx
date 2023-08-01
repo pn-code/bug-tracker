@@ -1,13 +1,32 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import serverAPI from "@/api/axios";
+import { useRouter } from "next/router";
+import { useUser } from "@/contexts/UserContext";
 
 export default function updateProject({ project }) {
-    const [projectName, setProjectName] = useState(project.name)
+    const [updatedProjectName, setUpdatedProjectName] = useState(project.name);
+
+    const router = useRouter();
+    const user = useUser().user
+
+    const updateProject = async (e) => {
+        e.preventDefault();
+        const res = await serverAPI.put(`/api/v1/projects/${project.id}`, {
+            updatedProjectName,
+            user,
+            project
+        });
+
+        if (res.status == 200) {
+            router.push("/projects");
+        }
+    };
+
     return (
         <div className="h-[90vh] w-full text-text">
             <form
-                onSubmit={(e) => submitProject(e)}
+                onSubmit={(e) => updateProject(e)}
                 className="px-4 pt-5 flex flex-col gap-4"
             >
                 <header className="flex justify-center sm:justify-between gap-20">
@@ -26,8 +45,8 @@ export default function updateProject({ project }) {
                     <section className="flex flex-col gap-2">
                         <label htmlFor="project">Project Name: </label>
                         <input
-                            onChange={(e) => setProjectName(e.target.value)}
-                            value={projectName}
+                            onChange={(e) => setUpdatedProjectName(e.target.value)}
+                            value={updatedProjectName}
                             className="px-2 py-1 rounded-md sm:w-72"
                             id="project"
                             type="text"
