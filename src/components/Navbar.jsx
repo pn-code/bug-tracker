@@ -1,16 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useUser } from "@/contexts/UserContext";
+import logo from "/public/assets/logo.png";
 
 const Navbar = () => {
     const [openNavMenu, setOpenNavMenu] = useState(false);
     const user = useUser().user;
 
     return (
-        <nav className="flex justify-between px-4 py-6 bg-background text-text font-semibold items-center">
-            <Link href="/">
-                <h1 className="text-xl">Bug Tracker</h1>
+        <nav className="flex justify-between px-4 py-3 bg-black text-text font-semibold items-center">
+            <Link className="hover:scale-105 ease-linear duration-200" href="/">
+                <Image src={logo} alt="Bug Tracker" height={70} width={210} />
             </Link>
 
             {user && (
@@ -29,7 +32,13 @@ const Navbar = () => {
                 <div className="fixed bg-background h-[100vh] z-[999] w-full top-0 left-0 flex items-center justify-center">
                     <div className="w-[290px] flex flex-col mx-3 gap-12">
                         <section className="flex justify-between w-full">
-                            <h1 className="text-3xl font-bold">Bug Tracker</h1>
+                            <Image
+                                className="p-2 rounded-md bg-black"
+                                src={logo}
+                                alt="Bug Tracker"
+                                height={70}
+                                width={210}
+                            />
                             <button
                                 onClick={() => setOpenNavMenu(false)}
                                 className="text-xl font-bold hover:bg-gray-50 hover:text-background rounded-full px-3 py-1"
@@ -91,16 +100,41 @@ const Navbar = () => {
             )}
 
             {user && (
-                <ul className="gap-12 text-sm hidden sm:flex">
-                    <Link className="border-b-4 border-transparent hover:border-accent" href="/">Dashboard</Link>
+                <ul className="gap-12 text-sm sm:text-[16px] hidden sm:flex">
+                    <Link
+                        className="border-b-4 border-transparent hover:border-accent ease-linear duration-200"
+                        href="/"
+                    >
+                        Dashboard
+                    </Link>
 
                     {user?.role === "admin" && (
-                        <Link className="border-b-4 border-transparent hover:border-accent" href="/roles">User Roles</Link>
+                        <Link
+                            className="border-b-4 border-transparent hover:border-accent ease-linear duration-200"
+                            href="/roles"
+                        >
+                            User Roles
+                        </Link>
                     )}
-                    
-                    <Link className="border-b-4 border-transparent hover:border-accent" href="/issues">Issues</Link>
-                    <Link className="border-b-4 border-transparent hover:border-accent" href="/projects">Projects</Link>
-                    <Link className="border-b-4 border-transparent hover:border-accent" href="/profile">Profile</Link>
+
+                    <Link
+                        className="border-b-4 border-transparent hover:border-accent ease-linear duration-200"
+                        href="/issues"
+                    >
+                        Issues
+                    </Link>
+                    <Link
+                        className="border-b-4 border-transparent hover:border-accent ease-linear duration-200"
+                        href="/projects"
+                    >
+                        Projects
+                    </Link>
+                    <Link
+                        className="border-b-4 border-transparent hover:border-accent ease-linear duration-200"
+                        href="/profile"
+                    >
+                        Profile
+                    </Link>
                 </ul>
             )}
         </nav>
